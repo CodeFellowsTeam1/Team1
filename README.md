@@ -96,9 +96,9 @@ Use project management website.
 
 What project management tool will be used?
 
-Trello or Github Projects https://trello.com/invite/b/GVUIYrxh/9a109727893d7f7d9771715144cd802a/farmfellows
+Trello or Github Projects (Pending)
 
-Presentation Deck https://docs.google.com/presentation/d/1LEAkuM6hGef3zZKBQoGHl-HN6qAicsh59zB--aeS3fI/edit?usp=sharing
+Presentation Deck (Pending)
 
 Schedule Presentation TBD
 
