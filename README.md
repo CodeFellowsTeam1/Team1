@@ -96,7 +96,7 @@ Use project management website.
 
 What project management tool will be used?
 
-Trello or Github Projects (Pending)
+Trello or Github Projects : https://trello.com/b/NMV9lYbZ/logitrack
 
 Presentation Deck (Pending)
 
