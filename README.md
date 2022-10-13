@@ -123,3 +123,7 @@ Anyone can as long as we all agree.
 How often will you merge?
 Every morning during review. as needed.
 How will you communicate that it’s time to merge? We have a set time or we can discuss if it's pertinent. as needed.
+
+## Wireframe
+![Screenshot Wireframe](https://user-images.githubusercontent.com/106052558/195731147-fef0115c-b65a-4eb7-8e33-974b66bdcdf6.png)
+
