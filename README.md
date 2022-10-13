@@ -127,3 +127,10 @@ How will you communicate that it’s time to merge? We have a set time or we can
 ## Wireframe
 ![Screenshot Wireframe](https://user-images.githubusercontent.com/106052558/195731147-fef0115c-b65a-4eb7-8e33-974b66bdcdf6.png)
 
+## User Stories
+- As a supervisor, I want to see where all my drivers are, so that I can track their work.
+- As a driver, I want to record my work, so that I can get reimbursed.
+- As a driver, I want to be notified of jobs and what they would pay, so that I know what to do.
+- As a supervisor, I want to see the number of hours and miles every driver has done, so that I can follow the rules.
+- As a supervisor, I want to know which drivers are available, so that I can assign jobs to them.
+
