@@ -10,7 +10,7 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 30,
-              "apiKeyExpirationDate": "2022-11-16T17:02:13.120Z",
+              "apiKeyExpirationDate": "2022-11-16T21:24:15.806Z",
               "description": "test"
             }
           },
@@ -20,16 +20,16 @@
     }
   },
   "auth": {
-    "logitrack6c3d7353": {
+    "logitrackbe6a5ca3": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
+        "socialProviders": [
+          "GOOGLE"
         ],
+        "usernameAttributes": [],
         "signupAttributes": [
           "EMAIL"
         ],
