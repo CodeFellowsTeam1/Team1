@@ -20,12 +20,13 @@
     }
   },
   "auth": {
-    "logitrackbe6a5ca3": {
+      "logitrackbe6a5ca3": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
+
         "socialProviders": [
           "GOOGLE"
         ],

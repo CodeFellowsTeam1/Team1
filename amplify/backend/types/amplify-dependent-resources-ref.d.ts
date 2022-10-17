@@ -7,7 +7,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "auth": {
-        "logitrackbe6a5ca3": {
+            "logitrackbe6a5ca3": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "HostedUIDomain": "string",
