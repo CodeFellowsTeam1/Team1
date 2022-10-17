@@ -10,6 +10,11 @@
       "StackName": "amplify-logitrack-dev-95125",
       "StackId": "arn:aws:cloudformation:us-west-2:221493064573:stack/amplify-logitrack-dev-95125/f09113b0-4e3b-11ed-a0e7-0a8095c5da27",
       "AmplifyAppId": "drnuvgk1zdezj"
+    },
+    "categories": {
+      "auth": {
+        "logitrack6c3d7353": {}
+      }
     }
   }
 }

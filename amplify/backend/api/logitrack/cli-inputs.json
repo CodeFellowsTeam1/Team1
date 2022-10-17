@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "logitrack",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 30,
+      "apiKeyExpirationDate": "2022-11-16T17:02:13.120Z",
+      "keyDescription": "test"
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
+  }
+}
