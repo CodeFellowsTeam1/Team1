@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-logitrack-dev-95125-authRole",
+      "UnauthRoleArn": "arn:aws:iam::221493064573:role/amplify-logitrack-dev-95125-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::221493064573:role/amplify-logitrack-dev-95125-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-logitrack-dev-95125-deployment",
+      "UnauthRoleName": "amplify-logitrack-dev-95125-unauthRole",
+      "StackName": "amplify-logitrack-dev-95125",
+      "StackId": "arn:aws:cloudformation:us-west-2:221493064573:stack/amplify-logitrack-dev-95125/f09113b0-4e3b-11ed-a0e7-0a8095c5da27",
+      "AmplifyAppId": "drnuvgk1zdezj"
+    }
+  }
+}
