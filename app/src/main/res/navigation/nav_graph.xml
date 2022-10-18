@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/WelcomePage">
+    app:startDestination="@id/firstFragment">
 
     <activity
         android:id="@+id/mainActivity"
@@ -11,17 +11,17 @@
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
     <fragment
-        android:id="@+id/WelcomePage"
-        android:name="com.frazmatic.logitrack.BlankFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" >
+        android:id="@+id/firstFragment"
+        android:name="com.frazmatic.logitrack.FirstFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_first" >
         <action
-            android:id="@+id/action_WelcomePage_to_loginFragment2"
-            app:destination="@id/loginFragment2" />
+            android:id="@+id/changeFirstToSecond"
+            app:destination="@id/secondFragment" />
     </fragment>
     <fragment
-        android:id="@+id/loginFragment2"
-        android:name="com.frazmatic.logitrack.LoginFragment"
-        android:label="fragment_login2"
-        tools:layout="@layout/fragment_login2" />
+        android:id="@+id/secondFragment"
+        android:name="com.frazmatic.logitrack.SecondFragment"
+        android:label="fragment_second"
+        tools:layout="@layout/fragment_second" />
 </navigation>
