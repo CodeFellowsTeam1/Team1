@@ -20,7 +20,6 @@
             <action android:name="android.support.customtabs.action.CustomTabsService" />
         </intent>
     </queries>
-    
     <application
         android:name=".LogiTrack"
         android:allowBackup="true"
@@ -49,6 +48,13 @@
             android:value="YOUR_API_KEY" />
 
         <activity
+            android:name=".NavHostActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -62,8 +68,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="logitrack" />
             </intent-filter>
         </activity>
