@@ -3,25 +3,76 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/firstFragment">
-
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.frazmatic.logitrack.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
+    app:startDestination="@id/userSelect">
     <fragment
-        android:id="@+id/firstFragment"
-        android:name="com.frazmatic.logitrack.FirstFragment"
-        android:label="fragment_first"
-        tools:layout="@layout/fragment_first" >
+        android:id="@+id/userSelect"
+        android:name="com.frazmatic.logitrack.fragments.userSelect"
+        android:label="fragment_user_select"
+        tools:layout="@layout/fragment_user_select" >
         <action
-            android:id="@+id/changeFirstToSecond"
-            app:destination="@id/secondFragment" />
+            android:id="@+id/action_userSelect_to_driverProfile"
+            app:destination="@id/driverProfile" />
+        <action
+            android:id="@+id/action_userSelect_to_supervisorProfile"
+            app:destination="@id/supervisorProfile" />
+        <action
+            android:id="@+id/action_userSelect_to_currentTrip"
+            app:destination="@id/currentTrip" />
+        <action
+            android:id="@+id/action_userSelect_to_supervisorTripStatus"
+            app:destination="@id/supervisorTripStatus" />
     </fragment>
     <fragment
-        android:id="@+id/secondFragment"
-        android:name="com.frazmatic.logitrack.SecondFragment"
-        android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
+        android:id="@+id/driverProfile"
+        android:name="com.frazmatic.logitrack.fragments.driverProfile"
+        android:label="fragment_driver_profile"
+        tools:layout="@layout/fragment_driver_profile" >
+        <action
+            android:id="@+id/action_driverProfile_to_currentTrip"
+            app:destination="@id/currentTrip" />
+    </fragment>
+    <fragment
+        android:id="@+id/supervisorProfile"
+        android:name="com.frazmatic.logitrack.fragments.supervisorProfile"
+        android:label="fragment_supervisor_profile"
+        tools:layout="@layout/fragment_supervisor_profile" >
+        <action
+            android:id="@+id/action_supervisorProfile_to_supervisorTripStatus"
+            app:destination="@id/supervisorTripStatus" />
+    </fragment>
+    <fragment
+        android:id="@+id/currentTrip"
+        android:name="com.frazmatic.logitrack.fragments.currentTrip"
+        android:label="fragment_current_trip"
+        tools:layout="@layout/fragment_current_trip" >
+        <action
+            android:id="@+id/action_currentTrip_to_mapGPS"
+            app:destination="@id/mapGPS" />
+    </fragment>
+    <fragment
+        android:id="@+id/supervisorTripStatus"
+        android:name="com.frazmatic.logitrack.fragments.supervisorTripStatus"
+        android:label="fragment_supervisor_trip_status"
+        tools:layout="@layout/fragment_supervisor_trip_status" >
+        <action
+            android:id="@+id/action_supervisorTripStatus_to_currentTrip"
+            app:destination="@id/currentTrip" />
+        <action
+            android:id="@+id/action_supervisorTripStatus_to_createTripSupervisor2"
+            app:destination="@id/createTripSupervisor" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTripSupervisor"
+        android:name="com.frazmatic.logitrack.fragments.createTripSupervisor"
+        android:label="fragment_create_trip_supervisor"
+        tools:layout="@layout/fragment_create_trip_supervisor" >
+        <action
+            android:id="@+id/action_createTripSupervisor_to_supervisorTripStatus2"
+            app:destination="@id/supervisorTripStatus" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapGPS"
+        android:name="com.frazmatic.logitrack.fragments.mapGPS"
+        android:label="fragment_map_g_p_s"
+        tools:layout="@layout/fragment_map_g_p_s" />
 </navigation>
