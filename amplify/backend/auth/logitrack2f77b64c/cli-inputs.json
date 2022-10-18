@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "logitrack6c3d7353_identitypool_6c3d7353",
+    "identityPoolName": "logitrack2f77b64c_identitypool_2f77b64c",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "logitr6c3d7353",
-    "userPoolName": "logitrack6c3d7353_userpool_6c3d7353",
+    "resourceNameTruncated": "logitr2f77b64c",
+    "userPoolName": "logitrack2f77b64c_userpool_2f77b64c",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,15 +31,17 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "logitr6c3d7353_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "logitr2f77b64c_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "6c3d7353",
-    "resourceName": "logitrack6c3d7353",
+    "sharedId": "2f77b64c",
+    "resourceName": "logitrack2f77b64c",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "default",
-    "usernameAttributes": [
-      "email"
-    ],
+    "useDefault": "defaultSocial",
+    "hostedUI": true,
+    "hostedUIDomainName": "logitrack2f77b64c-2f77b64c",
+    "authProvidersUserPool": [],
+    "hostedUIProviderMeta": "[]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"LogiTrack://\"],\"LogoutURLs\":[\"LogiTrack://\"]}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,

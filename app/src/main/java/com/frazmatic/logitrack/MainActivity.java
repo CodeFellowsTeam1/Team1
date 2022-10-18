@@ -2,6 +2,10 @@ package com.frazmatic.logitrack;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -9,8 +13,11 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.auth.AuthProvider;
 import com.amplifyframework.core.Amplify;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -30,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Amplify.Auth.signInWithSocialWebUI(AuthProvider.google(), this,
+                result -> Log.i("AuthQuickstart", result.toString()),
+                error -> Log.e("AuthQuickstart", error.toString())
+        );
         Amplify.Auth.fetchAuthSession(
                 result -> {
                     Log.i("AmplifyQuickstart", result.toString());
