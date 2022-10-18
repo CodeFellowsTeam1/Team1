@@ -10,7 +10,7 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 30,
-              "apiKeyExpirationDate": "2022-11-16T21:24:15.806Z",
+              "apiKeyExpirationDate": "2022-11-17T23:10:41.583Z",
               "description": "test"
             }
           },
@@ -20,7 +20,7 @@
     }
   },
   "auth": {
-      "logitrackbe6a5ca3": {
+    "logitrackbe6a5ca3": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

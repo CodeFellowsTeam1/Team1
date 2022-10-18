@@ -1,23 +1,90 @@
 # this is an auto generated file. This will be overwritten
-query GetTodo($id: ID!) {
-  getTodo(id: $id) {
+query GetUser($id: ID!) {
+  getUser(id: $id) {
     id
+    username
     name
-    description
+    licensePlate
+    lat
+    lon
+    companyID
+    company {
+      id
+      name
+      cityAndState
+      users {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
 }
-query ListTodos(
-  $filter: ModelTodoFilterInput
+query ListUsers(
+  $filter: ModelUserFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      username
+      name
+      licensePlate
+      lat
+      lon
+      companyID
+      company {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetCompany($id: ID!) {
+  getCompany(id: $id) {
+    id
+    name
+    cityAndState
+    users {
+      items {
+        id
+        username
+        name
+        licensePlate
+        lat
+        lon
+        companyID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListCompanies(
+  $filter: ModelCompanyFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCompanies(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       name
-      description
+      cityAndState
+      users {
+        nextToken
+      }
       createdAt
       updatedAt
     }

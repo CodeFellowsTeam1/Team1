@@ -28,17 +28,27 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 @Index(name = "byCompany", fields = {"companyID"})
 public final class User implements Model {
   public static final QueryField ID = field("User", "id");
+  public static final QueryField USERNAME = field("User", "username");
   public static final QueryField NAME = field("User", "name");
   public static final QueryField LICENSE_PLATE = field("User", "licensePlate");
+  public static final QueryField LAT = field("User", "lat");
+  public static final QueryField LON = field("User", "lon");
   public static final QueryField COMPANY = field("User", "companyID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="String", isRequired = true) String name;
-  private final @ModelField(targetType="String", isRequired = true) String licensePlate;
+  private final @ModelField(targetType="String") String username;
+  private final @ModelField(targetType="String") String name;
+  private final @ModelField(targetType="String") String licensePlate;
+  private final @ModelField(targetType="Float") Double lat;
+  private final @ModelField(targetType="Float") Double lon;
   private final @ModelField(targetType="Company") @BelongsTo(targetName = "companyID", type = Company.class) Company company;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
       return id;
+  }
+  
+  public String getUsername() {
+      return username;
   }
   
   public String getName() {
@@ -47,6 +57,14 @@ public final class User implements Model {
   
   public String getLicensePlate() {
       return licensePlate;
+  }
+  
+  public Double getLat() {
+      return lat;
+  }
+  
+  public Double getLon() {
+      return lon;
   }
   
   public Company getCompany() {
@@ -61,10 +79,13 @@ public final class User implements Model {
       return updatedAt;
   }
   
-  private User(String id, String name, String licensePlate, Company company) {
+  private User(String id, String username, String name, String licensePlate, Double lat, Double lon, Company company) {
     this.id = id;
+    this.username = username;
     this.name = name;
     this.licensePlate = licensePlate;
+    this.lat = lat;
+    this.lon = lon;
     this.company = company;
   }
   
@@ -77,8 +98,11 @@ public final class User implements Model {
       } else {
       User user = (User) obj;
       return ObjectsCompat.equals(getId(), user.getId()) &&
+              ObjectsCompat.equals(getUsername(), user.getUsername()) &&
               ObjectsCompat.equals(getName(), user.getName()) &&
               ObjectsCompat.equals(getLicensePlate(), user.getLicensePlate()) &&
+              ObjectsCompat.equals(getLat(), user.getLat()) &&
+              ObjectsCompat.equals(getLon(), user.getLon()) &&
               ObjectsCompat.equals(getCompany(), user.getCompany()) &&
               ObjectsCompat.equals(getCreatedAt(), user.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), user.getUpdatedAt());
@@ -89,8 +113,11 @@ public final class User implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
+      .append(getUsername())
       .append(getName())
       .append(getLicensePlate())
+      .append(getLat())
+      .append(getLon())
       .append(getCompany())
       .append(getCreatedAt())
       .append(getUpdatedAt())
@@ -103,8 +130,11 @@ public final class User implements Model {
     return new StringBuilder()
       .append("User {")
       .append("id=" + String.valueOf(getId()) + ", ")
+      .append("username=" + String.valueOf(getUsername()) + ", ")
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("licensePlate=" + String.valueOf(getLicensePlate()) + ", ")
+      .append("lat=" + String.valueOf(getLat()) + ", ")
+      .append("lon=" + String.valueOf(getLon()) + ", ")
       .append("company=" + String.valueOf(getCompany()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
@@ -112,7 +142,7 @@ public final class User implements Model {
       .toString();
   }
   
-  public static NameStep builder() {
+  public static BuildStep builder() {
       return new Builder();
   }
   
@@ -129,37 +159,41 @@ public final class User implements Model {
       id,
       null,
       null,
+      null,
+      null,
+      null,
       null
     );
   }
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
+      username,
       name,
       licensePlate,
+      lat,
+      lon,
       company);
   }
-  public interface NameStep {
-    LicensePlateStep name(String name);
-  }
-  
-
-  public interface LicensePlateStep {
-    BuildStep licensePlate(String licensePlate);
-  }
-  
-
   public interface BuildStep {
     User build();
     BuildStep id(String id);
+    BuildStep username(String username);
+    BuildStep name(String name);
+    BuildStep licensePlate(String licensePlate);
+    BuildStep lat(Double lat);
+    BuildStep lon(Double lon);
     BuildStep company(Company company);
   }
   
 
-  public static class Builder implements NameStep, LicensePlateStep, BuildStep {
+  public static class Builder implements BuildStep {
     private String id;
+    private String username;
     private String name;
     private String licensePlate;
+    private Double lat;
+    private Double lon;
     private Company company;
     @Override
      public User build() {
@@ -167,22 +201,41 @@ public final class User implements Model {
         
         return new User(
           id,
+          username,
           name,
           licensePlate,
+          lat,
+          lon,
           company);
     }
     
     @Override
-     public LicensePlateStep name(String name) {
-        Objects.requireNonNull(name);
+     public BuildStep username(String username) {
+        this.username = username;
+        return this;
+    }
+    
+    @Override
+     public BuildStep name(String name) {
         this.name = name;
         return this;
     }
     
     @Override
      public BuildStep licensePlate(String licensePlate) {
-        Objects.requireNonNull(licensePlate);
         this.licensePlate = licensePlate;
+        return this;
+    }
+    
+    @Override
+     public BuildStep lat(Double lat) {
+        this.lat = lat;
+        return this;
+    }
+    
+    @Override
+     public BuildStep lon(Double lon) {
+        this.lon = lon;
         return this;
     }
     
@@ -204,11 +257,19 @@ public final class User implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String licensePlate, Company company) {
+    private CopyOfBuilder(String id, String username, String name, String licensePlate, Double lat, Double lon, Company company) {
       super.id(id);
-      super.name(name)
+      super.username(username)
+        .name(name)
         .licensePlate(licensePlate)
+        .lat(lat)
+        .lon(lon)
         .company(company);
+    }
+    
+    @Override
+     public CopyOfBuilder username(String username) {
+      return (CopyOfBuilder) super.username(username);
     }
     
     @Override
@@ -219,6 +280,16 @@ public final class User implements Model {
     @Override
      public CopyOfBuilder licensePlate(String licensePlate) {
       return (CopyOfBuilder) super.licensePlate(licensePlate);
+    }
+    
+    @Override
+     public CopyOfBuilder lat(Double lat) {
+      return (CopyOfBuilder) super.lat(lat);
+    }
+    
+    @Override
+     public CopyOfBuilder lon(Double lon) {
+      return (CopyOfBuilder) super.lon(lon);
     }
     
     @Override

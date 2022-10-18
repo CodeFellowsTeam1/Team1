@@ -4,8 +4,11 @@ input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONL
 
 type User @model @auth(rules:[{allow: public}]) {
   id: ID!
-  name: String!
-  licensePlate: String!
+  username: String
+  name: String
+  licensePlate: String
+  lat: Float
+  lon: Float
   companyID: ID! @index(name: "byCompany")
   company: Company @belongsTo(fields: ["companyID"])
 }
@@ -13,6 +16,6 @@ type User @model @auth(rules:[{allow: public}]) {
 type Company @model @auth(rules:[{allow: public}]) {
     id: ID!
     name: String!
-    cityAndState: String!
+    cityAndState: String
     users: [User] @hasMany(indexName: "byCompany", fields:["id"])
 }

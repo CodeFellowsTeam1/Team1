@@ -1,27 +1,138 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateTodo {
-  onCreateTodo {
+subscription OnCreateUser {
+  onCreateUser {
     id
+    username
     name
-    description
+    licensePlate
+    lat
+    lon
+    companyID
+    company {
+      id
+      name
+      cityAndState
+      users {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
 }
-subscription OnUpdateTodo {
-  onUpdateTodo {
+subscription OnUpdateUser {
+  onUpdateUser {
     id
+    username
     name
-    description
+    licensePlate
+    lat
+    lon
+    companyID
+    company {
+      id
+      name
+      cityAndState
+      users {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
 }
-subscription OnDeleteTodo {
-  onDeleteTodo {
+subscription OnDeleteUser {
+  onDeleteUser {
+    id
+    username
+    name
+    licensePlate
+    lat
+    lon
+    companyID
+    company {
+      id
+      name
+      cityAndState
+      users {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateCompany {
+  onCreateCompany {
     id
     name
-    description
+    cityAndState
+    users {
+      items {
+        id
+        username
+        name
+        licensePlate
+        lat
+        lon
+        companyID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCompany {
+  onUpdateCompany {
+    id
+    name
+    cityAndState
+    users {
+      items {
+        id
+        username
+        name
+        licensePlate
+        lat
+        lon
+        companyID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCompany {
+  onDeleteCompany {
+    id
+    name
+    cityAndState
+    users {
+      items {
+        id
+        username
+        name
+        licensePlate
+        lat
+        lon
+        companyID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
