@@ -21,7 +21,7 @@
         app:layout_constraintTop_toBottomOf="@+id/LogoImageView" />
 
     <Button
-        android:id="@+id/SupBtn"
+        android:id="@+id/userSelectSupBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="96dp"
