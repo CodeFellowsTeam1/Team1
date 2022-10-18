@@ -2,7 +2,7 @@
 
 ## Cooperation Plan
 
-## Key Strenghts
+## Key Strengths
 
 Josh - Great design principles
 
