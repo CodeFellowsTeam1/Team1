@@ -4,10 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import androidx.core.app.ActivityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -36,13 +32,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button loginBtn = findViewById(R.id.MainActivityLoginBtn);
         loginBtn.setOnClickListener( view ->{
-            Amplify.Auth.signInWithSocialWebUI(AuthProvider.google(), this,
-                    result -> Log.i("AuthQuickstart", result.toString()),
-                    error -> Log.e("AuthQuickstart", error.toString())
-            );
             Intent goToNavHost = new Intent(MainActivity.this, NavHostActivity.class);
             startActivity(goToNavHost);
         });
+        Amplify.Auth.signInWithSocialWebUI(AuthProvider.google(), this,
+                result -> Log.i("AuthQuickstart", result.toString()),
+                error -> Log.e("AuthQuickstart", error.toString())
+        );
 
         Amplify.Auth.fetchAuthSession(
                 result -> {
