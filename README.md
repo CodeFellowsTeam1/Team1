@@ -10,7 +10,7 @@ Rexie - Comfortable with Java and android studios
 
 Stanley - Teamwork, googlefu, and time management
 
-Yahri - Design, research, and time management
+Yari - Design, research, and time management
 
 Caelin - research, troubleshooting, fast processing time, general understanding of how things work.
 
@@ -24,7 +24,7 @@ Rexie - help implement feature tasks for the project
 
 Stanley - Be able to help troubleshoot issues that arises and communicate the solutions to the problems.
 
-Yahri - Eager to design and help implement feature project tasks
+Yari - Eager to design and help implement feature project tasks
 
 Caelin - Help with testing, features, and brainstorming ideas for the project
 
@@ -63,7 +63,7 @@ Josh - ALLDAY!!
 Caelin - All day
 Rexie - 830am-6pm but always around
 Stanley - All day
-Yahri - school hours 
+Yari - school hours 
 What platforms will you use to communicate (ie. Slack, phone …)?
 
 Slack, Remo
