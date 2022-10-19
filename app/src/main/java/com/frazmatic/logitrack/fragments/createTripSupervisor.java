@@ -5,13 +5,16 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Trip;
 import com.frazmatic.logitrack.R;
 
 /**
@@ -20,6 +23,8 @@ import com.frazmatic.logitrack.R;
  * create an instance of this fragment.
  */
 public class createTripSupervisor extends Fragment {
+
+    View view;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,20 +71,45 @@ public class createTripSupervisor extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_create_trip_supervisor, container, false);
+        view = inflater.inflate(R.layout.fragment_create_trip_supervisor, container, false);
         Button redirect = view.findViewById(R.id.createTripBtn);
-        redirect.setOnClickListener(this);
+
+        redirect.setOnClickListener(v ->{
+            saveTrip();
+
+        });
+        return view;
     }
 
-    public void saveTrip(where, miles, hours, dropOff, deadHead, rate, deliveryNotes){
+    public void saveTrip(){
+
+        String where = ((EditText) view.findViewById(R.id.createTripWhereInput)).getText().toString();
+
+        EditText edt = (EditText) view.findViewById(R.id.createTripMilesInput);
+        Double miles = Double.valueOf(edt.getText().toString());
+
+        String hours = ((EditText) view.findViewById(R.id.createTripTravelTimeInput)).getText().toString();
+
+        String dropOff = ((EditText) view.findViewById(R.id.createTripDropOffInput)).getText().toString();
+
+
+        EditText deadheadtext = (EditText) view.findViewById(R.id.createTripDeadHeadInput);
+        Double deadHead = Double.valueOf(deadheadtext.getText().toString());
+
+        EditText ratetext = (EditText) view.findViewById(R.id.createTripRateInput);
+        Double rate = Double.valueOf(ratetext.getText().toString());
+
+        String deliveryNotes = ((EditText) view.findViewById(R.id.createTripDeliverNotesInput)).getText().toString();
+
+
         Trip newTrip = Trip.builder()
                 .where(where)
-                .miles(miles)
+                .dropOff(dropOff)
                 .hours(hours)
-                .dropOff(CREATE_TRIP_TAG)
+                .miles(miles)
                 .deadHead(deadHead)
                 .rate(rate)
-                .deliveryNotes(CREATE_TRIP_TAG)
+                .deliveryNotes(deliveryNotes)
                 .build();
         Amplify.API.mutate(
                 ModelMutation.create(newTrip),

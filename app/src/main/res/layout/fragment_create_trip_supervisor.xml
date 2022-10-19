@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.createTripSupervisor">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -36,104 +37,81 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <TextView
                 android:id="@+id/newTripTitleTV"
-                android:layout_width="86dp"
-                android:layout_height="65dp"
+                android:layout_width="284dp"
+                android:layout_height="66dp"
                 android:layout_marginTop="16dp"
-                android:text="Trip"
+                android:text="Create Trip"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/whereEditTV"
+                android:id="@+id/createTripWhereInput"
                 android:layout_width="298dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="40dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Where to:"
+                android:hint="Final Destination"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.347"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newTripTitleTV" />
 
             <EditText
-                android:id="@+id/milesNumberDecimal"
-                android:layout_width="300dp"
-                android:layout_height="48dp"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:text="Miles:"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.363"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/whereEditTV" />
-
-            <EditText
-                android:id="@+id/timeEditTextTime"
-                android:layout_width="299dp"
-                android:layout_height="48dp"
-                android:ems="10"
-                android:inputType="time"
-                android:text="Total Travel Time:"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.355"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/milesNumberDecimal" />
-
-            <EditText
-                android:id="@+id/drofOffEditTtv"
+                android:id="@+id/createTripDropOffInput"
                 android:layout_width="297dp"
                 android:layout_height="48dp"
                 android:ems="10"
+                android:hint="Drop-Off:"
                 android:inputType="textPersonName"
-                android:text="Drop-Off:"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.361"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/timeEditTextTime" />
+                app:layout_constraintTop_toBottomOf="@+id/createTripTravelTimeInput" />
 
             <EditText
-                android:id="@+id/deadHeadNumberDecimal"
+                android:id="@+id/createTripDeadHeadInput"
                 android:layout_width="296dp"
                 android:layout_height="48dp"
                 android:ems="10"
                 android:inputType="numberDecimal"
-                android:text="Dead Head:"
+                android:hint="Dead Head:"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.333"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/drofOffEditTtv" />
+                app:layout_constraintTop_toBottomOf="@+id/createTripDropOffInput" />
 
             <EditText
-                android:id="@+id/editTextNumberDecimal3"
+                android:id="@+id/createTripRateInput"
                 android:layout_width="297dp"
                 android:layout_height="48dp"
                 android:ems="10"
                 android:inputType="numberDecimal"
-                android:text="Rate:"
+                android:hint="Rate:"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.361"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/deadHeadNumberDecimal" />
+                app:layout_constraintTop_toBottomOf="@+id/createTripDeadHeadInput" />
 
             <EditText
-                android:id="@+id/deliveryNotesMLET"
+                android:id="@+id/createTripDeliverNotesInput"
                 android:layout_width="298dp"
                 android:layout_height="52dp"
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
-                android:text="Delivery Notes:"
+                android:hint="Delivery Notes:"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.369"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal3" />
+                app:layout_constraintTop_toBottomOf="@+id/createTripRateInput" />
 
             <Button
                 android:id="@+id/createTripBtn"
@@ -144,7 +122,33 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/deliveryNotesMLET" />
+                app:layout_constraintTop_toBottomOf="@+id/createTripDeliverNotesInput" />
+
+            <EditText
+                android:id="@+id/createTripMilesInput"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:ems="10"
+                android:hint="Miles"
+                android:inputType="numberDecimal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createTripWhereInput" />
+
+            <EditText
+                android:id="@+id/createTripTravelTimeInput"
+                android:layout_width="299dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="28dp"
+                android:ems="10"
+                android:hint="Hours"
+                android:inputType="numberDecimal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createTripMilesInput" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

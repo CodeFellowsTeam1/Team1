@@ -53,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupNavButton(){
         Button loginBtn = findViewById(R.id.MainActivityLoginBtn);
+        Amplify.Auth.fetchUserAttributes(
+                userAttributes -> Log.i("AuthDemo", "User attributes = " + userAttributes.toString()),
+
+                error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
+        );
 
         Amplify.Auth.fetchAuthSession(
                 result -> {

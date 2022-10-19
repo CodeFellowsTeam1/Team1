@@ -102,7 +102,7 @@ public class supervisorProfileForm extends Fragment {
             String CompanyLocation = ((EditText) view.findViewById(R.id.supervisorFormCompanyCityStateField)).getText().toString();
 
             saveForm(name, CompanyName, CompanyLocation);
-            Navigation.findNavController(v).navigate(R.id.action_supervisorProfileForm_to_supervisorProfile);
+            Navigation.findNavController(v).navigate(R.id.action_supervisorProfileForm_to_supervisorTripStatus);
         });
         return view;
     }
@@ -113,6 +113,7 @@ public class supervisorProfileForm extends Fragment {
 
         Amplify.API.query(
                 ModelQuery.list(Company.class, Company.NAME.contains(company)),
+
                 response -> {
                     ArrayList<Company> DBCompanies = new ArrayList<>();
                     for (Company c : response.getData()) {
