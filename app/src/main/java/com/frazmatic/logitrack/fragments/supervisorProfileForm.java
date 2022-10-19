@@ -1,13 +1,17 @@
 package com.frazmatic.logitrack.fragments;
 
+
 import android.content.SharedPreferences;
+
 import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+
 import android.preference.PreferenceManager;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +19,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
+
 import com.amplifyframework.api.graphql.model.ModelQuery;
+
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Company;
 import com.amplifyframework.datastore.generated.model.User;
@@ -33,9 +39,11 @@ import java.util.concurrent.ExecutionException;
  */
 public class supervisorProfileForm extends Fragment {
 
+
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
     private CompletableFuture<List<Company>> companies;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -96,7 +104,6 @@ public class supervisorProfileForm extends Fragment {
             saveForm(name, CompanyName, CompanyLocation);
             Navigation.findNavController(v).navigate(R.id.action_supervisorProfileForm_to_supervisorProfile);
         });
-
         return view;
     }
 
@@ -143,7 +150,6 @@ public class supervisorProfileForm extends Fragment {
                     failure -> Log.i(Tag,"Unable to save company info" + failure)
             );
         }
-
         User newUser = User.builder()
                 .name(name)
                 .licensePlate("123456")

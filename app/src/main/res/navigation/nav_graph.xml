@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/userSelect">
-    <fragment
+     <fragment
         android:id="@+id/userSelect"
         android:name="com.frazmatic.logitrack.fragments.userSelect"
         android:label="fragment_user_select"
@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_supervisorProfile_to_supervisorTripStatus"
             app:destination="@id/supervisorTripStatus" />
+        <action
+            android:id="@+id/action_supervisorProfile_to_supervisorProfileForm"
+            app:destination="@id/supervisorProfileForm" />
     </fragment>
     <fragment
         android:id="@+id/currentTrip"
@@ -78,4 +81,13 @@
         android:name="com.frazmatic.logitrack.fragments.mapGPS"
         android:label="fragment_map_g_p_s"
         tools:layout="@layout/fragment_map_g_p_s" />
+    <fragment
+        android:id="@+id/supervisorProfileForm"
+        android:name="com.frazmatic.logitrack.fragments.supervisorProfileForm"
+        android:label="fragment_supervisor_profile_form"
+        tools:layout="@layout/fragment_supervisor_profile_form" >
+        <action
+            android:id="@+id/action_supervisorProfileForm_to_supervisorProfile"
+            app:destination="@id/supervisorProfile" />
+    </fragment>
 </navigation>
