@@ -2,14 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout2"
+    android:id="@+id/frameLayout7"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.supervisorProfileForm">
+    tools:context=".fragments.driverProfileForm">
 
     <!-- TODO: Update blank fragment layout -->
-
-
     <EditText
         android:id="@+id/driverFormNameField"
         android:layout_width="wrap_content"
@@ -18,9 +16,12 @@
         android:layout_marginTop="166dp"
         android:layout_marginEnd="112dp"
         android:layout_marginBottom="22dp"
+        android:autofillHints=""
         android:ems="10"
-        android:hint="First/Last Name"
+        android:hint="@string/first_last_name"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
         app:layout_constraintBottom_toTopOf="@+id/driverFormCompanyField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,13 +30,15 @@
     <EditText
         android:id="@+id/driverFormCompanyField"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginStart="90dp"
         android:layout_marginEnd="112dp"
         android:layout_marginBottom="38dp"
+        android:autofillHints=""
         android:ems="10"
-        android:hint="Company"
+        android:hint="@string/company"
         android:inputType="textPersonName"
+        android:textColorHint="#757575"
         app:layout_constraintBottom_toTopOf="@+id/driverFormCompanyCityStateField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -47,7 +50,7 @@
         android:layout_marginStart="146dp"
         android:layout_marginEnd="178dp"
         android:layout_marginBottom="180dp"
-        android:text="Save"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -60,10 +63,14 @@
         android:layout_marginStart="91dp"
         android:layout_marginEnd="111dp"
         android:layout_marginBottom="146dp"
+        android:autofillHints=""
         android:ems="10"
-        android:hint="City and State"
+        android:hint="@string/city_and_state"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
         app:layout_constraintBottom_toTopOf="@+id/driverFormSaveBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
