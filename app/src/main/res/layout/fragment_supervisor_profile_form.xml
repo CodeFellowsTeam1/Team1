@@ -29,14 +29,14 @@
     <EditText
         android:id="@+id/supervisorFormCompanyField"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_marginStart="90dp"
         android:layout_marginEnd="112dp"
-        android:layout_marginBottom="97dp"
+        android:layout_marginBottom="38dp"
         android:ems="10"
         android:hint="Company"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/supervisorFormSaveBtn"
+        app:layout_constraintBottom_toTopOf="@+id/supervisorFormCompanyCityStateField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -46,9 +46,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="146dp"
         android:layout_marginEnd="178dp"
-        android:layout_marginBottom="308dp"
+        android:layout_marginBottom="180dp"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/supervisorFormCompanyCityStateField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="91dp"
+        android:layout_marginEnd="111dp"
+        android:layout_marginBottom="146dp"
+        android:ems="10"
+        android:hint="City and State"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/supervisorFormSaveBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

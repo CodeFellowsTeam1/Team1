@@ -73,25 +73,37 @@ public class supervisorProfileForm extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_supervisor_profile_form, container, false);
 
-        String name = ((EditText) view.findViewById(R.id.supervisorFormNameField)).getText().toString();
-        
-        String CompanyName = ((EditText) view.findViewById(R.id.supervisorFormCompanyField)).getText().toString();
 
-        view.findViewById(R.id.supervisorFormSaveBtn).setOnClickListener(v->{
-            saveForm(name,CompanyName);
+
+        view.findViewById(R.id.supervisorFormSaveBtn).setOnClickListener(v -> {
+
+            String name = ((EditText) view.findViewById(R.id.supervisorFormNameField)).getText().toString();
+            String CompanyName = ((EditText) view.findViewById(R.id.supervisorFormCompanyField)).getText().toString();
+            String CompanyLocation = ((EditText) view.findViewById(R.id.supervisorFormCompanyCityStateField)).getText().toString();
+
+            saveForm(name, CompanyName, CompanyLocation);
             Navigation.findNavController(v).navigate(R.id.action_supervisorProfileForm_to_supervisorProfile);
         });
-
 
 
         return view;
     }
 
-    private void saveForm(String name, String company){
+    private void saveForm(String name, String company, String companyLocation){
         //TODO: create database entry with user info
+        Company newCompany = Company.builder()
+                .name(company)
+                .cityAndState(companyLocation)
+                .build();
+        Amplify.API.mutate(
+                ModelMutation.create(newCompany),
+                success -> Log.i(Tag, "Updated company info"),
+                failure -> Log.i(Tag,"Unable to save company info" + failure)
+        );
         User newUser = User.builder()
                 .name(name)
                 .licensePlate("123456")
+                .company(newCompany)
                 .build();
         Amplify.API.mutate(
                 ModelMutation.create(newUser),

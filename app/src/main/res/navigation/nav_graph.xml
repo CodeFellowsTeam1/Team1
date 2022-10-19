@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/userSelect">
-    <fragment
+     <fragment
         android:id="@+id/userSelect"
         android:name="com.frazmatic.logitrack.fragments.userSelect"
         android:label="fragment_user_select"

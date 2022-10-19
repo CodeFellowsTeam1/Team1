@@ -73,6 +73,8 @@ public class supervisorProfile extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_supervisorProfileForm);
         });
 
+
+
         return view;
     }
 }
