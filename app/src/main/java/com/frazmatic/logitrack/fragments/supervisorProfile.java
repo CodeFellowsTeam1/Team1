@@ -3,10 +3,12 @@ package com.frazmatic.logitrack.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.frazmatic.logitrack.R;
 
@@ -61,6 +63,16 @@ public class supervisorProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_supervisor_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_supervisor_profile, container, false);
+        Button currentTrips = view.findViewById(R.id.supervisorProfileCurrentTripsBtn);
+        currentTrips.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_supervisorTripStatus);
+        });
+        Button createProfile = view.findViewById(R.id.supervisorProfileCreateBtn);
+        createProfile.setOnClickListener(v ->{
+            Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_supervisorProfileForm);
+        });
+
+        return view;
     }
 }
