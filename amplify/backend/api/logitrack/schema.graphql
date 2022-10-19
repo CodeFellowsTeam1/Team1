@@ -21,3 +21,14 @@ type Company @model @auth(rules:[{allow: public}]) {
     users: [User] @hasMany(indexName: "byCompany", fields:["id"])
 }
 
+type Trip @model @auth(rules:[{allow: public}]) {
+    id: ID!
+    where: String!
+    miles: Float
+    hours: String
+    dropOff: String!
+    deadHead: Float
+    rate: Float
+    deliveryNotes: String
+}
+

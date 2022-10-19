@@ -6,7 +6,10 @@ mutation CreateUser(
   createUser(input: $input, condition: $condition) {
     id
     name
+    username
     licensePlate
+    lat
+    lon
     companyID
     company {
       id
@@ -29,7 +32,10 @@ mutation UpdateUser(
   updateUser(input: $input, condition: $condition) {
     id
     name
+    username
     licensePlate
+    lat
+    lon
     companyID
     company {
       id
@@ -52,7 +58,10 @@ mutation DeleteUser(
   deleteUser(input: $input, condition: $condition) {
     id
     name
+    username
     licensePlate
+    lat
+    lon
     companyID
     company {
       id
@@ -80,7 +89,10 @@ mutation CreateCompany(
       items {
         id
         name
+        username
         licensePlate
+        lat
+        lon
         companyID
         createdAt
         updatedAt
@@ -103,7 +115,10 @@ mutation UpdateCompany(
       items {
         id
         name
+        username
         licensePlate
+        lat
+        lon
         companyID
         createdAt
         updatedAt
@@ -126,13 +141,67 @@ mutation DeleteCompany(
       items {
         id
         name
+        username
         licensePlate
+        lat
+        lon
         companyID
         createdAt
         updatedAt
       }
       nextToken
     }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateTrip(
+  $input: CreateTripInput!
+  $condition: ModelTripConditionInput
+) {
+  createTrip(input: $input, condition: $condition) {
+    id
+    where
+    miles
+    hours
+    dropOff
+    deadHead
+    rate
+    deliveryNotes
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateTrip(
+  $input: UpdateTripInput!
+  $condition: ModelTripConditionInput
+) {
+  updateTrip(input: $input, condition: $condition) {
+    id
+    where
+    miles
+    hours
+    dropOff
+    deadHead
+    rate
+    deliveryNotes
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteTrip(
+  $input: DeleteTripInput!
+  $condition: ModelTripConditionInput
+) {
+  deleteTrip(input: $input, condition: $condition) {
+    id
+    where
+    miles
+    hours
+    dropOff
+    deadHead
+    rate
+    deliveryNotes
     createdAt
     updatedAt
   }
