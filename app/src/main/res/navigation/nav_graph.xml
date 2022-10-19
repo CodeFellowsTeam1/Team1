@@ -24,6 +24,9 @@
          <action
              android:id="@+id/action_userSelect_to_supervisorProfileForm"
              app:destination="@id/supervisorProfileForm" />
+         <action
+             android:id="@+id/action_userSelect_to_driverProfileForm3"
+             app:destination="@id/driverProfileForm3" />
      </fragment>
     <fragment
         android:id="@+id/driverProfile"
@@ -33,6 +36,9 @@
         <action
             android:id="@+id/action_driverProfile_to_currentTrip"
             app:destination="@id/currentTrip" />
+        <action
+            android:id="@+id/action_driverProfile_to_driverProfileForm"
+            app:destination="@id/driverProfileForm3" />
     </fragment>
     <fragment
         android:id="@+id/supervisorProfile"
@@ -89,5 +95,14 @@
         <action
             android:id="@+id/action_supervisorProfileForm_to_supervisorTripStatus"
             app:destination="@id/supervisorTripStatus" />
+    </fragment>
+    <fragment
+        android:id="@+id/driverProfileForm3"
+        android:name="com.frazmatic.logitrack.fragments.driverProfileForm"
+        android:label="fragment_driver_profile_form"
+        tools:layout="@layout/fragment_driver_profile_form" >
+        <action
+            android:id="@+id/action_driverProfileForm3_to_driverProfile"
+            app:destination="@id/driverProfile" />
     </fragment>
 </navigation>

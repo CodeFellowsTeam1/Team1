@@ -1,16 +1,12 @@
 package com.frazmatic.logitrack.fragments;
 
-
 import android.content.SharedPreferences;
-
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-
 import android.preference.PreferenceManager;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +14,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
-
 import com.amplifyframework.api.graphql.model.ModelQuery;
-
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Company;
 import com.amplifyframework.datastore.generated.model.User;
@@ -33,11 +27,10 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link supervisorProfileForm#newInstance} factory method to
+ * Use the {@link driverProfileForm#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class supervisorProfileForm extends Fragment {
-
+public class driverProfileForm extends Fragment {
 
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
@@ -47,13 +40,13 @@ public class supervisorProfileForm extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public static final String Tag = "SupervisorProfileForm";
+    public static final String Tag = "DriverProfileForm";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public supervisorProfileForm() {
+    public driverProfileForm() {
         // Required empty public constructor
     }
 
@@ -63,18 +56,17 @@ public class supervisorProfileForm extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment supervisorProfileForm.
+     * @return A new instance of fragment driverProfileForm.
      */
     // TODO: Rename and change types and number of parameters
-    public static supervisorProfileForm newInstance(String param1, String param2) {
-        supervisorProfileForm fragment = new supervisorProfileForm();
+    public static driverProfileForm newInstance(String param1, String param2) {
+        driverProfileForm fragment = new driverProfileForm();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,7 +93,7 @@ public class supervisorProfileForm extends Fragment {
             String CompanyLocation = ((EditText) view.findViewById(R.id.driverFormCompanyCityStateField)).getText().toString();
 
             saveForm(name, CompanyName, CompanyLocation);
-            Navigation.findNavController(v).navigate(R.id.action_supervisorProfileForm_to_supervisorTripStatus);
+            Navigation.findNavController(v).navigate(R.id.action_driverProfile_to_driverProfileForm);
         });
         return view;
     }
@@ -112,21 +104,20 @@ public class supervisorProfileForm extends Fragment {
 
         Amplify.API.query(
                 ModelQuery.list(Company.class, Company.NAME.contains(company)),
-
                 response -> {
                     ArrayList<Company> DBCompanies = new ArrayList<>();
                     for (Company c : response.getData()) {
                         DBCompanies.add(c);
-                        Log.i("SupervisorProfileForm", c.getName());
+                        Log.i("DriverProfileForm", c.getName());
                     }
                     companies.complete(DBCompanies);
                 },
                 error -> {
                     companies.complete(null);
-                    Log.e("SupervisorProfileForm", "Query failure", error);
+                    Log.e("DriverProfileForm", "Query failure", error);
                 }
         );
-        
+
         ArrayList<Company> companyArrayList = new ArrayList<>();
         try {
             companyArrayList = (ArrayList<Company>)companies.get();
