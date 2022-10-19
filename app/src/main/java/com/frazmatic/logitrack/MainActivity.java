@@ -31,21 +31,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button loginBtn = findViewById(R.id.MainActivityLoginBtn);
+        oauth();
         loginBtn.setOnClickListener( view ->{
             Intent goToNavHost = new Intent(MainActivity.this, NavHostActivity.class);
             startActivity(goToNavHost);
         });
-        Amplify.Auth.signInWithSocialWebUI(AuthProvider.google(), this,
-                result -> Log.i("AuthQuickstart", result.toString()),
-                error -> Log.e("AuthQuickstart", error.toString())
-        );
-
-        Amplify.Auth.fetchAuthSession(
-                result -> {
-                    Log.i("AmplifyQuickstart", result.toString());
-                },
-                error -> Log.e("AmplifyQuickstart", error.toString())
-        );
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 55555);
         createLocationRequest(10);
         createLocationCallback();
@@ -104,5 +94,12 @@ public class MainActivity extends AppCompatActivity {
         fusedLocationProviderClient.requestLocationUpdates(locationRequest,
                 locationCallback,
                 Looper.getMainLooper());
+    }
+
+    private void oauth(){
+        Amplify.Auth.signInWithSocialWebUI(AuthProvider.google(), this,
+                result -> Log.i("AuthQuickstart", result.toString()),
+                error -> Log.e("AuthQuickstart", error.toString())
+        );
     }
 }
