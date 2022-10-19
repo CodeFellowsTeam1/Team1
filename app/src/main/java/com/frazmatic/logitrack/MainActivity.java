@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import com.amplifyframework.auth.AuthProvider;
+import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupNavButton(){
-        Button loginBtn = findViewById(R.id.MainActivityLoginBtn);
+        Button loginBtn = findViewById(R.id.MainActivityLoginBttn);
         Amplify.Auth.fetchUserAttributes(
                 userAttributes -> Log.i("AuthDemo", "User attributes = " + userAttributes.toString()),
 
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         Amplify.Auth.fetchAuthSession(
                 result -> {
+                    AuthUser currentUser = Amplify.Auth.getCurrentUser();
+                    Log.i("AUTHUSERID", "AuthUSerID = " + currentUser.getUserId());
                     if(result.isSignedIn()){
                         runOnUiThread(() -> {
                             loginBtn.setText("User Selection");
