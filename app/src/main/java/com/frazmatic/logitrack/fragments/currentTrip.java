@@ -72,7 +72,7 @@ public class currentTrip extends Fragment {
     View view = inflater.inflate(R.layout.fragment_current_trip, container, false);
     String currentTrip = ((TextView) view.findViewById(R.id.CurrentTripTV)).getText().toString();
     view.findViewById(R.id.userSelectSupBtn).setOnClickListener((v -> {
-        saveTrip(where, miles, hours, dropOff, deadHead, rate, deliveryNotes);
+//        saveTrip(where, miles, hours, dropOff, deadHead, rate, deliveryNotes);
         Navigation.findNavController(v).navigate(R.id.action_userSelect_to_supervisorProfile);
     }));
         return view;

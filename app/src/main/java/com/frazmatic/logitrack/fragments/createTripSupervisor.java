@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.Button;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Trip;
 import com.frazmatic.logitrack.R;
 
 /**
@@ -62,29 +64,32 @@ public class createTripSupervisor extends Fragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_create_trip_supervisor, container, false);
-        Button redirect = view.findViewById(R.id.createTripBtn);
-        redirect.setOnClickListener(this);
-    }
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        // Inflate the layout for this fragment
+//        View view = inflater.inflate(R.layout.fragment_create_trip_supervisor, container, false);
+//        Button redirect = view.findViewById(R.id.createTripBtn);
+//        redirect.setOnClickListener();
+//
+//        return view;
+//    }
 
-    public void saveTrip(where, miles, hours, dropOff, deadHead, rate, deliveryNotes){
-        Trip newTrip = Trip.builder()
-                .where(where)
-                .miles(miles)
-                .hours(hours)
-                .dropOff(CREATE_TRIP_TAG)
-                .deadHead(deadHead)
-                .rate(rate)
-                .deliveryNotes(CREATE_TRIP_TAG)
-                .build();
-        Amplify.API.mutate(
-                ModelMutation.create(newTrip),
-                success -> Log.i(CREATE_TRIP_TAG, "New trip info created."),
-                failure -> Log.i(CREATE_TRIP_TAG, "Unable to create new trip " + failure)
-        );
-    }
+//    public void saveTrip(where, miles, hours, dropOff, deadHead, rate, deliveryNotes){
+//        Trip newTrip = Trip.builder()
+//                .where(where)
+//                .miles(miles)
+//                .hours(hours)
+//                .dropOff(CREATE_TRIP_TAG)
+//                .deadHead(deadHead)
+//                .rate(rate)
+//                .deliveryNotes(CREATE_TRIP_TAG)
+//                .build();
+//
+//        Amplify.API.mutate(
+//                ModelMutation.create(newTrip),
+//                success -> Log.i(CREATE_TRIP_TAG, "New trip info created."),
+//                failure -> Log.i(CREATE_TRIP_TAG, "Unable to create new trip " + failure)
+//        );
+//    }
 }

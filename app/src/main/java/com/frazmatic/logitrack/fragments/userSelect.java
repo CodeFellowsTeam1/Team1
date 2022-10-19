@@ -48,7 +48,7 @@ public class userSelect extends Fragment {
 
         Button driver = view.findViewById(R.id.userSelectCarrierButton);
         driver.setOnClickListener((v -> {
-            Navigation.findNavController(v).navigate(R.id.action_userSelect_to_driverProfile);
+            Navigation.findNavController(v).navigate(R.id.action_userSelect_to_driverProfileForm3);
         }));
 
         return view;
