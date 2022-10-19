@@ -31,7 +31,7 @@ public final class Company implements Model {
   public static final QueryField CITY_AND_STATE = field("Company", "cityAndState");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String name;
-  private final @ModelField(targetType="String", isRequired = true) String cityAndState;
+  private final @ModelField(targetType="String") String cityAndState;
   private final @ModelField(targetType="User") @HasMany(associatedWith = "company", type = User.class) List<User> users = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
@@ -132,22 +132,18 @@ public final class Company implements Model {
       cityAndState);
   }
   public interface NameStep {
-    CityAndStateStep name(String name);
-  }
-  
-
-  public interface CityAndStateStep {
-    BuildStep cityAndState(String cityAndState);
+    BuildStep name(String name);
   }
   
 
   public interface BuildStep {
     Company build();
     BuildStep id(String id);
+    BuildStep cityAndState(String cityAndState);
   }
   
 
-  public static class Builder implements NameStep, CityAndStateStep, BuildStep {
+  public static class Builder implements NameStep, BuildStep {
     private String id;
     private String name;
     private String cityAndState;
@@ -162,7 +158,7 @@ public final class Company implements Model {
     }
     
     @Override
-     public CityAndStateStep name(String name) {
+     public BuildStep name(String name) {
         Objects.requireNonNull(name);
         this.name = name;
         return this;
@@ -170,7 +166,6 @@ public final class Company implements Model {
     
     @Override
      public BuildStep cityAndState(String cityAndState) {
-        Objects.requireNonNull(cityAndState);
         this.cityAndState = cityAndState;
         return this;
     }
