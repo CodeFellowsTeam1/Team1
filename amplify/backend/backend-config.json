@@ -9,9 +9,9 @@
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 365,
-              "apiKeyExpirationDate": "2023-10-18T21:55:44.372Z",
-              "description": "LogiTrack"
+              "apiKeyExpirationDays": 30,
+              "apiKeyExpirationDate": "2022-11-17T20:24:15.120Z",
+              "description": "test"
             }
           },
           "additionalAuthenticationProviders": []
