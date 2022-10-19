@@ -21,7 +21,10 @@
         <action
             android:id="@+id/action_userSelect_to_supervisorTripStatus"
             app:destination="@id/supervisorTripStatus" />
-    </fragment>
+         <action
+             android:id="@+id/action_userSelect_to_supervisorProfileForm"
+             app:destination="@id/supervisorProfileForm" />
+     </fragment>
     <fragment
         android:id="@+id/driverProfile"
         android:name="com.frazmatic.logitrack.fragments.driverProfile"

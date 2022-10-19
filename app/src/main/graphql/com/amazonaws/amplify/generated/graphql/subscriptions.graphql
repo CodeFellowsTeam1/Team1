@@ -3,7 +3,10 @@ subscription OnCreateUser {
   onCreateUser {
     id
     name
+    username
     licensePlate
+    lat
+    lon
     companyID
     company {
       id
@@ -23,7 +26,10 @@ subscription OnUpdateUser {
   onUpdateUser {
     id
     name
+    username
     licensePlate
+    lat
+    lon
     companyID
     company {
       id
@@ -43,7 +49,10 @@ subscription OnDeleteUser {
   onDeleteUser {
     id
     name
+    username
     licensePlate
+    lat
+    lon
     companyID
     company {
       id
@@ -68,7 +77,10 @@ subscription OnCreateCompany {
       items {
         id
         name
+        username
         licensePlate
+        lat
+        lon
         companyID
         createdAt
         updatedAt
@@ -88,7 +100,10 @@ subscription OnUpdateCompany {
       items {
         id
         name
+        username
         licensePlate
+        lat
+        lon
         companyID
         createdAt
         updatedAt
@@ -108,13 +123,58 @@ subscription OnDeleteCompany {
       items {
         id
         name
+        username
         licensePlate
+        lat
+        lon
         companyID
         createdAt
         updatedAt
       }
       nextToken
     }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateTrip {
+  onCreateTrip {
+    id
+    where
+    miles
+    hours
+    dropOff
+    deadHead
+    rate
+    deliveryNotes
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateTrip {
+  onUpdateTrip {
+    id
+    where
+    miles
+    hours
+    dropOff
+    deadHead
+    rate
+    deliveryNotes
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteTrip {
+  onDeleteTrip {
+    id
+    where
+    miles
+    hours
+    dropOff
+    deadHead
+    rate
+    deliveryNotes
     createdAt
     updatedAt
   }

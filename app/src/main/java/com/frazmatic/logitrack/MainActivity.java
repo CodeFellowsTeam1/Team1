@@ -10,6 +10,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import com.amplifyframework.auth.AuthProvider;
 import com.amplifyframework.core.Amplify;
@@ -29,15 +30,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
-        Button loginBtn = findViewById(R.id.MainActivityLoginBtn);
-        oauth();
-        loginBtn.setOnClickListener( view ->{
-            Intent goToNavHost = new Intent(MainActivity.this, NavHostActivity.class);
-            startActivity(goToNavHost);
-        });
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 55555);
-        createLocationRequest(10);
+        createLocationRequest(20);
         createLocationCallback();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
     }
@@ -45,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         resumeLocationUpdates();
+        setupNavButton();
     }
 
     private void createLocationRequest(int intervalSeconds){
@@ -52,6 +49,35 @@ public class MainActivity extends AppCompatActivity {
         locationRequest = LocationRequest.create();
         locationRequest.setInterval(milliseconds);
         locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
+    }
+
+    private void setupNavButton(){
+        Button loginBtn = findViewById(R.id.MainActivityLoginBtn);
+
+        Amplify.Auth.fetchAuthSession(
+                result -> {
+                    if(result.isSignedIn()){
+                        runOnUiThread(() -> {
+                            loginBtn.setText("User Selection");
+                            loginBtn.setOnClickListener( view ->{
+                                Intent goToNavHost = new Intent(MainActivity.this, NavHostActivity.class);
+                                startActivity(goToNavHost);
+                            });
+
+                        });
+                    } else {
+                        runOnUiThread(() -> {
+                            loginBtn.setText("LOGIN");
+                            loginBtn.setOnClickListener(view -> {
+                                oauth();
+                                finish();
+                                startActivity(getIntent());
+                            });
+
+                        });
+                    }
+                },
+                error -> {});
     }
 
     public void createLocationCallback(){
@@ -102,4 +128,31 @@ public class MainActivity extends AppCompatActivity {
                 error -> Log.e("AuthQuickstart", error.toString())
         );
     }
+
+//    private void setupLoginLogoutButton(){
+//        Button b = findViewById(R.id.buttonLoginLogout);
+//        Amplify.Auth.fetchAuthSession(
+//                result -> {
+//                    if (result.isSignedIn()){
+//                        runOnUiThread(() -> {
+//                            b.setText("Log Out");
+//                            b.setOnClickListener(view -> {
+//                                signOutUser();
+//                                finish();
+//                                startActivity(getIntent());
+//                            });
+//                        });
+//                    } else {
+//                        runOnUiThread(() -> {
+//                            b.setText("Log In");
+//                            b.setOnClickListener(view -> {
+//                                Intent intent = new Intent(this, LogIn.class);
+//                                startActivity(intent);
+//                            });
+//                        });
+//                    }
+//                },
+//                error -> Log.e("AmplifyQuickstart", error.toString())
+//        );
+//    }
 }

@@ -3,7 +3,10 @@ query GetUser($id: ID!) {
   getUser(id: $id) {
     id
     name
+    username
     licensePlate
+    lat
+    lon
     companyID
     company {
       id
@@ -28,7 +31,10 @@ query ListUsers(
     items {
       id
       name
+      username
       licensePlate
+      lat
+      lon
       companyID
       company {
         id
@@ -52,7 +58,10 @@ query GetCompany($id: ID!) {
       items {
         id
         name
+        username
         licensePlate
+        lat
+        lon
         companyID
         createdAt
         updatedAt
@@ -76,6 +85,41 @@ query ListCompanies(
       users {
         nextToken
       }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetTrip($id: ID!) {
+  getTrip(id: $id) {
+    id
+    where
+    miles
+    hours
+    dropOff
+    deadHead
+    rate
+    deliveryNotes
+    createdAt
+    updatedAt
+  }
+}
+query ListTrips(
+  $filter: ModelTripFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTrips(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      where
+      miles
+      hours
+      dropOff
+      deadHead
+      rate
+      deliveryNotes
       createdAt
       updatedAt
     }
