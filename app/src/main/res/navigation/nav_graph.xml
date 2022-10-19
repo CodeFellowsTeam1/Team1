@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+ <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
@@ -93,8 +93,8 @@
         android:label="fragment_supervisor_profile_form"
         tools:layout="@layout/fragment_supervisor_profile_form" >
         <action
-            android:id="@+id/action_supervisorProfileForm_to_supervisorProfile"
-            app:destination="@id/supervisorProfile" />
+            android:id="@+id/action_supervisorProfileForm_to_supervisorTripStatus"
+            app:destination="@id/supervisorTripStatus" />
     </fragment>
     <fragment
         android:id="@+id/driverProfileForm3"

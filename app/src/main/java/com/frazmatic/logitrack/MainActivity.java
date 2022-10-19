@@ -10,8 +10,10 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import com.amplifyframework.auth.AuthProvider;
+import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -52,9 +54,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupNavButton(){
         Button loginBtn = findViewById(R.id.MainActivityLoginBttn);
+        Amplify.Auth.fetchUserAttributes(
+                userAttributes -> Log.i("AuthDemo", "User attributes = " + userAttributes.toString()),
+
+                error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
+        );
 
         Amplify.Auth.fetchAuthSession(
                 result -> {
+                    AuthUser currentUser = Amplify.Auth.getCurrentUser();
+                    Log.i("AUTHUSERID", "AuthUSerID = " + currentUser.getUserId());
                     if(result.isSignedIn()){
                         runOnUiThread(() -> {
                             loginBtn.setText("User Selection");

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
@@ -22,6 +23,8 @@ import com.frazmatic.logitrack.R;
  * create an instance of this fragment.
  */
 public class createTripSupervisor extends Fragment {
+
+    View view;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,32 +67,54 @@ public class createTripSupervisor extends Fragment {
         }
     }
 
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        // Inflate the layout for this fragment
-//        View view = inflater.inflate(R.layout.fragment_create_trip_supervisor, container, false);
-//        Button redirect = view.findViewById(R.id.createTripBtn);
-//        redirect.setOnClickListener();
-//
-//        return view;
-//    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_create_trip_supervisor, container, false);
+        Button redirect = view.findViewById(R.id.createTripBtn);
 
-//    public void saveTrip(where, miles, hours, dropOff, deadHead, rate, deliveryNotes){
-//        Trip newTrip = Trip.builder()
-//                .where(where)
-//                .miles(miles)
-//                .hours(hours)
-//                .dropOff(CREATE_TRIP_TAG)
-//                .deadHead(deadHead)
-//                .rate(rate)
-//                .deliveryNotes(CREATE_TRIP_TAG)
-//                .build();
-//
-//        Amplify.API.mutate(
-//                ModelMutation.create(newTrip),
-//                success -> Log.i(CREATE_TRIP_TAG, "New trip info created."),
-//                failure -> Log.i(CREATE_TRIP_TAG, "Unable to create new trip " + failure)
-//        );
-//    }
+        redirect.setOnClickListener(v ->{
+            saveTrip();
+
+        });
+        return view;
+    }
+
+    public void saveTrip(){
+
+        String where = ((EditText) view.findViewById(R.id.createTripWhereInput)).getText().toString();
+
+        EditText edt = (EditText) view.findViewById(R.id.createTripMilesInput);
+        Double miles = Double.valueOf(edt.getText().toString());
+
+        String hours = ((EditText) view.findViewById(R.id.createTripTravelTimeInput)).getText().toString();
+
+        String dropOff = ((EditText) view.findViewById(R.id.createTripDropOffInput)).getText().toString();
+
+
+        EditText deadheadtext = (EditText) view.findViewById(R.id.createTripDeadHeadInput);
+        Double deadHead = Double.valueOf(deadheadtext.getText().toString());
+
+        EditText ratetext = (EditText) view.findViewById(R.id.createTripRateInput);
+        Double rate = Double.valueOf(ratetext.getText().toString());
+
+        String deliveryNotes = ((EditText) view.findViewById(R.id.createTripDeliverNotesInput)).getText().toString();
+
+
+        Trip newTrip = Trip.builder()
+                .where(where)
+                .dropOff(dropOff)
+                .hours(hours)
+                .miles(miles)
+                .deadHead(deadHead)
+                .rate(rate)
+                .deliveryNotes(deliveryNotes)
+                .build();
+        Amplify.API.mutate(
+                ModelMutation.create(newTrip),
+                success -> Log.i(CREATE_TRIP_TAG, "New trip info created."),
+                failure -> Log.i(CREATE_TRIP_TAG, "Unable to create new trip " + failure)
+        );
+    }
 }
