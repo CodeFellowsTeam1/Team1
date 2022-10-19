@@ -32,3 +32,17 @@ type Trip @model @auth(rules:[{allow: public}]) {
     deliveryNotes: String
 }
 
+type Driver @model @auth(rules:[{allow: public}]) {
+    id: ID!
+    users: User @hasOne
+    licensePlate: String!
+    licenseType: String!
+
+}
+
+type Supervisor @model @auth(rules:[{allow: public}]) {
+    id: ID!
+    users: User @hasOne
+
+}
+
