@@ -179,3 +179,165 @@ subscription OnDeleteTrip {
     updatedAt
   }
 }
+subscription OnCreateDriver {
+  onCreateDriver {
+    id
+    users {
+      id
+      name
+      username
+      licensePlate
+      lat
+      lon
+      companyID
+      company {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    licensePlate
+    licenseType
+    createdAt
+    updatedAt
+    driverUsersId
+  }
+}
+subscription OnUpdateDriver {
+  onUpdateDriver {
+    id
+    users {
+      id
+      name
+      username
+      licensePlate
+      lat
+      lon
+      companyID
+      company {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    licensePlate
+    licenseType
+    createdAt
+    updatedAt
+    driverUsersId
+  }
+}
+subscription OnDeleteDriver {
+  onDeleteDriver {
+    id
+    users {
+      id
+      name
+      username
+      licensePlate
+      lat
+      lon
+      companyID
+      company {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    licensePlate
+    licenseType
+    createdAt
+    updatedAt
+    driverUsersId
+  }
+}
+subscription OnCreateSupervisor {
+  onCreateSupervisor {
+    id
+    users {
+      id
+      name
+      username
+      licensePlate
+      lat
+      lon
+      companyID
+      company {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    supervisorUsersId
+  }
+}
+subscription OnUpdateSupervisor {
+  onUpdateSupervisor {
+    id
+    users {
+      id
+      name
+      username
+      licensePlate
+      lat
+      lon
+      companyID
+      company {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    supervisorUsersId
+  }
+}
+subscription OnDeleteSupervisor {
+  onDeleteSupervisor {
+    id
+    users {
+      id
+      name
+      username
+      licensePlate
+      lat
+      lon
+      companyID
+      company {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    supervisorUsersId
+  }
+}

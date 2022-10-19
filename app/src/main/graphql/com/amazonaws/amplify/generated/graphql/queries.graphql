@@ -126,3 +126,111 @@ query ListTrips(
     nextToken
   }
 }
+query GetDriver($id: ID!) {
+  getDriver(id: $id) {
+    id
+    users {
+      id
+      name
+      username
+      licensePlate
+      lat
+      lon
+      companyID
+      company {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    licensePlate
+    licenseType
+    createdAt
+    updatedAt
+    driverUsersId
+  }
+}
+query ListDrivers(
+  $filter: ModelDriverFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listDrivers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      users {
+        id
+        name
+        username
+        licensePlate
+        lat
+        lon
+        companyID
+        createdAt
+        updatedAt
+      }
+      licensePlate
+      licenseType
+      createdAt
+      updatedAt
+      driverUsersId
+    }
+    nextToken
+  }
+}
+query GetSupervisor($id: ID!) {
+  getSupervisor(id: $id) {
+    id
+    users {
+      id
+      name
+      username
+      licensePlate
+      lat
+      lon
+      companyID
+      company {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    supervisorUsersId
+  }
+}
+query ListSupervisors(
+  $filter: ModelSupervisorFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSupervisors(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      users {
+        id
+        name
+        username
+        licensePlate
+        lat
+        lon
+        companyID
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      supervisorUsersId
+    }
+    nextToken
+  }
+}
