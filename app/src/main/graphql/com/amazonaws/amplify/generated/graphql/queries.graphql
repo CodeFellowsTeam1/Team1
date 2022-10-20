@@ -7,8 +7,8 @@ query GetUser($id: ID!) {
     licensePlate
     lat
     lon
-    companyID
-    company {
+    firmID
+    firm {
       id
       name
       cityAndState
@@ -35,8 +35,8 @@ query ListUsers(
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState
@@ -49,8 +49,8 @@ query ListUsers(
     nextToken
   }
 }
-query GetCompany($id: ID!) {
-  getCompany(id: $id) {
+query GetFirm($id: ID!) {
+  getFirm(id: $id) {
     id
     name
     cityAndState
@@ -62,7 +62,7 @@ query GetCompany($id: ID!) {
         licensePlate
         lat
         lon
-        companyID
+        firmID
         createdAt
         updatedAt
       }
@@ -72,12 +72,12 @@ query GetCompany($id: ID!) {
     updatedAt
   }
 }
-query ListCompanies(
-  $filter: ModelCompanyFilterInput
+query ListFirms(
+  $filter: ModelFirmFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listCompanies(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listFirms(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       name
@@ -136,8 +136,8 @@ query GetDriver($id: ID!) {
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState
@@ -147,8 +147,6 @@ query GetDriver($id: ID!) {
       createdAt
       updatedAt
     }
-    licensePlate
-    licenseType
     createdAt
     updatedAt
     driverUsersId
@@ -169,12 +167,10 @@ query ListDrivers(
         licensePlate
         lat
         lon
-        companyID
+        firmID
         createdAt
         updatedAt
       }
-      licensePlate
-      licenseType
       createdAt
       updatedAt
       driverUsersId
@@ -192,8 +188,8 @@ query GetSupervisor($id: ID!) {
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState
@@ -223,7 +219,7 @@ query ListSupervisors(
         licensePlate
         lat
         lon
-        companyID
+        firmID
         createdAt
         updatedAt
       }

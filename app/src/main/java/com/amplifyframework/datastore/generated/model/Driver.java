@@ -29,10 +29,10 @@ public final class Driver implements Model {
   public static final QueryField ID = field("Driver", "id");
   public static final QueryField DRIVER_USERS_ID = field("Driver", "driverUsersId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="User") @HasOne(associatedWith = "id", type = User.class) User users = null;
+  private final @ModelField(targetType="User", isRequired = true) @HasOne(associatedWith = "id", type = User.class) User users = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
-  private final @ModelField(targetType="ID") String driverUsersId;
+  private final @ModelField(targetType="ID", isRequired = true) String driverUsersId;
   public String getId() {
       return id;
   }
@@ -96,7 +96,7 @@ public final class Driver implements Model {
       .toString();
   }
   
-  public static BuildStep builder() {
+  public static DriverUsersIdStep builder() {
       return new Builder();
   }
   
@@ -119,14 +119,18 @@ public final class Driver implements Model {
     return new CopyOfBuilder(id,
       driverUsersId);
   }
-  public interface BuildStep {
-    Driver build();
-    BuildStep id(String id);
+  public interface DriverUsersIdStep {
     BuildStep driverUsersId(String driverUsersId);
   }
   
 
-  public static class Builder implements BuildStep {
+  public interface BuildStep {
+    Driver build();
+    BuildStep id(String id);
+  }
+  
+
+  public static class Builder implements DriverUsersIdStep, BuildStep {
     private String id;
     private String driverUsersId;
     @Override
@@ -140,6 +144,7 @@ public final class Driver implements Model {
     
     @Override
      public BuildStep driverUsersId(String driverUsersId) {
+        Objects.requireNonNull(driverUsersId);
         this.driverUsersId = driverUsersId;
         return this;
     }

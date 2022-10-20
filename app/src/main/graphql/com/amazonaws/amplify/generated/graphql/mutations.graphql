@@ -10,8 +10,8 @@ mutation CreateUser(
     licensePlate
     lat
     lon
-    companyID
-    company {
+    firmID
+    firm {
       id
       name
       cityAndState
@@ -36,8 +36,8 @@ mutation UpdateUser(
     licensePlate
     lat
     lon
-    companyID
-    company {
+    firmID
+    firm {
       id
       name
       cityAndState
@@ -62,8 +62,8 @@ mutation DeleteUser(
     licensePlate
     lat
     lon
-    companyID
-    company {
+    firmID
+    firm {
       id
       name
       cityAndState
@@ -77,11 +77,11 @@ mutation DeleteUser(
     updatedAt
   }
 }
-mutation CreateCompany(
-  $input: CreateCompanyInput!
-  $condition: ModelCompanyConditionInput
+mutation CreateFirm(
+  $input: CreateFirmInput!
+  $condition: ModelFirmConditionInput
 ) {
-  createCompany(input: $input, condition: $condition) {
+  createFirm(input: $input, condition: $condition) {
     id
     name
     cityAndState
@@ -93,7 +93,7 @@ mutation CreateCompany(
         licensePlate
         lat
         lon
-        companyID
+        firmID
         createdAt
         updatedAt
       }
@@ -103,11 +103,11 @@ mutation CreateCompany(
     updatedAt
   }
 }
-mutation UpdateCompany(
-  $input: UpdateCompanyInput!
-  $condition: ModelCompanyConditionInput
+mutation UpdateFirm(
+  $input: UpdateFirmInput!
+  $condition: ModelFirmConditionInput
 ) {
-  updateCompany(input: $input, condition: $condition) {
+  updateFirm(input: $input, condition: $condition) {
     id
     name
     cityAndState
@@ -119,7 +119,7 @@ mutation UpdateCompany(
         licensePlate
         lat
         lon
-        companyID
+        firmID
         createdAt
         updatedAt
       }
@@ -129,11 +129,11 @@ mutation UpdateCompany(
     updatedAt
   }
 }
-mutation DeleteCompany(
-  $input: DeleteCompanyInput!
-  $condition: ModelCompanyConditionInput
+mutation DeleteFirm(
+  $input: DeleteFirmInput!
+  $condition: ModelFirmConditionInput
 ) {
-  deleteCompany(input: $input, condition: $condition) {
+  deleteFirm(input: $input, condition: $condition) {
     id
     name
     cityAndState
@@ -145,7 +145,7 @@ mutation DeleteCompany(
         licensePlate
         lat
         lon
-        companyID
+        firmID
         createdAt
         updatedAt
       }
@@ -219,8 +219,8 @@ mutation CreateDriver(
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState
@@ -230,8 +230,6 @@ mutation CreateDriver(
       createdAt
       updatedAt
     }
-    licensePlate
-    licenseType
     createdAt
     updatedAt
     driverUsersId
@@ -250,8 +248,8 @@ mutation UpdateDriver(
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState
@@ -261,8 +259,6 @@ mutation UpdateDriver(
       createdAt
       updatedAt
     }
-    licensePlate
-    licenseType
     createdAt
     updatedAt
     driverUsersId
@@ -281,8 +277,8 @@ mutation DeleteDriver(
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState
@@ -292,8 +288,6 @@ mutation DeleteDriver(
       createdAt
       updatedAt
     }
-    licensePlate
-    licenseType
     createdAt
     updatedAt
     driverUsersId
@@ -312,8 +306,8 @@ mutation CreateSupervisor(
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState
@@ -341,8 +335,8 @@ mutation UpdateSupervisor(
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState
@@ -370,8 +364,8 @@ mutation DeleteSupervisor(
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState

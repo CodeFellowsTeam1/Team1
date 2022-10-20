@@ -7,8 +7,8 @@ subscription OnCreateUser {
     licensePlate
     lat
     lon
-    companyID
-    company {
+    firmID
+    firm {
       id
       name
       cityAndState
@@ -30,8 +30,8 @@ subscription OnUpdateUser {
     licensePlate
     lat
     lon
-    companyID
-    company {
+    firmID
+    firm {
       id
       name
       cityAndState
@@ -53,8 +53,8 @@ subscription OnDeleteUser {
     licensePlate
     lat
     lon
-    companyID
-    company {
+    firmID
+    firm {
       id
       name
       cityAndState
@@ -68,8 +68,8 @@ subscription OnDeleteUser {
     updatedAt
   }
 }
-subscription OnCreateCompany {
-  onCreateCompany {
+subscription OnCreateFirm {
+  onCreateFirm {
     id
     name
     cityAndState
@@ -81,7 +81,7 @@ subscription OnCreateCompany {
         licensePlate
         lat
         lon
-        companyID
+        firmID
         createdAt
         updatedAt
       }
@@ -91,8 +91,8 @@ subscription OnCreateCompany {
     updatedAt
   }
 }
-subscription OnUpdateCompany {
-  onUpdateCompany {
+subscription OnUpdateFirm {
+  onUpdateFirm {
     id
     name
     cityAndState
@@ -104,7 +104,7 @@ subscription OnUpdateCompany {
         licensePlate
         lat
         lon
-        companyID
+        firmID
         createdAt
         updatedAt
       }
@@ -114,8 +114,8 @@ subscription OnUpdateCompany {
     updatedAt
   }
 }
-subscription OnDeleteCompany {
-  onDeleteCompany {
+subscription OnDeleteFirm {
+  onDeleteFirm {
     id
     name
     cityAndState
@@ -127,7 +127,7 @@ subscription OnDeleteCompany {
         licensePlate
         lat
         lon
-        companyID
+        firmID
         createdAt
         updatedAt
       }
@@ -189,8 +189,8 @@ subscription OnCreateDriver {
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState
@@ -200,8 +200,6 @@ subscription OnCreateDriver {
       createdAt
       updatedAt
     }
-    licensePlate
-    licenseType
     createdAt
     updatedAt
     driverUsersId
@@ -217,8 +215,8 @@ subscription OnUpdateDriver {
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState
@@ -228,8 +226,6 @@ subscription OnUpdateDriver {
       createdAt
       updatedAt
     }
-    licensePlate
-    licenseType
     createdAt
     updatedAt
     driverUsersId
@@ -245,8 +241,8 @@ subscription OnDeleteDriver {
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState
@@ -256,8 +252,6 @@ subscription OnDeleteDriver {
       createdAt
       updatedAt
     }
-    licensePlate
-    licenseType
     createdAt
     updatedAt
     driverUsersId
@@ -273,8 +267,8 @@ subscription OnCreateSupervisor {
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState
@@ -299,8 +293,8 @@ subscription OnUpdateSupervisor {
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState
@@ -325,8 +319,8 @@ subscription OnDeleteSupervisor {
       licensePlate
       lat
       lon
-      companyID
-      company {
+      firmID
+      firm {
         id
         name
         cityAndState

@@ -34,10 +34,10 @@ public final class Trip implements Model {
   public static final QueryField RATE = field("Trip", "rate");
   public static final QueryField DELIVERY_NOTES = field("Trip", "deliveryNotes");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="String", isRequired = true) String where;
+  private final @ModelField(targetType="String") String where;
   private final @ModelField(targetType="Float") Double miles;
   private final @ModelField(targetType="String") String hours;
-  private final @ModelField(targetType="String", isRequired = true) String dropOff;
+  private final @ModelField(targetType="String") String dropOff;
   private final @ModelField(targetType="Float") Double deadHead;
   private final @ModelField(targetType="Float") Double rate;
   private final @ModelField(targetType="String") String deliveryNotes;
@@ -150,7 +150,7 @@ public final class Trip implements Model {
       .toString();
   }
   
-  public static WhereStep builder() {
+  public static BuildStep builder() {
       return new Builder();
   }
   
@@ -185,33 +185,25 @@ public final class Trip implements Model {
       rate,
       deliveryNotes);
   }
-  public interface WhereStep {
-    DropOffStep where(String where);
-  }
-  
-
-  public interface DropOffStep {
-    BuildStep dropOff(String dropOff);
-  }
-  
-
   public interface BuildStep {
     Trip build();
     BuildStep id(String id);
+    BuildStep where(String where);
     BuildStep miles(Double miles);
     BuildStep hours(String hours);
+    BuildStep dropOff(String dropOff);
     BuildStep deadHead(Double deadHead);
     BuildStep rate(Double rate);
     BuildStep deliveryNotes(String deliveryNotes);
   }
   
 
-  public static class Builder implements WhereStep, DropOffStep, BuildStep {
+  public static class Builder implements BuildStep {
     private String id;
     private String where;
-    private String dropOff;
     private Double miles;
     private String hours;
+    private String dropOff;
     private Double deadHead;
     private Double rate;
     private String deliveryNotes;
@@ -231,16 +223,8 @@ public final class Trip implements Model {
     }
     
     @Override
-     public DropOffStep where(String where) {
-        Objects.requireNonNull(where);
+     public BuildStep where(String where) {
         this.where = where;
-        return this;
-    }
-    
-    @Override
-     public BuildStep dropOff(String dropOff) {
-        Objects.requireNonNull(dropOff);
-        this.dropOff = dropOff;
         return this;
     }
     
@@ -253,6 +237,12 @@ public final class Trip implements Model {
     @Override
      public BuildStep hours(String hours) {
         this.hours = hours;
+        return this;
+    }
+    
+    @Override
+     public BuildStep dropOff(String dropOff) {
+        this.dropOff = dropOff;
         return this;
     }
     
@@ -289,9 +279,9 @@ public final class Trip implements Model {
     private CopyOfBuilder(String id, String where, Double miles, String hours, String dropOff, Double deadHead, Double rate, String deliveryNotes) {
       super.id(id);
       super.where(where)
-        .dropOff(dropOff)
         .miles(miles)
         .hours(hours)
+        .dropOff(dropOff)
         .deadHead(deadHead)
         .rate(rate)
         .deliveryNotes(deliveryNotes);
@@ -303,11 +293,6 @@ public final class Trip implements Model {
     }
     
     @Override
-     public CopyOfBuilder dropOff(String dropOff) {
-      return (CopyOfBuilder) super.dropOff(dropOff);
-    }
-    
-    @Override
      public CopyOfBuilder miles(Double miles) {
       return (CopyOfBuilder) super.miles(miles);
     }
@@ -315,6 +300,11 @@ public final class Trip implements Model {
     @Override
      public CopyOfBuilder hours(String hours) {
       return (CopyOfBuilder) super.hours(hours);
+    }
+    
+    @Override
+     public CopyOfBuilder dropOff(String dropOff) {
+      return (CopyOfBuilder) super.dropOff(dropOff);
     }
     
     @Override
