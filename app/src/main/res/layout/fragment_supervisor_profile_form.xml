@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayoutSupervisorForm"
@@ -7,63 +7,133 @@
     android:layout_height="match_parent"
     tools:context=".fragments.supervisorProfileForm">
 
-    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/tan">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
-    <EditText
-        android:id="@+id/supervisorFormNameField"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/fragmentAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#C1121F"
+                app:navigationIcon="@drawable/ic_baseline_menu_24"
+                app:title="LogiTrack"
+                app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
+                app:titleTextColor="#FFFFFF" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/NSVDriverProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="590dp"
+            android:layout_below="@+id/fragmentAppBar"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="42dp"
+            android:layout_marginBottom="37dp"
+            android:fillViewport="true"
+            tools:ignore="NotSibling">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="319dp"
+                android:layout_height="589dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                tools:layout_conversion_absoluteHeight="426dp"
+                tools:layout_conversion_absoluteWidth="250dp">
+
+
+                <EditText
+                    android:id="@+id/supervisorFormNameField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginEnd="112dp"
+                    android:ems="10"
+                    android:hint="First/Last Name"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.387"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/supProfileTextView" />
+
+                <EditText
+                    android:id="@+id/supervisorFormCompanyField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:ems="10"
+                    android:hint="Company"
+                    android:inputType="textPersonName"
+                    app:layout_constraintBottom_toTopOf="@+id/supervisorFormCompanyCityStateField"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/supervisorFormNameField" />
+
+                <Button
+                    android:id="@+id/supervisorFormSaveBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:text="Save"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/supervisorFormCompanyCityStateField" />
+
+                <EditText
+                    android:id="@+id/supervisorFormCompanyCityStateField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="91dp"
+                    android:layout_marginEnd="111dp"
+                    android:ems="10"
+                    android:hint="City and State"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.397"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="261dp" />
+
+                <TextView
+                    android:id="@+id/supProfileTextView"
+                    android:layout_width="288dp"
+                    android:layout_height="43dp"
+                    android:layout_marginTop="28dp"
+                    android:text="Supervisor Profile"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#780000"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        android:layout_marginTop="166dp"
-        android:layout_marginEnd="112dp"
-        android:layout_marginBottom="22dp"
-        android:ems="10"
-        android:hint="First/Last Name"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/supervisorFormCompanyField"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/top_app_bar" />
+</androidx.drawerlayout.widget.DrawerLayout>
 
-    <EditText
-        android:id="@+id/supervisorFormCompanyField"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginStart="90dp"
-        android:layout_marginEnd="112dp"
-        android:layout_marginBottom="38dp"
-        android:ems="10"
-        android:hint="Company"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/supervisorFormCompanyCityStateField"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/supervisorFormSaveBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="146dp"
-        android:layout_marginEnd="178dp"
-        android:layout_marginBottom="180dp"
-        android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/supervisorFormCompanyCityStateField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="91dp"
-        android:layout_marginEnd="111dp"
-        android:layout_marginBottom="146dp"
-        android:ems="10"
-        android:hint="City and State"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/supervisorFormSaveBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>

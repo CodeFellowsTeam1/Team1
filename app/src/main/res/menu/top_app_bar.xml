@@ -1,36 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
 
-    <item
-        android:id="@+id/profile"
-        android:title="Profile"
-        android:contentDescription="Profile"
-        app:showAsAction="never" />
+    <group android:checkableBehavior="single">
 
-    <item
-        android:id="@+id/trips"
-        android:title="Trips"
-        android:contentDescription="trips"
-        app:showAsAction="never">
+        <item
+            android:id="@+id/profile"
+            android:title="Profile"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:contentDescription="Profile"
+            />
+    </group>
 
-        <menu>
-            <item
-                android:id="@+id/currentTrips"
-                android:title="Current Trip"
-                android:contentDescription="current trips"
-                app:showAsAction="never" />
-            <item
-                android:id="@+id/pastTrips"
-                android:title="Past Trips"
-                android:contentDescription="past trips"
-                app:showAsAction="never" />
-        </menu>
-    </item>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/trips"
+            android:title="Trips"
+            android:icon="@drawable/ic_baseline_map_24"
+            android:contentDescription="trips"
+            >
 
-    <item
-        android:id="@+id/map"
-        android:title="Map"
-        android:contentDescription="map"
-        app:showAsAction="never" />
+            <menu>
+                <item
+                    android:id="@+id/currentTrips"
+                    android:title="Current Trip"
+                    android:contentDescription="current trips"
+                    />
+                <item
+                    android:id="@+id/pastTrips"
+                    android:title="Past Trips"
+                    android:contentDescription="past trips"
+                    />
+            </menu>
+        </item>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/map"
+            android:title="Map"
+            android:icon="@drawable/ic_baseline_map_24"
+            android:contentDescription="map"
+            />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/logout"
+            android:title="Logout"
+            android:icon="@drawable/logout_svgrepo_com"
+            android:contentDescription="logout"
+            />
+    </group>
 </menu>

@@ -24,7 +24,7 @@ import com.frazmatic.logitrack.R;
  */
 public class createTripSupervisor extends Fragment {
 
-    View view;
+    View view = null;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,6 +65,8 @@ public class createTripSupervisor extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        resetForm();
     }
 
     @Override
@@ -83,23 +85,23 @@ public class createTripSupervisor extends Fragment {
 
     public void saveTrip(){
 
-        String where = ((EditText) view.findViewById(R.id.createTripWhereInput)).getText().toString();
+        String where = ((EditText) view.findViewById(R.id.whereEditTV)).getText().toString();
 
-        EditText edt = (EditText) view.findViewById(R.id.createTripMilesInput);
+        EditText edt = (EditText) view.findViewById(R.id.milesNumberDecimal);
         Double miles = Double.valueOf(edt.getText().toString());
 
-        String hours = ((EditText) view.findViewById(R.id.createTripTravelTimeInput)).getText().toString();
+        String hours = ((EditText) view.findViewById(R.id.timeEditTextTime)).getText().toString();
 
-        String dropOff = ((EditText) view.findViewById(R.id.createTripDropOffInput)).getText().toString();
+        String dropOff = ((EditText) view.findViewById(R.id.dropOffEditTV)).getText().toString();
 
 
-        EditText deadheadtext = (EditText) view.findViewById(R.id.createTripDeadHeadInput);
+        EditText deadheadtext = (EditText) view.findViewById(R.id.deadHeadNumberDecimal);
         Double deadHead = Double.valueOf(deadheadtext.getText().toString());
 
-        EditText ratetext = (EditText) view.findViewById(R.id.createTripRateInput);
+        EditText ratetext = (EditText) view.findViewById(R.id.rateNumberDecimal);
         Double rate = Double.valueOf(ratetext.getText().toString());
 
-        String deliveryNotes = ((EditText) view.findViewById(R.id.createTripDeliverNotesInput)).getText().toString();
+        String deliveryNotes = ((EditText) view.findViewById(R.id.deliveryNotesMLET)).getText().toString();
 
 
         Trip newTrip = Trip.builder()
@@ -116,5 +118,29 @@ public class createTripSupervisor extends Fragment {
                 success -> Log.i(CREATE_TRIP_TAG, "New trip info created."),
                 failure -> Log.i(CREATE_TRIP_TAG, "Unable to create new trip " + failure)
         );
+    }
+
+    public void resetForm(){
+        Button reset = view.findViewById(R.id.createTripFloatingActionButton);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText where = view.findViewById(R.id.whereEditTV);
+                where.setText("");
+                EditText miles = view.findViewById(R.id.milesNumberDecimal);
+                miles.setText("");
+                EditText time = view.findViewById(R.id.timeEditTextTime);
+                time.setText("");
+                EditText dropOff = view.findViewById(R.id.dropOffEditTV);
+                dropOff.setText("");
+                EditText deadHead = view.findViewById(R.id.deadHeadNumberDecimal);
+                deadHead.setText("");
+                EditText notes = view.findViewById(R.id.deliveryNotesMLET);
+                notes.setText("");
+                EditText rate = view.findViewById(R.id.rateNumberDecimal);
+                rate.setText("");
+            }
+        });
+
     }
 }

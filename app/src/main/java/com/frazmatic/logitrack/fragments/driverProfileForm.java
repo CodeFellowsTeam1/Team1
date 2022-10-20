@@ -1,8 +1,10 @@
 package com.frazmatic.logitrack.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -11,7 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -40,6 +44,7 @@ public class driverProfileForm extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public static final String Tag = "DriverProfileForm";
+    View view = null;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -74,24 +79,28 @@ public class driverProfileForm extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        resetForm();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_driver_profile_form, container, false);
+        view = inflater.inflate(R.layout.fragment_driver_profile_form, container, false);
         firmCompletableFuture = new CompletableFuture<>();
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         editor = settings.edit();
 
         view.findViewById(R.id.driverFormSaveBtn).setOnClickListener(v -> {
-            String name = ((EditText) view.findViewById(R.id.supervisorFormNameField)).getText().toString();
-            String CompanyName = ((EditText) view.findViewById(R.id.supervisorFormCompanyField)).getText().toString();
-            String CompanyLocation = ((EditText) view.findViewById(R.id.supervisorFormCompanyCityStateField)).getText().toString();
+            String name = ((EditText) view.findViewById(R.id.driverFormNameField)).getText().toString();
+            String CompanyName = ((EditText) view.findViewById(R.id.driverFormCompanyField)).getText().toString();
+            String CompanyLocation = ((EditText) view.findViewById(R.id.driverFormCompanyCityStateField)).getText().toString();
             saveForm(name, CompanyName, CompanyLocation);
             Navigation.findNavController(v).navigate(R.id.action_driverProfile_to_driverProfileForm);
-        });
+
+            });
         return view;
     }
     //TODO Chane to use methods from Supervisor Form
@@ -130,6 +139,23 @@ public class driverProfileForm extends Fragment {
                 },
                 failure -> Log.i(Tag,"Unable to save user info" + failure)
         );
+
+    };
+
+    public void resetForm(){
+        Button reset = view.findViewById(R.id.resetBtn);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText dName = view.findViewById(R.id.driverFormNameField);
+                dName.setText("");
+                EditText coName = view.findViewById(R.id.driverFormCompanyField);
+                coName.setText("");
+                EditText csName = view.findViewById(R.id.driverFormCompanyCityStateField);
+                csName.setText("");
+            }
+        });
+
     }
 
     private void completeFirmFuture(String firmName){

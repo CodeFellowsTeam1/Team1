@@ -1,9 +1,18 @@
 package com.frazmatic.logitrack;
 
+import static com.frazmatic.logitrack.R.*;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.Manifest;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,6 +21,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -21,12 +31,17 @@ import com.amplifyframework.auth.AuthProvider;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.User;
+import com.frazmatic.logitrack.fragments.currentTrip;
+import com.frazmatic.logitrack.fragments.driverProfile;
+import com.frazmatic.logitrack.fragments.mapGPS;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -52,9 +67,43 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(layout.activity_main);
         settings = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         editor = settings.edit();
+
+
+        MaterialToolbar toolbar = findViewById(R.id.fragmentAppBar);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id =item.getItemId();
+                item.setChecked(true);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                switch(id){
+                    case R.id.profile:
+                        replaceFragment(new driverProfile()); break;
+                    case R.id.trips:
+                        replaceFragment(new currentTrip()); break;
+                    case R.id.map:
+                        replaceFragment(new mapGPS()); break;
+                    case R.id.logout:
+                        Amplify.Auth.signOut(
+                                () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                                error -> Log.e("AuthQuickstart", error.toString())
+                        ); break;
+                }
+                return false;
+            }
+        });
+
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 55555);
         createLocationRequest(30);
         createLocationCallback();
@@ -76,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupNavButton(){
-        Button loginBtn = findViewById(R.id.MainActivityLoginBttn);
+        Button loginBtn = findViewById(id.MainActivityLoginBttn);
         Amplify.Auth.fetchUserAttributes(
                 userAttributes -> Log.i("AuthDemo", "User attributes = " + userAttributes.toString()),
 
@@ -176,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+
     private void updateUserLocation(Double lat, Double lon){
         editor.putFloat(CURRENT_LAT, (float)(double)lat);
         editor.putFloat(CURRENT_LON, (float)(double)lon);
@@ -213,4 +263,13 @@ public class MainActivity extends AppCompatActivity {
             );
         }
     }
+
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(id.frameLayout, fragment);
+        fragmentTransaction.commit();
+    }
+
+
 }
