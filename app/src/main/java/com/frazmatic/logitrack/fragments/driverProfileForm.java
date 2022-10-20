@@ -16,6 +16,7 @@ import android.widget.EditText;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Firm;
 import com.amplifyframework.datastore.generated.model.User;
 import com.frazmatic.logitrack.R;
 
@@ -33,7 +34,6 @@ public class driverProfileForm extends Fragment {
 
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
-    private CompletableFuture<List<Company>> companies;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,7 +84,6 @@ public class driverProfileForm extends Fragment {
 
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         editor = settings.edit();
-        companies = new CompletableFuture<>();
 
         view.findViewById(R.id.driverFormSaveBtn).setOnClickListener(v -> {
             String name = ((EditText) view.findViewById(R.id.driverFormNameField)).getText().toString();
@@ -101,49 +100,24 @@ public class driverProfileForm extends Fragment {
         //TODO: create database entry with user info
         //TODO: CHECK DB FIRST for company name
 
-        Amplify.API.query(
-                ModelQuery.list(Company.class, Company.NAME.contains(company)),
-                response -> {
-                    ArrayList<Company> DBCompanies = new ArrayList<>();
-                    for (Company c : response.getData()) {
-                        DBCompanies.add(c);
-                        Log.i("DriverProfileForm", c.getName());
-                    }
-                    companies.complete(DBCompanies);
-                },
-                error -> {
-                    companies.complete(null);
-                    Log.e("DriverProfileForm", "Query failure", error);
-                }
+
+
+
+        Firm newFirm = Firm
+                .builder()
+                .name(company)
+                .cityAndState(companyLocation)
+                .build();
+        Amplify.API.mutate(
+                ModelMutation.create(newFirm),
+                success -> Log.i(Tag, "Updated company info"),
+                failure -> Log.i(Tag,"Unable to save company info" + failure)
         );
 
-        ArrayList<Company> companyArrayList = new ArrayList<>();
-        try {
-            companyArrayList = (ArrayList<Company>)companies.get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Company newCompany;
-        if (companyArrayList.size() > 0){
-            newCompany = companyArrayList.get(0);
-        } else {
-            newCompany = Company
-                    .builder()
-                    .name(company)
-                    .cityAndState(companyLocation)
-                    .build();
-            Amplify.API.mutate(
-                    ModelMutation.create(newCompany),
-                    success -> Log.i(Tag, "Updated company info"),
-                    failure -> Log.i(Tag,"Unable to save company info" + failure)
-            );
-        }
         User newUser = User.builder()
                 .name(name)
                 .licensePlate("123456")
-                .company(newCompany)
+                .firm(newFirm)
                 .build();
         Amplify.API.mutate(
                 ModelMutation.create(newUser),

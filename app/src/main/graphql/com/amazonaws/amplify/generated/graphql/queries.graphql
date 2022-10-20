@@ -3,7 +3,7 @@ query GetUser($id: ID!) {
   getUser(id: $id) {
     id
     name
-    username
+    auth_id
     licensePlate
     lat
     lon
@@ -31,7 +31,7 @@ query ListUsers(
     items {
       id
       name
-      username
+      auth_id
       licensePlate
       lat
       lon
@@ -58,7 +58,7 @@ query GetFirm($id: ID!) {
       items {
         id
         name
-        username
+        auth_id
         licensePlate
         lat
         lon
@@ -132,7 +132,7 @@ query GetDriver($id: ID!) {
     users {
       id
       name
-      username
+      auth_id
       licensePlate
       lat
       lon
@@ -163,7 +163,7 @@ query ListDrivers(
       users {
         id
         name
-        username
+        auth_id
         licensePlate
         lat
         lon
@@ -184,7 +184,7 @@ query GetSupervisor($id: ID!) {
     users {
       id
       name
-      username
+      auth_id
       licensePlate
       lat
       lon
@@ -215,7 +215,7 @@ query ListSupervisors(
       users {
         id
         name
-        username
+        auth_id
         licensePlate
         lat
         lon

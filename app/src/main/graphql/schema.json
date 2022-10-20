@@ -415,7 +415,7 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "username",
+                        "name": "auth_id",
                         "description": null,
                         "args": [],
                         "type": {
@@ -715,7 +715,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "username",
+                        "name": "auth_id",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -1602,13 +1602,9 @@
                         "description": null,
                         "args": [],
                         "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "String",
-                                "ofType": null
-                            }
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -1642,13 +1638,9 @@
                         "description": null,
                         "args": [],
                         "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "String",
-                                "ofType": null
-                            }
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -1925,9 +1917,13 @@
                         "description": null,
                         "args": [],
                         "type": {
-                            "kind": "OBJECT",
-                            "name": "User",
-                            "ofType": null
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "OBJECT",
+                                "name": "User",
+                                "ofType": null
+                            }
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -1969,9 +1965,13 @@
                         "description": null,
                         "args": [],
                         "type": {
-                            "kind": "SCALAR",
-                            "name": "ID",
-                            "ofType": null
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "ofType": null
+                            }
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -2120,9 +2120,13 @@
                         "description": null,
                         "args": [],
                         "type": {
-                            "kind": "OBJECT",
-                            "name": "User",
-                            "ofType": null
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "OBJECT",
+                                "name": "User",
+                                "ofType": null
+                            }
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -2164,9 +2168,13 @@
                         "description": null,
                         "args": [],
                         "type": {
-                            "kind": "SCALAR",
-                            "name": "ID",
-                            "ofType": null
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "ofType": null
+                            }
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -2882,7 +2890,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "username",
+                        "name": "auth_id",
                         "description": null,
                         "type": {
                             "kind": "SCALAR",
@@ -2957,7 +2965,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "username",
+                        "name": "auth_id",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -3080,7 +3088,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "username",
+                        "name": "auth_id",
                         "description": null,
                         "type": {
                             "kind": "SCALAR",
@@ -3363,13 +3371,9 @@
                         "name": "where",
                         "description": null,
                         "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "String",
-                                "ofType": null
-                            }
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
                         },
                         "defaultValue": null
                     },
@@ -3397,13 +3401,9 @@
                         "name": "dropOff",
                         "description": null,
                         "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "String",
-                                "ofType": null
-                            }
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
                         },
                         "defaultValue": null
                     },
@@ -3701,9 +3701,13 @@
                         "name": "driverUsersId",
                         "description": null,
                         "type": {
-                            "kind": "SCALAR",
-                            "name": "ID",
-                            "ofType": null
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "ofType": null
+                            }
                         },
                         "defaultValue": null
                     }
@@ -3795,9 +3799,13 @@
                         "name": "driverUsersId",
                         "description": null,
                         "type": {
-                            "kind": "SCALAR",
-                            "name": "ID",
-                            "ofType": null
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "ofType": null
+                            }
                         },
                         "defaultValue": null
                     }
@@ -3851,9 +3859,13 @@
                         "name": "supervisorUsersId",
                         "description": null,
                         "type": {
-                            "kind": "SCALAR",
-                            "name": "ID",
-                            "ofType": null
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "ofType": null
+                            }
                         },
                         "defaultValue": null
                     }
@@ -3945,9 +3957,13 @@
                         "name": "supervisorUsersId",
                         "description": null,
                         "type": {
-                            "kind": "SCALAR",
-                            "name": "ID",
-                            "ofType": null
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "ofType": null
+                            }
                         },
                         "defaultValue": null
                     }

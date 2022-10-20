@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 55555);
         createLocationRequest(20);
@@ -63,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         Amplify.Auth.fetchAuthSession(
                 result -> {
                     AuthUser currentUser = Amplify.Auth.getCurrentUser();
-                    Log.i("AUTHUSERID", "AuthUSerID = " + currentUser.getUserId());
                     if(result.isSignedIn()){
                         runOnUiThread(() -> {
                             loginBtn.setText("User Selection");
@@ -71,17 +69,13 @@ public class MainActivity extends AppCompatActivity {
                                 Intent goToNavHost = new Intent(MainActivity.this, NavHostActivity.class);
                                 startActivity(goToNavHost);
                             });
-
                         });
                     } else {
                         runOnUiThread(() -> {
                             loginBtn.setText("LOGIN");
                             loginBtn.setOnClickListener(view -> {
-                                oauth();
-                                finish();
-                                startActivity(getIntent());
+                                oauth(loginBtn);
                             });
-
                         });
                     }
                 },
@@ -130,37 +124,19 @@ public class MainActivity extends AppCompatActivity {
                 Looper.getMainLooper());
     }
 
-    private void oauth(){
+    private void oauth(Button loginBtn){
         Amplify.Auth.signInWithSocialWebUI(AuthProvider.google(), this,
-                result -> Log.i("AuthQuickstart", result.toString()),
+                result -> {
+                    runOnUiThread(() -> {
+                        loginBtn.setText("User Selection");
+                        loginBtn.setOnClickListener( view ->{
+                            Intent goToNavHost = new Intent(MainActivity.this, NavHostActivity.class);
+                            startActivity(goToNavHost);
+                        });
+                    });
+                },
                 error -> Log.e("AuthQuickstart", error.toString())
         );
     }
 
-//    private void setupLoginLogoutButton(){
-//        Button b = findViewById(R.id.buttonLoginLogout);
-//        Amplify.Auth.fetchAuthSession(
-//                result -> {
-//                    if (result.isSignedIn()){
-//                        runOnUiThread(() -> {
-//                            b.setText("Log Out");
-//                            b.setOnClickListener(view -> {
-//                                signOutUser();
-//                                finish();
-//                                startActivity(getIntent());
-//                            });
-//                        });
-//                    } else {
-//                        runOnUiThread(() -> {
-//                            b.setText("Log In");
-//                            b.setOnClickListener(view -> {
-//                                Intent intent = new Intent(this, LogIn.class);
-//                                startActivity(intent);
-//                            });
-//                        });
-//                    }
-//                },
-//                error -> Log.e("AmplifyQuickstart", error.toString())
-//        );
-//    }
 }
