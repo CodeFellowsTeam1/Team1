@@ -28,6 +28,9 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
 public class MainActivity extends AppCompatActivity {
 
     protected LocationRequest locationRequest;
@@ -78,7 +81,16 @@ public class MainActivity extends AppCompatActivity {
         Amplify.Auth.fetchAuthSession(
                 result -> {
                     if(result.isSignedIn()){
-                        AuthUser currentUser = Amplify.Auth.getCurrentUser();
+                        CompletableFuture<AuthUser> u = new CompletableFuture<>();
+                        u.complete(Amplify.Auth.getCurrentUser());
+                        AuthUser currentUser = null;
+                        try {
+                            currentUser = u.get();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         editor.putString(AUTH_ID_TAG, currentUser.getUserId());
                         editor.apply();
                         runOnUiThread(() -> {
