@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
     public static final String FIRM_ID_TAG = "firmId";
     public static final String SUPERVISOR_ID_TAG = "supervisorId";
     public static final String DRIVER_ID_TAG = "driverId";
+    public static final String CURRENT_LAT = "currentLat";
+    public static final String CURRENT_LON = "currentLon";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         settings = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         editor = settings.edit();
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 55555);
-        createLocationRequest(20);
+        createLocationRequest(30);
         createLocationCallback();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
     }
@@ -172,6 +175,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUserLocation(Double lat, Double lon){
+        editor.putFloat(CURRENT_LAT, (float)(double)lat);
+        editor.putFloat(CURRENT_LON, (float)(double)lon);
+        editor.apply();
+        Log.i("Saved Lat/Lon: ", settings.getFloat(CURRENT_LAT, 0.0f) + ", " + settings.getFloat(CURRENT_LON, 0.0f));
         String userId = settings.getString(USER_ID_TAG, "");
         if (!userId.isEmpty()){
             Amplify.API.query(
