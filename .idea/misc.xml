@@ -4,9 +4,6 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/joshu/Team1/app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="..\:/Users/joshu/Team1/app/src/main/res/layout/fragment_driver_profile_form.xml" value="0.12613981762917933" />
-        <entry key="..\:/Users/joshu/Team1/app/src/main/res/layout/fragment_supervisor_profile.xml" value="0.264" />
-        <entry key="..\:/Users/joshu/Team1/app/src/main/res/layout/fragment_supervisor_profile_form.xml" value="0.12613981762917933" />
         <entry key="..\:/msys64/home/erexi/class401-2/groupProject/Team1/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/msys64/home/erexi/class401-2/groupProject/Team1/app/src/main/res/layout/activity_nav_host.xml" value="0.38697916666666665" />
         <entry key="..\:/msys64/home/erexi/class401-2/groupProject/Team1/app/src/main/res/layout/fragment_driver_profile_form.xml" value="0.33" />
@@ -16,12 +13,13 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23697916666666666" />
         <entry key="app/src/main/res/layout/activity_nav_host.xml" value="0.23697916666666666" />
         <entry key="app/src/main/res/layout/fragment_create_trip_supervisor.xml" value="0.23697916666666666" />
-        <entry key="app/src/main/res/layout/fragment_current_trip.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_driver_profile.xml" value="0.23697916666666666" />
+        <entry key="app/src/main/res/layout/fragment_current_trip.xml" value="0.26898047722342733" />
+        <entry key="app/src/main/res/layout/fragment_driver_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_map_g_p_s.xml" value="0.23697916666666666" />
         <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.23697916666666666" />
-        <entry key="app/src/main/res/layout/fragment_supervisor_profile.xml" value="0.23697916666666666" />
+        <entry key="app/src/main/res/layout/fragment_supervisor_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_supervisor_trip_status.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_user_select.xml" value="0.22" />
         <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.23697916666666666" />
       </map>
