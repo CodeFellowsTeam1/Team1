@@ -69,6 +69,7 @@ public class supervisorProfile extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_supervisorTripStatus);
         });
 
+
         Button seeTeamMap = view.findViewById(R.id.buttonSupervisorTeamMembers);
         seeTeamMap.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_mapsFragmentSeeFirmMembers);
