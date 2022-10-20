@@ -30,6 +30,8 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthProvider;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Firm;
+import com.amplifyframework.datastore.generated.model.Trip;
 import com.amplifyframework.datastore.generated.model.User;
 import com.frazmatic.logitrack.fragments.currentTrip;
 import com.frazmatic.logitrack.fragments.driverProfile;
@@ -42,6 +44,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.gms.maps.model.Marker;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -66,8 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(layout.activity_main);
+        setContentView(R.layout.activity_main);
         settings = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         editor = settings.edit();
 
@@ -125,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupNavButton(){
-        Button loginBtn = findViewById(id.MainActivityLoginBttn);
+        Button loginBtn = findViewById(R.id.MainActivityLoginBttn);
         Amplify.Auth.fetchUserAttributes(
                 userAttributes -> Log.i("AuthDemo", "User attributes = " + userAttributes.toString()),
 
@@ -184,7 +188,6 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 for (Location location : locationResult.getLocations()) {
-                    //TODO: Call a method do something with location
                     updateUserLocation(location.getLatitude(), location.getLongitude());
                 }
             }

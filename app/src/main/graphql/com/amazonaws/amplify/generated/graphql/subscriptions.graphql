@@ -20,23 +20,6 @@ subscription OnCreateUser {
       createdAt
       updatedAt
     }
-    trips {
-      items {
-        id
-        where
-        miles
-        hours
-        dropOff
-        deadHead
-        rate
-        deliveryNotes
-        firmID
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
     createdAt
     updatedAt
   }
@@ -62,23 +45,6 @@ subscription OnUpdateUser {
       createdAt
       updatedAt
     }
-    trips {
-      items {
-        id
-        where
-        miles
-        hours
-        dropOff
-        deadHead
-        rate
-        deliveryNotes
-        firmID
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
     createdAt
     updatedAt
   }
@@ -103,23 +69,6 @@ subscription OnDeleteUser {
       }
       createdAt
       updatedAt
-    }
-    trips {
-      items {
-        id
-        where
-        miles
-        hours
-        dropOff
-        deadHead
-        rate
-        deliveryNotes
-        firmID
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
     }
     createdAt
     updatedAt
@@ -281,9 +230,6 @@ subscription OnCreateTrip {
         createdAt
         updatedAt
       }
-      trips {
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -329,9 +275,6 @@ subscription OnUpdateTrip {
         cityAndState
         createdAt
         updatedAt
-      }
-      trips {
-        nextToken
       }
       createdAt
       updatedAt
@@ -379,9 +322,6 @@ subscription OnDeleteTrip {
         createdAt
         updatedAt
       }
-      trips {
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -406,9 +346,6 @@ subscription OnCreateDriver {
         cityAndState
         createdAt
         updatedAt
-      }
-      trips {
-        nextToken
       }
       createdAt
       updatedAt
@@ -435,9 +372,6 @@ subscription OnUpdateDriver {
         createdAt
         updatedAt
       }
-      trips {
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -462,9 +396,6 @@ subscription OnDeleteDriver {
         cityAndState
         createdAt
         updatedAt
-      }
-      trips {
-        nextToken
       }
       createdAt
       updatedAt
@@ -491,9 +422,6 @@ subscription OnCreateSupervisor {
         createdAt
         updatedAt
       }
-      trips {
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -519,9 +447,6 @@ subscription OnUpdateSupervisor {
         createdAt
         updatedAt
       }
-      trips {
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -546,9 +471,6 @@ subscription OnDeleteSupervisor {
         cityAndState
         createdAt
         updatedAt
-      }
-      trips {
-        nextToken
       }
       createdAt
       updatedAt
