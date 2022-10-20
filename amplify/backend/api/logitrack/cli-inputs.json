@@ -6,7 +6,7 @@
     "defaultAuthType": {
       "mode": "API_KEY",
       "expirationTime": 365,
-      "apiKeyExpirationDate": "2023-10-20T00:39:15.157Z",
+      "apiKeyExpirationDate": "2023-10-20T04:29:11.910Z",
       "keyDescription": "LogiTrack"
     },
     "conflictResolution": {},

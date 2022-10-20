@@ -3,8 +3,7 @@ subscription OnCreateUser {
   onCreateUser {
     id
     name
-    auth_id
-    licensePlate
+    authId
     lat
     lon
     firmID
@@ -26,8 +25,7 @@ subscription OnUpdateUser {
   onUpdateUser {
     id
     name
-    auth_id
-    licensePlate
+    authId
     lat
     lon
     firmID
@@ -49,8 +47,7 @@ subscription OnDeleteUser {
   onDeleteUser {
     id
     name
-    auth_id
-    licensePlate
+    authId
     lat
     lon
     firmID
@@ -77,8 +74,7 @@ subscription OnCreateFirm {
       items {
         id
         name
-        auth_id
-        licensePlate
+        authId
         lat
         lon
         firmID
@@ -100,8 +96,7 @@ subscription OnUpdateFirm {
       items {
         id
         name
-        auth_id
-        licensePlate
+        authId
         lat
         lon
         firmID
@@ -123,8 +118,7 @@ subscription OnDeleteFirm {
       items {
         id
         name
-        auth_id
-        licensePlate
+        authId
         lat
         lon
         firmID
@@ -182,11 +176,11 @@ subscription OnDeleteTrip {
 subscription OnCreateDriver {
   onCreateDriver {
     id
-    users {
+    userID
+    user {
       id
       name
-      auth_id
-      licensePlate
+      authId
       lat
       lon
       firmID
@@ -202,17 +196,16 @@ subscription OnCreateDriver {
     }
     createdAt
     updatedAt
-    driverUsersId
   }
 }
 subscription OnUpdateDriver {
   onUpdateDriver {
     id
-    users {
+    userID
+    user {
       id
       name
-      auth_id
-      licensePlate
+      authId
       lat
       lon
       firmID
@@ -228,17 +221,16 @@ subscription OnUpdateDriver {
     }
     createdAt
     updatedAt
-    driverUsersId
   }
 }
 subscription OnDeleteDriver {
   onDeleteDriver {
     id
-    users {
+    userID
+    user {
       id
       name
-      auth_id
-      licensePlate
+      authId
       lat
       lon
       firmID
@@ -254,17 +246,16 @@ subscription OnDeleteDriver {
     }
     createdAt
     updatedAt
-    driverUsersId
   }
 }
 subscription OnCreateSupervisor {
   onCreateSupervisor {
     id
-    users {
+    userID
+    user {
       id
       name
-      auth_id
-      licensePlate
+      authId
       lat
       lon
       firmID
@@ -280,17 +271,16 @@ subscription OnCreateSupervisor {
     }
     createdAt
     updatedAt
-    supervisorUsersId
   }
 }
 subscription OnUpdateSupervisor {
   onUpdateSupervisor {
     id
-    users {
+    userID
+    user {
       id
       name
-      auth_id
-      licensePlate
+      authId
       lat
       lon
       firmID
@@ -306,17 +296,16 @@ subscription OnUpdateSupervisor {
     }
     createdAt
     updatedAt
-    supervisorUsersId
   }
 }
 subscription OnDeleteSupervisor {
   onDeleteSupervisor {
     id
-    users {
+    userID
+    user {
       id
       name
-      auth_id
-      licensePlate
+      authId
       lat
       lon
       firmID
@@ -332,6 +321,5 @@ subscription OnDeleteSupervisor {
     }
     createdAt
     updatedAt
-    supervisorUsersId
   }
 }

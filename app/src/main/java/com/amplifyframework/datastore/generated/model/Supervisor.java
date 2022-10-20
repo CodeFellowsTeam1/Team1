@@ -27,18 +27,22 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 })
 public final class Supervisor implements Model {
   public static final QueryField ID = field("Supervisor", "id");
-  public static final QueryField SUPERVISOR_USERS_ID = field("Supervisor", "supervisorUsersId");
+  public static final QueryField USER_ID = field("Supervisor", "userID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="User", isRequired = true) @HasOne(associatedWith = "id", type = User.class) User users = null;
+  private final @ModelField(targetType="ID") String userID;
+  private final @ModelField(targetType="User") @HasOne(associatedWith = "id", type = User.class) User user = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
-  private final @ModelField(targetType="ID", isRequired = true) String supervisorUsersId;
   public String getId() {
       return id;
   }
   
-  public User getUsers() {
-      return users;
+  public String getUserId() {
+      return userID;
+  }
+  
+  public User getUser() {
+      return user;
   }
   
   public Temporal.DateTime getCreatedAt() {
@@ -49,13 +53,9 @@ public final class Supervisor implements Model {
       return updatedAt;
   }
   
-  public String getSupervisorUsersId() {
-      return supervisorUsersId;
-  }
-  
-  private Supervisor(String id, String supervisorUsersId) {
+  private Supervisor(String id, String userID) {
     this.id = id;
-    this.supervisorUsersId = supervisorUsersId;
+    this.userID = userID;
   }
   
   @Override
@@ -67,9 +67,9 @@ public final class Supervisor implements Model {
       } else {
       Supervisor supervisor = (Supervisor) obj;
       return ObjectsCompat.equals(getId(), supervisor.getId()) &&
+              ObjectsCompat.equals(getUserId(), supervisor.getUserId()) &&
               ObjectsCompat.equals(getCreatedAt(), supervisor.getCreatedAt()) &&
-              ObjectsCompat.equals(getUpdatedAt(), supervisor.getUpdatedAt()) &&
-              ObjectsCompat.equals(getSupervisorUsersId(), supervisor.getSupervisorUsersId());
+              ObjectsCompat.equals(getUpdatedAt(), supervisor.getUpdatedAt());
       }
   }
   
@@ -77,9 +77,9 @@ public final class Supervisor implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
+      .append(getUserId())
       .append(getCreatedAt())
       .append(getUpdatedAt())
-      .append(getSupervisorUsersId())
       .toString()
       .hashCode();
   }
@@ -89,14 +89,14 @@ public final class Supervisor implements Model {
     return new StringBuilder()
       .append("Supervisor {")
       .append("id=" + String.valueOf(getId()) + ", ")
+      .append("userID=" + String.valueOf(getUserId()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
-      .append("updatedAt=" + String.valueOf(getUpdatedAt()) + ", ")
-      .append("supervisorUsersId=" + String.valueOf(getSupervisorUsersId()))
+      .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
       .toString();
   }
   
-  public static SupervisorUsersIdStep builder() {
+  public static BuildStep builder() {
       return new Builder();
   }
   
@@ -117,35 +117,30 @@ public final class Supervisor implements Model {
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      supervisorUsersId);
+      userID);
   }
-  public interface SupervisorUsersIdStep {
-    BuildStep supervisorUsersId(String supervisorUsersId);
-  }
-  
-
   public interface BuildStep {
     Supervisor build();
     BuildStep id(String id);
+    BuildStep userId(String userId);
   }
   
 
-  public static class Builder implements SupervisorUsersIdStep, BuildStep {
+  public static class Builder implements BuildStep {
     private String id;
-    private String supervisorUsersId;
+    private String userID;
     @Override
      public Supervisor build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
         return new Supervisor(
           id,
-          supervisorUsersId);
+          userID);
     }
     
     @Override
-     public BuildStep supervisorUsersId(String supervisorUsersId) {
-        Objects.requireNonNull(supervisorUsersId);
-        this.supervisorUsersId = supervisorUsersId;
+     public BuildStep userId(String userId) {
+        this.userID = userId;
         return this;
     }
     
@@ -161,14 +156,14 @@ public final class Supervisor implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String supervisorUsersId) {
+    private CopyOfBuilder(String id, String userId) {
       super.id(id);
-      super.supervisorUsersId(supervisorUsersId);
+      super.userId(userId);
     }
     
     @Override
-     public CopyOfBuilder supervisorUsersId(String supervisorUsersId) {
-      return (CopyOfBuilder) super.supervisorUsersId(supervisorUsersId);
+     public CopyOfBuilder userId(String userId) {
+      return (CopyOfBuilder) super.userId(userId);
     }
   }
   
