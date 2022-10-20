@@ -28,6 +28,9 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
 public class MainActivity extends AppCompatActivity {
 
     protected LocationRequest locationRequest;
@@ -42,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
     public static final String DRIVER_ID_TAG = "driverId";
     public static final String USERNAME_TAG = "username";
 
+    public static final String CURRENT_LAT = "currentLat";
+    public static final String CURRENT_LON = "currentLon";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         settings = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         editor = settings.edit();
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 55555);
-        createLocationRequest(20);
+        createLocationRequest(30);
         createLocationCallback();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
     }
@@ -79,7 +86,16 @@ public class MainActivity extends AppCompatActivity {
         Amplify.Auth.fetchAuthSession(
                 result -> {
                     if(result.isSignedIn()){
-                        AuthUser currentUser = Amplify.Auth.getCurrentUser();
+                        CompletableFuture<AuthUser> u = new CompletableFuture<>();
+                        u.complete(Amplify.Auth.getCurrentUser());
+                        AuthUser currentUser = null;
+                        try {
+                            currentUser = u.get();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         editor.putString(AUTH_ID_TAG, currentUser.getUserId());
                         editor.apply();
                         runOnUiThread(() -> {
@@ -161,6 +177,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUserLocation(Double lat, Double lon){
+        editor.putFloat(CURRENT_LAT, (float)(double)lat);
+        editor.putFloat(CURRENT_LON, (float)(double)lon);
+        editor.apply();
+        Log.i("Saved Lat/Lon: ", settings.getFloat(CURRENT_LAT, 0.0f) + ", " + settings.getFloat(CURRENT_LON, 0.0f));
         String userId = settings.getString(USER_ID_TAG, "");
         if (!userId.isEmpty()){
             Amplify.API.query(

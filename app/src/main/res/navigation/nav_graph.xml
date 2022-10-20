@@ -48,6 +48,9 @@
         <action
             android:id="@+id/action_supervisorProfile_to_supervisorTripStatus"
             app:destination="@id/supervisorTripStatus" />
+        <action
+            android:id="@+id/action_supervisorProfile_to_mapsFragmentSeeFirmMembers"
+            app:destination="@id/mapsFragmentSeeFirmMembers" />
     </fragment>
     <fragment
         android:id="@+id/currentTrip"
@@ -102,4 +105,9 @@
             android:id="@+id/action_driverProfileForm3_to_driverProfile"
             app:destination="@id/driverProfile" />
     </fragment>
+    <fragment
+        android:id="@+id/mapsFragmentSeeFirmMembers"
+        android:name="com.frazmatic.logitrack.fragments.MapsFragmentSeeFirmMembers"
+        android:label="fragment_maps_see_firm_members"
+        tools:layout="@layout/fragment_maps_see_firm_members" />
 </navigation>
