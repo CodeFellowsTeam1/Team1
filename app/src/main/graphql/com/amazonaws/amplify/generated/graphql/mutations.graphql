@@ -23,23 +23,6 @@ mutation CreateUser(
       createdAt
       updatedAt
     }
-    trips {
-      items {
-        id
-        where
-        miles
-        hours
-        dropOff
-        deadHead
-        rate
-        deliveryNotes
-        firmID
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
     createdAt
     updatedAt
   }
@@ -68,23 +51,6 @@ mutation UpdateUser(
       createdAt
       updatedAt
     }
-    trips {
-      items {
-        id
-        where
-        miles
-        hours
-        dropOff
-        deadHead
-        rate
-        deliveryNotes
-        firmID
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
     createdAt
     updatedAt
   }
@@ -112,23 +78,6 @@ mutation DeleteUser(
       }
       createdAt
       updatedAt
-    }
-    trips {
-      items {
-        id
-        where
-        miles
-        hours
-        dropOff
-        deadHead
-        rate
-        deliveryNotes
-        firmID
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
     }
     createdAt
     updatedAt
@@ -302,9 +251,6 @@ mutation CreateTrip(
         createdAt
         updatedAt
       }
-      trips {
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -353,9 +299,6 @@ mutation UpdateTrip(
         cityAndState
         createdAt
         updatedAt
-      }
-      trips {
-        nextToken
       }
       createdAt
       updatedAt
@@ -406,9 +349,6 @@ mutation DeleteTrip(
         createdAt
         updatedAt
       }
-      trips {
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -436,9 +376,6 @@ mutation CreateDriver(
         cityAndState
         createdAt
         updatedAt
-      }
-      trips {
-        nextToken
       }
       createdAt
       updatedAt
@@ -468,9 +405,6 @@ mutation UpdateDriver(
         createdAt
         updatedAt
       }
-      trips {
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -498,9 +432,6 @@ mutation DeleteDriver(
         cityAndState
         createdAt
         updatedAt
-      }
-      trips {
-        nextToken
       }
       createdAt
       updatedAt
@@ -530,9 +461,6 @@ mutation CreateSupervisor(
         createdAt
         updatedAt
       }
-      trips {
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -561,9 +489,6 @@ mutation UpdateSupervisor(
         createdAt
         updatedAt
       }
-      trips {
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -591,9 +516,6 @@ mutation DeleteSupervisor(
         cityAndState
         createdAt
         updatedAt
-      }
-      trips {
-        nextToken
       }
       createdAt
       updatedAt
