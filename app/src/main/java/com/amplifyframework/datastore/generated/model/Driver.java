@@ -27,18 +27,22 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 })
 public final class Driver implements Model {
   public static final QueryField ID = field("Driver", "id");
-  public static final QueryField DRIVER_USERS_ID = field("Driver", "driverUsersId");
+  public static final QueryField USER_ID = field("Driver", "userID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="User", isRequired = true) @HasOne(associatedWith = "id", type = User.class) User users = null;
+  private final @ModelField(targetType="ID") String userID;
+  private final @ModelField(targetType="User") @HasOne(associatedWith = "id", type = User.class) User user = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
-  private final @ModelField(targetType="ID", isRequired = true) String driverUsersId;
   public String getId() {
       return id;
   }
   
-  public User getUsers() {
-      return users;
+  public String getUserId() {
+      return userID;
+  }
+  
+  public User getUser() {
+      return user;
   }
   
   public Temporal.DateTime getCreatedAt() {
@@ -49,13 +53,9 @@ public final class Driver implements Model {
       return updatedAt;
   }
   
-  public String getDriverUsersId() {
-      return driverUsersId;
-  }
-  
-  private Driver(String id, String driverUsersId) {
+  private Driver(String id, String userID) {
     this.id = id;
-    this.driverUsersId = driverUsersId;
+    this.userID = userID;
   }
   
   @Override
@@ -67,9 +67,9 @@ public final class Driver implements Model {
       } else {
       Driver driver = (Driver) obj;
       return ObjectsCompat.equals(getId(), driver.getId()) &&
+              ObjectsCompat.equals(getUserId(), driver.getUserId()) &&
               ObjectsCompat.equals(getCreatedAt(), driver.getCreatedAt()) &&
-              ObjectsCompat.equals(getUpdatedAt(), driver.getUpdatedAt()) &&
-              ObjectsCompat.equals(getDriverUsersId(), driver.getDriverUsersId());
+              ObjectsCompat.equals(getUpdatedAt(), driver.getUpdatedAt());
       }
   }
   
@@ -77,9 +77,9 @@ public final class Driver implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
+      .append(getUserId())
       .append(getCreatedAt())
       .append(getUpdatedAt())
-      .append(getDriverUsersId())
       .toString()
       .hashCode();
   }
@@ -89,14 +89,14 @@ public final class Driver implements Model {
     return new StringBuilder()
       .append("Driver {")
       .append("id=" + String.valueOf(getId()) + ", ")
+      .append("userID=" + String.valueOf(getUserId()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
-      .append("updatedAt=" + String.valueOf(getUpdatedAt()) + ", ")
-      .append("driverUsersId=" + String.valueOf(getDriverUsersId()))
+      .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
       .toString();
   }
   
-  public static DriverUsersIdStep builder() {
+  public static BuildStep builder() {
       return new Builder();
   }
   
@@ -117,35 +117,30 @@ public final class Driver implements Model {
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      driverUsersId);
+      userID);
   }
-  public interface DriverUsersIdStep {
-    BuildStep driverUsersId(String driverUsersId);
-  }
-  
-
   public interface BuildStep {
     Driver build();
     BuildStep id(String id);
+    BuildStep userId(String userId);
   }
   
 
-  public static class Builder implements DriverUsersIdStep, BuildStep {
+  public static class Builder implements BuildStep {
     private String id;
-    private String driverUsersId;
+    private String userID;
     @Override
      public Driver build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
         return new Driver(
           id,
-          driverUsersId);
+          userID);
     }
     
     @Override
-     public BuildStep driverUsersId(String driverUsersId) {
-        Objects.requireNonNull(driverUsersId);
-        this.driverUsersId = driverUsersId;
+     public BuildStep userId(String userId) {
+        this.userID = userId;
         return this;
     }
     
@@ -161,14 +156,14 @@ public final class Driver implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String driverUsersId) {
+    private CopyOfBuilder(String id, String userId) {
       super.id(id);
-      super.driverUsersId(driverUsersId);
+      super.userId(userId);
     }
     
     @Override
-     public CopyOfBuilder driverUsersId(String driverUsersId) {
-      return (CopyOfBuilder) super.driverUsersId(driverUsersId);
+     public CopyOfBuilder userId(String userId) {
+      return (CopyOfBuilder) super.userId(userId);
     }
   }
   

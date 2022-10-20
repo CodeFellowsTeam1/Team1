@@ -29,15 +29,13 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 public final class User implements Model {
   public static final QueryField ID = field("User", "id");
   public static final QueryField NAME = field("User", "name");
-  public static final QueryField AUTH_ID = field("User", "auth_id");
-  public static final QueryField LICENSE_PLATE = field("User", "licensePlate");
+  public static final QueryField AUTH_ID = field("User", "authId");
   public static final QueryField LAT = field("User", "lat");
   public static final QueryField LON = field("User", "lon");
   public static final QueryField FIRM = field("User", "firmID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String name;
-  private final @ModelField(targetType="String") String auth_id;
-  private final @ModelField(targetType="String") String licensePlate;
+  private final @ModelField(targetType="String") String authId;
   private final @ModelField(targetType="Float") Double lat;
   private final @ModelField(targetType="Float") Double lon;
   private final @ModelField(targetType="Firm") @BelongsTo(targetName = "firmID", type = Firm.class) Firm firm;
@@ -52,11 +50,7 @@ public final class User implements Model {
   }
   
   public String getAuthId() {
-      return auth_id;
-  }
-  
-  public String getLicensePlate() {
-      return licensePlate;
+      return authId;
   }
   
   public Double getLat() {
@@ -79,11 +73,10 @@ public final class User implements Model {
       return updatedAt;
   }
   
-  private User(String id, String name, String auth_id, String licensePlate, Double lat, Double lon, Firm firm) {
+  private User(String id, String name, String authId, Double lat, Double lon, Firm firm) {
     this.id = id;
     this.name = name;
-    this.auth_id = auth_id;
-    this.licensePlate = licensePlate;
+    this.authId = authId;
     this.lat = lat;
     this.lon = lon;
     this.firm = firm;
@@ -100,7 +93,6 @@ public final class User implements Model {
       return ObjectsCompat.equals(getId(), user.getId()) &&
               ObjectsCompat.equals(getName(), user.getName()) &&
               ObjectsCompat.equals(getAuthId(), user.getAuthId()) &&
-              ObjectsCompat.equals(getLicensePlate(), user.getLicensePlate()) &&
               ObjectsCompat.equals(getLat(), user.getLat()) &&
               ObjectsCompat.equals(getLon(), user.getLon()) &&
               ObjectsCompat.equals(getFirm(), user.getFirm()) &&
@@ -115,7 +107,6 @@ public final class User implements Model {
       .append(getId())
       .append(getName())
       .append(getAuthId())
-      .append(getLicensePlate())
       .append(getLat())
       .append(getLon())
       .append(getFirm())
@@ -131,8 +122,7 @@ public final class User implements Model {
       .append("User {")
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("name=" + String.valueOf(getName()) + ", ")
-      .append("auth_id=" + String.valueOf(getAuthId()) + ", ")
-      .append("licensePlate=" + String.valueOf(getLicensePlate()) + ", ")
+      .append("authId=" + String.valueOf(getAuthId()) + ", ")
       .append("lat=" + String.valueOf(getLat()) + ", ")
       .append("lon=" + String.valueOf(getLon()) + ", ")
       .append("firm=" + String.valueOf(getFirm()) + ", ")
@@ -161,7 +151,6 @@ public final class User implements Model {
       null,
       null,
       null,
-      null,
       null
     );
   }
@@ -169,8 +158,7 @@ public final class User implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       name,
-      auth_id,
-      licensePlate,
+      authId,
       lat,
       lon,
       firm);
@@ -180,7 +168,6 @@ public final class User implements Model {
     BuildStep id(String id);
     BuildStep name(String name);
     BuildStep authId(String authId);
-    BuildStep licensePlate(String licensePlate);
     BuildStep lat(Double lat);
     BuildStep lon(Double lon);
     BuildStep firm(Firm firm);
@@ -190,8 +177,7 @@ public final class User implements Model {
   public static class Builder implements BuildStep {
     private String id;
     private String name;
-    private String auth_id;
-    private String licensePlate;
+    private String authId;
     private Double lat;
     private Double lon;
     private Firm firm;
@@ -202,8 +188,7 @@ public final class User implements Model {
         return new User(
           id,
           name,
-          auth_id,
-          licensePlate,
+          authId,
           lat,
           lon,
           firm);
@@ -217,13 +202,7 @@ public final class User implements Model {
     
     @Override
      public BuildStep authId(String authId) {
-        this.auth_id = authId;
-        return this;
-    }
-    
-    @Override
-     public BuildStep licensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
+        this.authId = authId;
         return this;
     }
     
@@ -257,11 +236,10 @@ public final class User implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String authId, String licensePlate, Double lat, Double lon, Firm firm) {
+    private CopyOfBuilder(String id, String name, String authId, Double lat, Double lon, Firm firm) {
       super.id(id);
       super.name(name)
         .authId(authId)
-        .licensePlate(licensePlate)
         .lat(lat)
         .lon(lon)
         .firm(firm);
@@ -275,11 +253,6 @@ public final class User implements Model {
     @Override
      public CopyOfBuilder authId(String authId) {
       return (CopyOfBuilder) super.authId(authId);
-    }
-    
-    @Override
-     public CopyOfBuilder licensePlate(String licensePlate) {
-      return (CopyOfBuilder) super.licensePlate(licensePlate);
     }
     
     @Override

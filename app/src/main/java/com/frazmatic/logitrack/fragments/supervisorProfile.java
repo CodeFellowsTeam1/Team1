@@ -68,13 +68,6 @@ public class supervisorProfile extends Fragment {
         currentTrips.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_supervisorTripStatus);
         });
-        Button createProfile = view.findViewById(R.id.supervisorProfileCreateBtn);
-        createProfile.setOnClickListener(v ->{
-            Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_supervisorProfileForm);
-        });
-
-
-
         return view;
     }
 }

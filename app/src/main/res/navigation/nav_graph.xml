@@ -48,9 +48,6 @@
         <action
             android:id="@+id/action_supervisorProfile_to_supervisorTripStatus"
             app:destination="@id/supervisorTripStatus" />
-        <action
-            android:id="@+id/action_supervisorProfile_to_supervisorProfileForm"
-            app:destination="@id/supervisorProfileForm" />
     </fragment>
     <fragment
         android:id="@+id/currentTrip"
@@ -93,8 +90,8 @@
         android:label="fragment_supervisor_profile_form"
         tools:layout="@layout/fragment_supervisor_profile_form" >
         <action
-            android:id="@+id/action_supervisorProfileForm_to_supervisorTripStatus"
-            app:destination="@id/supervisorTripStatus" />
+            android:id="@+id/action_supervisorProfileForm_to_supervisorProfile"
+            app:destination="@id/supervisorProfile" />
     </fragment>
     <fragment
         android:id="@+id/driverProfileForm3"

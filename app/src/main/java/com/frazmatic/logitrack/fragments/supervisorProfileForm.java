@@ -20,14 +20,14 @@ import android.widget.EditText;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
-
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Driver;
 import com.amplifyframework.datastore.generated.model.Firm;
+import com.amplifyframework.datastore.generated.model.Supervisor;
 import com.amplifyframework.datastore.generated.model.User;
+import com.frazmatic.logitrack.MainActivity;
 import com.frazmatic.logitrack.R;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -41,6 +41,7 @@ public class supervisorProfileForm extends Fragment {
 
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
+    private CompletableFuture<Firm> firmCompletableFuture;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,49 +90,118 @@ public class supervisorProfileForm extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_supervisor_profile_form, container, false);
-
+        firmCompletableFuture = new CompletableFuture<>();
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         editor = settings.edit();
 
-        view.findViewById(R.id.driverFormSaveBtn).setOnClickListener(v -> {
-            String name = ((EditText) view.findViewById(R.id.driverFormNameField)).getText().toString();
-            String CompanyName = ((EditText) view.findViewById(R.id.driverFormCompanyField)).getText().toString();
-            String CompanyLocation = ((EditText) view.findViewById(R.id.driverFormCompanyCityStateField)).getText().toString();
-
-            saveForm(name, CompanyName, CompanyLocation);
-            Navigation.findNavController(v).navigate(R.id.action_supervisorProfileForm_to_supervisorTripStatus);
+        view.findViewById(R.id.supervisorFormSaveBtn).setOnClickListener(v -> {
+            String name = ((EditText) view.findViewById(R.id.supervisorFormNameField)).getText().toString();
+            String CompanyName = ((EditText) view.findViewById(R.id.supervisorFormCompanyField)).getText().toString();
+            String CompanyLocation = ((EditText) view.findViewById(R.id.supervisorFormCompanyCityStateField)).getText().toString();
+            saveForm(name, CompanyName, CompanyLocation, true);
+            Navigation.findNavController(v).navigate(R.id.action_supervisorProfileForm_to_supervisorProfile);
         });
         return view;
     }
 
-    private void saveForm(String name, String company, String companyLocation){
-        //TODO: create database entry with user info
-        //TODO: CHECK DB FIRST for company name
+    //TODO Make these methods public & static so they can be called from driver form
+    private void saveForm(String name, String firm, String companyLocation, boolean isSupervisor) {
 
-        Firm newFirm = Firm
-                .builder()
-                .name(company)
-                .cityAndState(companyLocation)
-                .build();
-        Amplify.API.mutate(
-                ModelMutation.create(newFirm),
-                success -> Log.i(Tag, "Updated company info"),
-                failure -> Log.i(Tag,"Unable to save company info" + failure)
-        );
+        completeFirmFuture(firm);
+        Firm newFirm = getFirm();
+
+        if (newFirm == null) {
+            newFirm = Firm
+                    .builder()
+                    .name(firm)
+                    .cityAndState(companyLocation)
+                    .build();
+            Amplify.API.mutate(
+                    ModelMutation.create(newFirm),
+                    success -> Log.i(Tag, "Updated company info"),
+                    failure -> Log.i(Tag, "Unable to save company info" + failure)
+            );
+        }
+
         User newUser = User.builder()
                 .name(name)
-                .licensePlate("123456")
+                .authId(settings.getString(MainActivity.AUTH_ID_TAG, ""))
                 .firm(newFirm)
                 .build();
+
         Amplify.API.mutate(
                 ModelMutation.create(newUser),
                 success -> {
-                    String id = ((User)success.getData()).getId();
-                    editor.putString("id", id);
+                    String id = ((User) success.getData()).getId();
+                    String firmId = ((User) success.getData()).getFirm().getId();
+                    editor.putString(MainActivity.USER_ID_TAG, id);
+                    editor.putString(MainActivity.FIRM_ID_TAG, firmId);
                     editor.apply();
                     Log.i(Tag, "Updated user info");
                 },
-                failure -> Log.i(Tag,"Unable to save user info" + failure)
+                failure -> Log.i(Tag, "Unable to save user info" + failure)
+        );
+
+        if (isSupervisor){
+            Supervisor newSupervisorEntry = Supervisor.builder()
+                    .userId(newUser.getId())
+                    .build();
+            Amplify.API.mutate(
+                    ModelMutation.create(newSupervisorEntry),
+                    success -> {
+                        editor.putString(MainActivity.SUPERVISOR_ID_TAG, success.getData().getId());
+                        editor.apply();
+                    },
+                    failure -> {
+
+                    }
+            );
+        } else {
+            Driver newDriverEntry = Driver.builder()
+                    .userId(newUser.getId())
+                    .build();
+            Amplify.API.mutate(
+                    ModelMutation.create(newDriverEntry),
+                    success -> {
+                        editor.putString(MainActivity.DRIVER_ID_TAG, success.getData().getId());
+                        editor.apply();
+                    },
+                    failure -> {
+
+                    }
+            );
+        }
+
+
+    }
+    private void completeFirmFuture(String firmName){
+        Amplify.API.query(
+                ModelQuery.list(Firm.class, Firm.NAME.contains(firmName)),
+                response -> {
+                    for (Firm f : response.getData()){
+                        if (f.getName() == firmName){
+                            firmCompletableFuture.complete(f);
+                        }
+                    }
+                    firmCompletableFuture.complete(null);
+                },
+                error -> {
+                    firmCompletableFuture.complete(null);
+                }
         );
     }
+
+    private Firm getFirm(){
+        Firm f = null;
+        try {
+            f = firmCompletableFuture.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return f;
+    }
+
+
 }

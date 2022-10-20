@@ -3,8 +3,7 @@ query GetUser($id: ID!) {
   getUser(id: $id) {
     id
     name
-    auth_id
-    licensePlate
+    authId
     lat
     lon
     firmID
@@ -31,8 +30,7 @@ query ListUsers(
     items {
       id
       name
-      auth_id
-      licensePlate
+      authId
       lat
       lon
       firmID
@@ -58,8 +56,7 @@ query GetFirm($id: ID!) {
       items {
         id
         name
-        auth_id
-        licensePlate
+        authId
         lat
         lon
         firmID
@@ -129,11 +126,11 @@ query ListTrips(
 query GetDriver($id: ID!) {
   getDriver(id: $id) {
     id
-    users {
+    userID
+    user {
       id
       name
-      auth_id
-      licensePlate
+      authId
       lat
       lon
       firmID
@@ -149,7 +146,6 @@ query GetDriver($id: ID!) {
     }
     createdAt
     updatedAt
-    driverUsersId
   }
 }
 query ListDrivers(
@@ -160,11 +156,11 @@ query ListDrivers(
   listDrivers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      users {
+      userID
+      user {
         id
         name
-        auth_id
-        licensePlate
+        authId
         lat
         lon
         firmID
@@ -173,7 +169,6 @@ query ListDrivers(
       }
       createdAt
       updatedAt
-      driverUsersId
     }
     nextToken
   }
@@ -181,11 +176,11 @@ query ListDrivers(
 query GetSupervisor($id: ID!) {
   getSupervisor(id: $id) {
     id
-    users {
+    userID
+    user {
       id
       name
-      auth_id
-      licensePlate
+      authId
       lat
       lon
       firmID
@@ -201,7 +196,6 @@ query GetSupervisor($id: ID!) {
     }
     createdAt
     updatedAt
-    supervisorUsersId
   }
 }
 query ListSupervisors(
@@ -212,11 +206,11 @@ query ListSupervisors(
   listSupervisors(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      users {
+      userID
+      user {
         id
         name
-        auth_id
-        licensePlate
+        authId
         lat
         lon
         firmID
@@ -225,7 +219,6 @@ query ListSupervisors(
       }
       createdAt
       updatedAt
-      supervisorUsersId
     }
     nextToken
   }

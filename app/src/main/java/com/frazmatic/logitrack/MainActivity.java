@@ -5,16 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthProvider;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.User;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -27,16 +33,26 @@ public class MainActivity extends AppCompatActivity {
     protected LocationRequest locationRequest;
     protected LocationCallback locationCallback;
     private FusedLocationProviderClient fusedLocationProviderClient;
+    private SharedPreferences settings;
+    private SharedPreferences.Editor editor;
+    public static final String AUTH_ID_TAG = "authId";
+    public static final String USER_ID_TAG = "userId";
+    public static final String FIRM_ID_TAG = "firmId";
+    public static final String SUPERVISOR_ID_TAG = "supervisorId";
+    public static final String DRIVER_ID_TAG = "driverId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        settings = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        editor = settings.edit();
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 55555);
         createLocationRequest(20);
         createLocationCallback();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -61,8 +77,10 @@ public class MainActivity extends AppCompatActivity {
 
         Amplify.Auth.fetchAuthSession(
                 result -> {
-                    AuthUser currentUser = Amplify.Auth.getCurrentUser();
                     if(result.isSignedIn()){
+                        AuthUser currentUser = Amplify.Auth.getCurrentUser();
+                        editor.putString(AUTH_ID_TAG, currentUser.getUserId());
+                        editor.apply();
                         runOnUiThread(() -> {
                             loginBtn.setText("User Selection");
                             loginBtn.setOnClickListener( view ->{
@@ -101,8 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 for (Location location : locationResult.getLocations()) {
                     //TODO: Call a method do something with location
-                    String lat = ((Double)location.getLatitude()).toString();
-                    Log.i("Lat: ", lat);
+                    updateUserLocation(location.getLatitude(), location.getLongitude());
                 }
             }
         };
@@ -127,6 +144,9 @@ public class MainActivity extends AppCompatActivity {
     private void oauth(Button loginBtn){
         Amplify.Auth.signInWithSocialWebUI(AuthProvider.google(), this,
                 result -> {
+                    String authId = Amplify.Auth.getCurrentUser().getUserId();
+                    editor.putString(AUTH_ID_TAG, authId);
+                    editor.apply();
                     runOnUiThread(() -> {
                         loginBtn.setText("User Selection");
                         loginBtn.setOnClickListener( view ->{
@@ -139,4 +159,37 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    private void updateUserLocation(Double lat, Double lon){
+        String userId = settings.getString(USER_ID_TAG, "");
+        if (!userId.isEmpty()){
+            Amplify.API.query(
+                    ModelQuery.get(User.class, userId),
+                    response -> {
+                        User currentUser = (User)response.getData();
+                        User updatedUser = User.builder()
+                                .id(currentUser.getId())
+                                .name(currentUser.getName())
+                                .authId(currentUser.getAuthId())
+                                .firm(currentUser.getFirm())
+                                .lat(lat)
+                                .lon(lon)
+                                .build();
+                        Amplify.API.mutate(
+                                ModelMutation.update(updatedUser),
+                                updateResponse -> {
+                                    String lt = updateResponse.getData().getLat().toString();
+                                    String ln = updateResponse.getData().getLon().toString();
+                                    Log.i("Updated Lat/Lon: ", lt + ", " + ln);
+                                },
+                                error -> {
+
+                                }
+                        );
+                    },
+                    error -> {
+
+                    }
+            );
+        }
+    }
 }
