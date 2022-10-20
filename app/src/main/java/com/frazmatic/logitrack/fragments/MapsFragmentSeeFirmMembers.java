@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +22,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.frazmatic.logitrack.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -35,6 +38,7 @@ public class MapsFragmentSeeFirmMembers extends Fragment {
     private CompletableFuture<List<User>> teamMembers;
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
+    private HashMap<Marker, User> markerUsers;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -49,12 +53,17 @@ public class MapsFragmentSeeFirmMembers extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-
+            googleMap.setOnMarkerClickListener(marker -> {
+                User u = markerUsers.get(marker);
+                Log.i("USER NAME: ", u.getName());
+                return false;
+            });
             try {
                 ArrayList<User> users = (ArrayList<User>)teamMembers.get();
                 for (User u : users){
                     LatLng loc = new LatLng(u.getLat(), u.getLon());
-                    googleMap.addMarker(new MarkerOptions().position(loc).title(u.getName()));
+                    Marker m = googleMap.addMarker(new MarkerOptions().position(loc).title(u.getName()));
+                    markerUsers.put(m, u);
                 }
             } catch (ExecutionException e) {
                 e.printStackTrace();
@@ -89,6 +98,7 @@ public class MapsFragmentSeeFirmMembers extends Fragment {
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         editor = settings.edit();
         teamMembers = new CompletableFuture<>();
+        markerUsers = new HashMap<>();
         completeTeamMembers();
     }
 
@@ -108,4 +118,5 @@ public class MapsFragmentSeeFirmMembers extends Fragment {
             );
         }
     }
+
 }
