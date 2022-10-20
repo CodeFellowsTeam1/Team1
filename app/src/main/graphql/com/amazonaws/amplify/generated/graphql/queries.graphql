@@ -20,6 +20,23 @@ query GetUser($id: ID!) {
       createdAt
       updatedAt
     }
+    trips {
+      items {
+        id
+        where
+        miles
+        hours
+        dropOff
+        deadHead
+        rate
+        deliveryNotes
+        firmID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -43,6 +60,9 @@ query ListUsers(
         cityAndState
         createdAt
         updatedAt
+      }
+      trips {
+        nextToken
       }
       createdAt
       updatedAt
@@ -79,6 +99,7 @@ query GetFirm($id: ID!) {
         rate
         deliveryNotes
         firmID
+        userID
         createdAt
         updatedAt
       }
@@ -134,6 +155,27 @@ query GetTrip($id: ID!) {
       createdAt
       updatedAt
     }
+    userID
+    user {
+      id
+      name
+      authId
+      lat
+      lon
+      firmID
+      firm {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
+      }
+      trips {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -161,6 +203,17 @@ query ListTrips(
         createdAt
         updatedAt
       }
+      userID
+      user {
+        id
+        name
+        authId
+        lat
+        lon
+        firmID
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -184,6 +237,9 @@ query GetDriver($id: ID!) {
         cityAndState
         createdAt
         updatedAt
+      }
+      trips {
+        nextToken
       }
       createdAt
       updatedAt
@@ -234,6 +290,9 @@ query GetSupervisor($id: ID!) {
         cityAndState
         createdAt
         updatedAt
+      }
+      trips {
+        nextToken
       }
       createdAt
       updatedAt

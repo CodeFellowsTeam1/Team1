@@ -23,6 +23,23 @@ mutation CreateUser(
       createdAt
       updatedAt
     }
+    trips {
+      items {
+        id
+        where
+        miles
+        hours
+        dropOff
+        deadHead
+        rate
+        deliveryNotes
+        firmID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -51,6 +68,23 @@ mutation UpdateUser(
       createdAt
       updatedAt
     }
+    trips {
+      items {
+        id
+        where
+        miles
+        hours
+        dropOff
+        deadHead
+        rate
+        deliveryNotes
+        firmID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -78,6 +112,23 @@ mutation DeleteUser(
       }
       createdAt
       updatedAt
+    }
+    trips {
+      items {
+        id
+        where
+        miles
+        hours
+        dropOff
+        deadHead
+        rate
+        deliveryNotes
+        firmID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
     createdAt
     updatedAt
@@ -115,6 +166,7 @@ mutation CreateFirm(
         rate
         deliveryNotes
         firmID
+        userID
         createdAt
         updatedAt
       }
@@ -156,6 +208,7 @@ mutation UpdateFirm(
         rate
         deliveryNotes
         firmID
+        userID
         createdAt
         updatedAt
       }
@@ -197,6 +250,7 @@ mutation DeleteFirm(
         rate
         deliveryNotes
         firmID
+        userID
         createdAt
         updatedAt
       }
@@ -226,6 +280,27 @@ mutation CreateTrip(
       cityAndState
       users {
         nextToken
+      }
+      trips {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    userID
+    user {
+      id
+      name
+      authId
+      lat
+      lon
+      firmID
+      firm {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
       }
       trips {
         nextToken
@@ -264,6 +339,27 @@ mutation UpdateTrip(
       createdAt
       updatedAt
     }
+    userID
+    user {
+      id
+      name
+      authId
+      lat
+      lon
+      firmID
+      firm {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
+      }
+      trips {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -288,6 +384,27 @@ mutation DeleteTrip(
       cityAndState
       users {
         nextToken
+      }
+      trips {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    userID
+    user {
+      id
+      name
+      authId
+      lat
+      lon
+      firmID
+      firm {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
       }
       trips {
         nextToken
@@ -320,6 +437,9 @@ mutation CreateDriver(
         createdAt
         updatedAt
       }
+      trips {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -347,6 +467,9 @@ mutation UpdateDriver(
         cityAndState
         createdAt
         updatedAt
+      }
+      trips {
+        nextToken
       }
       createdAt
       updatedAt
@@ -376,6 +499,9 @@ mutation DeleteDriver(
         createdAt
         updatedAt
       }
+      trips {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -403,6 +529,9 @@ mutation CreateSupervisor(
         cityAndState
         createdAt
         updatedAt
+      }
+      trips {
+        nextToken
       }
       createdAt
       updatedAt
@@ -432,6 +561,9 @@ mutation UpdateSupervisor(
         createdAt
         updatedAt
       }
+      trips {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -459,6 +591,9 @@ mutation DeleteSupervisor(
         cityAndState
         createdAt
         updatedAt
+      }
+      trips {
+        nextToken
       }
       createdAt
       updatedAt

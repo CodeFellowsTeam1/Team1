@@ -20,6 +20,23 @@ subscription OnCreateUser {
       createdAt
       updatedAt
     }
+    trips {
+      items {
+        id
+        where
+        miles
+        hours
+        dropOff
+        deadHead
+        rate
+        deliveryNotes
+        firmID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -45,6 +62,23 @@ subscription OnUpdateUser {
       createdAt
       updatedAt
     }
+    trips {
+      items {
+        id
+        where
+        miles
+        hours
+        dropOff
+        deadHead
+        rate
+        deliveryNotes
+        firmID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -69,6 +103,23 @@ subscription OnDeleteUser {
       }
       createdAt
       updatedAt
+    }
+    trips {
+      items {
+        id
+        where
+        miles
+        hours
+        dropOff
+        deadHead
+        rate
+        deliveryNotes
+        firmID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
     createdAt
     updatedAt
@@ -103,6 +154,7 @@ subscription OnCreateFirm {
         rate
         deliveryNotes
         firmID
+        userID
         createdAt
         updatedAt
       }
@@ -141,6 +193,7 @@ subscription OnUpdateFirm {
         rate
         deliveryNotes
         firmID
+        userID
         createdAt
         updatedAt
       }
@@ -179,6 +232,7 @@ subscription OnDeleteFirm {
         rate
         deliveryNotes
         firmID
+        userID
         createdAt
         updatedAt
       }
@@ -205,6 +259,27 @@ subscription OnCreateTrip {
       cityAndState
       users {
         nextToken
+      }
+      trips {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    userID
+    user {
+      id
+      name
+      authId
+      lat
+      lon
+      firmID
+      firm {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
       }
       trips {
         nextToken
@@ -240,6 +315,27 @@ subscription OnUpdateTrip {
       createdAt
       updatedAt
     }
+    userID
+    user {
+      id
+      name
+      authId
+      lat
+      lon
+      firmID
+      firm {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
+      }
+      trips {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -261,6 +357,27 @@ subscription OnDeleteTrip {
       cityAndState
       users {
         nextToken
+      }
+      trips {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    userID
+    user {
+      id
+      name
+      authId
+      lat
+      lon
+      firmID
+      firm {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
       }
       trips {
         nextToken
@@ -290,6 +407,9 @@ subscription OnCreateDriver {
         createdAt
         updatedAt
       }
+      trips {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -314,6 +434,9 @@ subscription OnUpdateDriver {
         cityAndState
         createdAt
         updatedAt
+      }
+      trips {
+        nextToken
       }
       createdAt
       updatedAt
@@ -340,6 +463,9 @@ subscription OnDeleteDriver {
         createdAt
         updatedAt
       }
+      trips {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -364,6 +490,9 @@ subscription OnCreateSupervisor {
         cityAndState
         createdAt
         updatedAt
+      }
+      trips {
+        nextToken
       }
       createdAt
       updatedAt
@@ -390,6 +519,9 @@ subscription OnUpdateSupervisor {
         createdAt
         updatedAt
       }
+      trips {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -414,6 +546,9 @@ subscription OnDeleteSupervisor {
         cityAndState
         createdAt
         updatedAt
+      }
+      trips {
+        nextToken
       }
       createdAt
       updatedAt
