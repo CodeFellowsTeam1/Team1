@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/trip_nav_graph"
+    app:startDestination="@id/createTripSupervisor2">
+
+    <fragment
+        android:id="@+id/createTripSupervisor2"
+        android:name="com.frazmatic.logitrack.fragments.createTripSupervisor"
+        android:label="fragment_create_trip_supervisor"
+        tools:layout="@layout/fragment_create_trip_supervisor" />
+</navigation>

@@ -14,6 +14,9 @@ query GetUser($id: ID!) {
       users {
         nextToken
       }
+      trips {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -65,6 +68,22 @@ query GetFirm($id: ID!) {
       }
       nextToken
     }
+    trips {
+      items {
+        id
+        where
+        miles
+        hours
+        dropOff
+        deadHead
+        rate
+        deliveryNotes
+        firmID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -80,6 +99,9 @@ query ListFirms(
       name
       cityAndState
       users {
+        nextToken
+      }
+      trips {
         nextToken
       }
       createdAt
@@ -98,6 +120,20 @@ query GetTrip($id: ID!) {
     deadHead
     rate
     deliveryNotes
+    firmID
+    firm {
+      id
+      name
+      cityAndState
+      users {
+        nextToken
+      }
+      trips {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -117,6 +153,14 @@ query ListTrips(
       deadHead
       rate
       deliveryNotes
+      firmID
+      firm {
+        id
+        name
+        cityAndState
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

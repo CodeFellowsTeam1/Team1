@@ -17,6 +17,9 @@ mutation CreateUser(
       users {
         nextToken
       }
+      trips {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -40,6 +43,9 @@ mutation UpdateUser(
       name
       cityAndState
       users {
+        nextToken
+      }
+      trips {
         nextToken
       }
       createdAt
@@ -67,6 +73,9 @@ mutation DeleteUser(
       users {
         nextToken
       }
+      trips {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -89,6 +98,22 @@ mutation CreateFirm(
         authId
         lat
         lon
+        firmID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    trips {
+      items {
+        id
+        where
+        miles
+        hours
+        dropOff
+        deadHead
+        rate
+        deliveryNotes
         firmID
         createdAt
         updatedAt
@@ -120,6 +145,22 @@ mutation UpdateFirm(
       }
       nextToken
     }
+    trips {
+      items {
+        id
+        where
+        miles
+        hours
+        dropOff
+        deadHead
+        rate
+        deliveryNotes
+        firmID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -145,6 +186,22 @@ mutation DeleteFirm(
       }
       nextToken
     }
+    trips {
+      items {
+        id
+        where
+        miles
+        hours
+        dropOff
+        deadHead
+        rate
+        deliveryNotes
+        firmID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -162,6 +219,20 @@ mutation CreateTrip(
     deadHead
     rate
     deliveryNotes
+    firmID
+    firm {
+      id
+      name
+      cityAndState
+      users {
+        nextToken
+      }
+      trips {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -179,6 +250,20 @@ mutation UpdateTrip(
     deadHead
     rate
     deliveryNotes
+    firmID
+    firm {
+      id
+      name
+      cityAndState
+      users {
+        nextToken
+      }
+      trips {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -196,6 +281,20 @@ mutation DeleteTrip(
     deadHead
     rate
     deliveryNotes
+    firmID
+    firm {
+      id
+      name
+      cityAndState
+      users {
+        nextToken
+      }
+      trips {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }

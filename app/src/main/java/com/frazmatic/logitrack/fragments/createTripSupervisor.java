@@ -1,5 +1,7 @@
 package com.frazmatic.logitrack.fragments;
 
+import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,9 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Firm;
 import com.amplifyframework.datastore.generated.model.Trip;
+import com.amplifyframework.datastore.generated.model.User;
 import com.frazmatic.logitrack.R;
+
+import java.util.concurrent.CompletableFuture;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +31,11 @@ import com.frazmatic.logitrack.R;
  */
 public class createTripSupervisor extends Fragment {
 
+    private SharedPreferences settings;
+    private SharedPreferences.Editor editor;
     View view;
+    private CompletableFuture<Firm> FirmFuture;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -101,6 +112,15 @@ public class createTripSupervisor extends Fragment {
 
         String deliveryNotes = ((EditText) view.findViewById(R.id.createTripDeliverNotesInput)).getText().toString();
 
+        Amplify.API.query(
+               ModelQuery.get(Firm.class,settings.getString("FIRM_ID_TAG","")),
+                response -> {
+                   FirmFuture.complete((Firm)response.getData());
+                },
+                error -> Log.i("errors", "no data to get.")
+        );
+
+
 
         Trip newTrip = Trip.builder()
                 .where(where)
@@ -110,10 +130,11 @@ public class createTripSupervisor extends Fragment {
                 .deadHead(deadHead)
                 .rate(rate)
                 .deliveryNotes(deliveryNotes)
+                .firm(FirmFuture.join())
                 .build();
         Amplify.API.mutate(
                 ModelMutation.create(newTrip),
-                success -> Log.i(CREATE_TRIP_TAG, "New trip info created."),
+                success -> Log.i(CREATE_TRIP_TAG, "New trip info created."+ success),
                 failure -> Log.i(CREATE_TRIP_TAG, "Unable to create new trip " + failure)
         );
     }
