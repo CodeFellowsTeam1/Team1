@@ -1,6 +1,7 @@
 package com.amplifyframework.datastore.generated.model;
 
 import com.amplifyframework.core.model.annotations.BelongsTo;
+import com.amplifyframework.core.model.annotations.HasOne;
 import com.amplifyframework.core.model.temporal.Temporal;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public final class Trip implements Model {
   public static final QueryField RATE = field("Trip", "rate");
   public static final QueryField DELIVERY_NOTES = field("Trip", "deliveryNotes");
   public static final QueryField FIRM = field("Trip", "firmID");
-  public static final QueryField USER = field("Trip", "userID");
+  public static final QueryField USER_ID = field("Trip", "userID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String where;
   private final @ModelField(targetType="Float") Double miles;
@@ -47,7 +48,8 @@ public final class Trip implements Model {
   private final @ModelField(targetType="Float") Double rate;
   private final @ModelField(targetType="String") String deliveryNotes;
   private final @ModelField(targetType="Firm") @BelongsTo(targetName = "firmID", type = Firm.class) Firm firm;
-  private final @ModelField(targetType="User") @BelongsTo(targetName = "userID", type = User.class) User user;
+  private final @ModelField(targetType="ID") String userID;
+  private final @ModelField(targetType="User") @HasOne(associatedWith = "id", type = User.class) User user = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -86,6 +88,10 @@ public final class Trip implements Model {
       return firm;
   }
   
+  public String getUserId() {
+      return userID;
+  }
+  
   public User getUser() {
       return user;
   }
@@ -98,7 +104,7 @@ public final class Trip implements Model {
       return updatedAt;
   }
   
-  private Trip(String id, String where, Double miles, String hours, String dropOff, Double deadHead, Double rate, String deliveryNotes, Firm firm, User user) {
+  private Trip(String id, String where, Double miles, String hours, String dropOff, Double deadHead, Double rate, String deliveryNotes, Firm firm, String userID) {
     this.id = id;
     this.where = where;
     this.miles = miles;
@@ -108,7 +114,7 @@ public final class Trip implements Model {
     this.rate = rate;
     this.deliveryNotes = deliveryNotes;
     this.firm = firm;
-    this.user = user;
+    this.userID = userID;
   }
   
   @Override
@@ -128,7 +134,7 @@ public final class Trip implements Model {
               ObjectsCompat.equals(getRate(), trip.getRate()) &&
               ObjectsCompat.equals(getDeliveryNotes(), trip.getDeliveryNotes()) &&
               ObjectsCompat.equals(getFirm(), trip.getFirm()) &&
-              ObjectsCompat.equals(getUser(), trip.getUser()) &&
+              ObjectsCompat.equals(getUserId(), trip.getUserId()) &&
               ObjectsCompat.equals(getCreatedAt(), trip.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), trip.getUpdatedAt());
       }
@@ -146,7 +152,7 @@ public final class Trip implements Model {
       .append(getRate())
       .append(getDeliveryNotes())
       .append(getFirm())
-      .append(getUser())
+      .append(getUserId())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -166,7 +172,7 @@ public final class Trip implements Model {
       .append("rate=" + String.valueOf(getRate()) + ", ")
       .append("deliveryNotes=" + String.valueOf(getDeliveryNotes()) + ", ")
       .append("firm=" + String.valueOf(getFirm()) + ", ")
-      .append("user=" + String.valueOf(getUser()) + ", ")
+      .append("userID=" + String.valueOf(getUserId()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -210,7 +216,7 @@ public final class Trip implements Model {
       rate,
       deliveryNotes,
       firm,
-      user);
+      userID);
   }
   public interface BuildStep {
     Trip build();
@@ -223,7 +229,7 @@ public final class Trip implements Model {
     BuildStep rate(Double rate);
     BuildStep deliveryNotes(String deliveryNotes);
     BuildStep firm(Firm firm);
-    BuildStep user(User user);
+    BuildStep userId(String userId);
   }
   
 
@@ -237,7 +243,7 @@ public final class Trip implements Model {
     private Double rate;
     private String deliveryNotes;
     private Firm firm;
-    private User user;
+    private String userID;
     @Override
      public Trip build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -252,7 +258,7 @@ public final class Trip implements Model {
           rate,
           deliveryNotes,
           firm,
-          user);
+          userID);
     }
     
     @Override
@@ -304,8 +310,8 @@ public final class Trip implements Model {
     }
     
     @Override
-     public BuildStep user(User user) {
-        this.user = user;
+     public BuildStep userId(String userId) {
+        this.userID = userId;
         return this;
     }
     
@@ -321,7 +327,7 @@ public final class Trip implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String where, Double miles, String hours, String dropOff, Double deadHead, Double rate, String deliveryNotes, Firm firm, User user) {
+    private CopyOfBuilder(String id, String where, Double miles, String hours, String dropOff, Double deadHead, Double rate, String deliveryNotes, Firm firm, String userId) {
       super.id(id);
       super.where(where)
         .miles(miles)
@@ -331,7 +337,7 @@ public final class Trip implements Model {
         .rate(rate)
         .deliveryNotes(deliveryNotes)
         .firm(firm)
-        .user(user);
+        .userId(userId);
     }
     
     @Override
@@ -375,8 +381,8 @@ public final class Trip implements Model {
     }
     
     @Override
-     public CopyOfBuilder user(User user) {
-      return (CopyOfBuilder) super.user(user);
+     public CopyOfBuilder userId(String userId) {
+      return (CopyOfBuilder) super.userId(userId);
     }
   }
   
