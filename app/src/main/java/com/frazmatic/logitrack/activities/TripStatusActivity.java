@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Trip;
 import com.frazmatic.logitrack.R;
 import com.frazmatic.logitrack.adapter.TripStatusRecyclerViewAdapter;
@@ -31,6 +34,7 @@ public class TripStatusActivity extends AppCompatActivity {
         });
 
         setUpTripStatusRecyclerView();
+        QueryDB();
     }
 
     private void setUpTripStatusRecyclerView() {
@@ -45,4 +49,24 @@ public class TripStatusActivity extends AppCompatActivity {
         TripStatusRecyclerView.setAdapter(adapter);
 
     }
+
+    public void QueryDB() {
+        Amplify.API.query(
+                ModelQuery.list(Trip.class),
+                success -> {
+                    Log.i("QueryDB", "Read DB successfully");
+                    Trips.clear();
+                    for (Trip DBTrip : success.getData()){
+                        Trips.add(DBTrip);
+                    }
+                    runOnUiThread(() ->{
+                        adapter.notifyDataSetChanged();
+                    });
+                },
+                failure -> {
+                    Log.i("QueryDB", "Query DB Failed");
+                });
+    }
+
+
 }

@@ -182,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
         Log.i("Saved Lat/Lon: ", settings.getFloat(CURRENT_LAT, 0.0f) + ", " + settings.getFloat(CURRENT_LON, 0.0f));
         String userId = settings.getString(USER_ID_TAG, "");
+
         if (!userId.isEmpty()){
             Amplify.API.query(
                     ModelQuery.get(User.class, userId),

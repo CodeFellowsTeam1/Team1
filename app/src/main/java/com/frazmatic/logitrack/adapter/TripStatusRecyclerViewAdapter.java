@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Trip;
 import com.frazmatic.logitrack.R;
 
@@ -42,8 +43,10 @@ public class TripStatusRecyclerViewAdapter extends RecyclerView.Adapter<TripStat
     public void onBindViewHolder(@NonNull TripStatusViewHolder holder, int position) {
         // 11 bind the data to our fragment
         TextView TripStatusTitleFragment = holder.itemView.findViewById(R.id.TripRecyclerViewTextView);
+
         //TODO: Put DB Data here
         String taskTitle = trips.get(position).getWhere();
+
 //        String taskDescription = tasks.get(position).getDescription();
 //        String TaskStatus = tasks.get(position).getState().toString();
 

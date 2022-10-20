@@ -10,7 +10,6 @@ type User @model @auth(rules:[{allow: public}]) {
   lon: Float
   firmID: ID! @index(name: "byFirm")
   firm: Firm @belongsTo(fields: ["firmID"])
-  trips: [Trip] @hasMany(indexName: "byUser", fields:["id"])
 }
 
 type Firm @model @auth(rules:[{allow: public}]) {
@@ -33,7 +32,7 @@ type Trip @model @auth(rules:[{allow: public}]) {
     firmID: ID! @index(name: "byFirm")
     firm: Firm @belongsTo(fields: ["firmID"])
     userID: ID @index(name: "byUser")
-    user: User @belongsTo(fields: ["userID"])
+    user: User @hasOne(fields: ["userID"])
 }
 
 type Driver @model @auth(rules:[{allow: public}]) {
@@ -47,3 +46,4 @@ type Supervisor @model @auth(rules:[{allow: public}]) {
     userID: ID
     user: User @hasOne(fields: ["userID"])
 }
+
