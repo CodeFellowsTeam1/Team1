@@ -1,6 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
-import com.amplifyframework.core.model.annotations.HasOne;
+import com.amplifyframework.core.model.annotations.HasMany;
 import com.amplifyframework.core.model.temporal.Temporal;
 
 import java.util.List;
@@ -20,24 +20,34 @@ import com.amplifyframework.core.model.query.predicate.QueryField;
 
 import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
-/** This is an auto generated class representing the Driver type in your schema. */
+/** This is an auto generated class representing the Firm type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "Drivers", authRules = {
+@ModelConfig(pluralName = "Firms", authRules = {
   @AuthRule(allow = AuthStrategy.PUBLIC, operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
 })
-public final class Driver implements Model {
-  public static final QueryField ID = field("Driver", "id");
-  public static final QueryField DRIVER_USERS_ID = field("Driver", "driverUsersId");
+public final class Firm implements Model {
+  public static final QueryField ID = field("Firm", "id");
+  public static final QueryField NAME = field("Firm", "name");
+  public static final QueryField CITY_AND_STATE = field("Firm", "cityAndState");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="User") @HasOne(associatedWith = "id", type = User.class) User users = null;
+  private final @ModelField(targetType="String", isRequired = true) String name;
+  private final @ModelField(targetType="String") String cityAndState;
+  private final @ModelField(targetType="User") @HasMany(associatedWith = "firm", type = User.class) List<User> users = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
-  private final @ModelField(targetType="ID") String driverUsersId;
   public String getId() {
       return id;
   }
   
-  public User getUsers() {
+  public String getName() {
+      return name;
+  }
+  
+  public String getCityAndState() {
+      return cityAndState;
+  }
+  
+  public List<User> getUsers() {
       return users;
   }
   
@@ -49,13 +59,10 @@ public final class Driver implements Model {
       return updatedAt;
   }
   
-  public String getDriverUsersId() {
-      return driverUsersId;
-  }
-  
-  private Driver(String id, String driverUsersId) {
+  private Firm(String id, String name, String cityAndState) {
     this.id = id;
-    this.driverUsersId = driverUsersId;
+    this.name = name;
+    this.cityAndState = cityAndState;
   }
   
   @Override
@@ -65,11 +72,12 @@ public final class Driver implements Model {
       } else if(obj == null || getClass() != obj.getClass()) {
         return false;
       } else {
-      Driver driver = (Driver) obj;
-      return ObjectsCompat.equals(getId(), driver.getId()) &&
-              ObjectsCompat.equals(getCreatedAt(), driver.getCreatedAt()) &&
-              ObjectsCompat.equals(getUpdatedAt(), driver.getUpdatedAt()) &&
-              ObjectsCompat.equals(getDriverUsersId(), driver.getDriverUsersId());
+      Firm firm = (Firm) obj;
+      return ObjectsCompat.equals(getId(), firm.getId()) &&
+              ObjectsCompat.equals(getName(), firm.getName()) &&
+              ObjectsCompat.equals(getCityAndState(), firm.getCityAndState()) &&
+              ObjectsCompat.equals(getCreatedAt(), firm.getCreatedAt()) &&
+              ObjectsCompat.equals(getUpdatedAt(), firm.getUpdatedAt());
       }
   }
   
@@ -77,9 +85,10 @@ public final class Driver implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
+      .append(getName())
+      .append(getCityAndState())
       .append(getCreatedAt())
       .append(getUpdatedAt())
-      .append(getDriverUsersId())
       .toString()
       .hashCode();
   }
@@ -87,16 +96,17 @@ public final class Driver implements Model {
   @Override
    public String toString() {
     return new StringBuilder()
-      .append("Driver {")
+      .append("Firm {")
       .append("id=" + String.valueOf(getId()) + ", ")
+      .append("name=" + String.valueOf(getName()) + ", ")
+      .append("cityAndState=" + String.valueOf(getCityAndState()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
-      .append("updatedAt=" + String.valueOf(getUpdatedAt()) + ", ")
-      .append("driverUsersId=" + String.valueOf(getDriverUsersId()))
+      .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
       .toString();
   }
   
-  public static BuildStep builder() {
+  public static NameStep builder() {
       return new Builder();
   }
   
@@ -108,39 +118,55 @@ public final class Driver implements Model {
    * @param id the id of the existing item this instance will represent
    * @return an instance of this model with only ID populated
    */
-  public static Driver justId(String id) {
-    return new Driver(
+  public static Firm justId(String id) {
+    return new Firm(
       id,
+      null,
       null
     );
   }
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      driverUsersId);
+      name,
+      cityAndState);
   }
-  public interface BuildStep {
-    Driver build();
-    BuildStep id(String id);
-    BuildStep driverUsersId(String driverUsersId);
+  public interface NameStep {
+    BuildStep name(String name);
   }
   
 
-  public static class Builder implements BuildStep {
+  public interface BuildStep {
+    Firm build();
+    BuildStep id(String id);
+    BuildStep cityAndState(String cityAndState);
+  }
+  
+
+  public static class Builder implements NameStep, BuildStep {
     private String id;
-    private String driverUsersId;
+    private String name;
+    private String cityAndState;
     @Override
-     public Driver build() {
+     public Firm build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
-        return new Driver(
+        return new Firm(
           id,
-          driverUsersId);
+          name,
+          cityAndState);
     }
     
     @Override
-     public BuildStep driverUsersId(String driverUsersId) {
-        this.driverUsersId = driverUsersId;
+     public BuildStep name(String name) {
+        Objects.requireNonNull(name);
+        this.name = name;
+        return this;
+    }
+    
+    @Override
+     public BuildStep cityAndState(String cityAndState) {
+        this.cityAndState = cityAndState;
         return this;
     }
     
@@ -156,14 +182,20 @@ public final class Driver implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String driverUsersId) {
+    private CopyOfBuilder(String id, String name, String cityAndState) {
       super.id(id);
-      super.driverUsersId(driverUsersId);
+      super.name(name)
+        .cityAndState(cityAndState);
     }
     
     @Override
-     public CopyOfBuilder driverUsersId(String driverUsersId) {
-      return (CopyOfBuilder) super.driverUsersId(driverUsersId);
+     public CopyOfBuilder name(String name) {
+      return (CopyOfBuilder) super.name(name);
+    }
+    
+    @Override
+     public CopyOfBuilder cityAndState(String cityAndState) {
+      return (CopyOfBuilder) super.cityAndState(cityAndState);
     }
   }
   

@@ -25,7 +25,7 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 @ModelConfig(pluralName = "Users", authRules = {
   @AuthRule(allow = AuthStrategy.PUBLIC, operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
 })
-@Index(name = "byCompany", fields = {"companyID"})
+@Index(name = "byFirm", fields = {"firmID"})
 public final class User implements Model {
   public static final QueryField ID = field("User", "id");
   public static final QueryField NAME = field("User", "name");
@@ -33,14 +33,14 @@ public final class User implements Model {
   public static final QueryField LICENSE_PLATE = field("User", "licensePlate");
   public static final QueryField LAT = field("User", "lat");
   public static final QueryField LON = field("User", "lon");
-  public static final QueryField COMPANY = field("User", "companyID");
+  public static final QueryField FIRM = field("User", "firmID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String name;
   private final @ModelField(targetType="String") String username;
   private final @ModelField(targetType="String") String licensePlate;
   private final @ModelField(targetType="Float") Double lat;
   private final @ModelField(targetType="Float") Double lon;
-  private final @ModelField(targetType="Company") @BelongsTo(targetName = "companyID", type = Company.class) Company company;
+  private final @ModelField(targetType="Firm") @BelongsTo(targetName = "firmID", type = Firm.class) Firm firm;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -67,8 +67,8 @@ public final class User implements Model {
       return lon;
   }
   
-  public Company getCompany() {
-      return company;
+  public Firm getFirm() {
+      return firm;
   }
   
   public Temporal.DateTime getCreatedAt() {
@@ -79,14 +79,14 @@ public final class User implements Model {
       return updatedAt;
   }
   
-  private User(String id, String name, String username, String licensePlate, Double lat, Double lon, Company company) {
+  private User(String id, String name, String username, String licensePlate, Double lat, Double lon, Firm firm) {
     this.id = id;
     this.name = name;
     this.username = username;
     this.licensePlate = licensePlate;
     this.lat = lat;
     this.lon = lon;
-    this.company = company;
+    this.firm = firm;
   }
   
   @Override
@@ -103,7 +103,7 @@ public final class User implements Model {
               ObjectsCompat.equals(getLicensePlate(), user.getLicensePlate()) &&
               ObjectsCompat.equals(getLat(), user.getLat()) &&
               ObjectsCompat.equals(getLon(), user.getLon()) &&
-              ObjectsCompat.equals(getCompany(), user.getCompany()) &&
+              ObjectsCompat.equals(getFirm(), user.getFirm()) &&
               ObjectsCompat.equals(getCreatedAt(), user.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), user.getUpdatedAt());
       }
@@ -118,7 +118,7 @@ public final class User implements Model {
       .append(getLicensePlate())
       .append(getLat())
       .append(getLon())
-      .append(getCompany())
+      .append(getFirm())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -135,7 +135,7 @@ public final class User implements Model {
       .append("licensePlate=" + String.valueOf(getLicensePlate()) + ", ")
       .append("lat=" + String.valueOf(getLat()) + ", ")
       .append("lon=" + String.valueOf(getLon()) + ", ")
-      .append("company=" + String.valueOf(getCompany()) + ", ")
+      .append("firm=" + String.valueOf(getFirm()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -173,7 +173,7 @@ public final class User implements Model {
       licensePlate,
       lat,
       lon,
-      company);
+      firm);
   }
   public interface BuildStep {
     User build();
@@ -183,7 +183,7 @@ public final class User implements Model {
     BuildStep licensePlate(String licensePlate);
     BuildStep lat(Double lat);
     BuildStep lon(Double lon);
-    BuildStep company(Company company);
+    BuildStep firm(Firm firm);
   }
   
 
@@ -194,7 +194,7 @@ public final class User implements Model {
     private String licensePlate;
     private Double lat;
     private Double lon;
-    private Company company;
+    private Firm firm;
     @Override
      public User build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -206,7 +206,7 @@ public final class User implements Model {
           licensePlate,
           lat,
           lon,
-          company);
+          firm);
     }
     
     @Override
@@ -240,8 +240,8 @@ public final class User implements Model {
     }
     
     @Override
-     public BuildStep company(Company company) {
-        this.company = company;
+     public BuildStep firm(Firm firm) {
+        this.firm = firm;
         return this;
     }
     
@@ -257,14 +257,14 @@ public final class User implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String username, String licensePlate, Double lat, Double lon, Company company) {
+    private CopyOfBuilder(String id, String name, String username, String licensePlate, Double lat, Double lon, Firm firm) {
       super.id(id);
       super.name(name)
         .username(username)
         .licensePlate(licensePlate)
         .lat(lat)
         .lon(lon)
-        .company(company);
+        .firm(firm);
     }
     
     @Override
@@ -293,8 +293,8 @@ public final class User implements Model {
     }
     
     @Override
-     public CopyOfBuilder company(Company company) {
-      return (CopyOfBuilder) super.company(company);
+     public CopyOfBuilder firm(Firm firm) {
+      return (CopyOfBuilder) super.firm(firm);
     }
   }
   
