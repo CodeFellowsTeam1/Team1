@@ -33,6 +33,7 @@ public final class Firm implements Model {
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="String") String cityAndState;
   private final @ModelField(targetType="User") @HasMany(associatedWith = "firm", type = User.class) List<User> users = null;
+  private final @ModelField(targetType="Trip") @HasMany(associatedWith = "firm", type = Trip.class) List<Trip> trips = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -49,6 +50,10 @@ public final class Firm implements Model {
   
   public List<User> getUsers() {
       return users;
+  }
+  
+  public List<Trip> getTrips() {
+      return trips;
   }
   
   public Temporal.DateTime getCreatedAt() {

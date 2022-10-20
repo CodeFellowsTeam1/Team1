@@ -1,6 +1,7 @@
 package com.amplifyframework.datastore.generated.model;
 
 import com.amplifyframework.core.model.annotations.BelongsTo;
+import com.amplifyframework.core.model.annotations.HasMany;
 import com.amplifyframework.core.model.temporal.Temporal;
 
 import java.util.List;
@@ -39,6 +40,7 @@ public final class User implements Model {
   private final @ModelField(targetType="Float") Double lat;
   private final @ModelField(targetType="Float") Double lon;
   private final @ModelField(targetType="Firm") @BelongsTo(targetName = "firmID", type = Firm.class) Firm firm;
+  private final @ModelField(targetType="Trip") @HasMany(associatedWith = "user", type = Trip.class) List<Trip> trips = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -63,6 +65,10 @@ public final class User implements Model {
   
   public Firm getFirm() {
       return firm;
+  }
+  
+  public List<Trip> getTrips() {
+      return trips;
   }
   
   public Temporal.DateTime getCreatedAt() {
