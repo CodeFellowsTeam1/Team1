@@ -6,7 +6,7 @@ mutation CreateUser(
   createUser(input: $input, condition: $condition) {
     id
     name
-    username
+    auth_id
     licensePlate
     lat
     lon
@@ -32,7 +32,7 @@ mutation UpdateUser(
   updateUser(input: $input, condition: $condition) {
     id
     name
-    username
+    auth_id
     licensePlate
     lat
     lon
@@ -58,7 +58,7 @@ mutation DeleteUser(
   deleteUser(input: $input, condition: $condition) {
     id
     name
-    username
+    auth_id
     licensePlate
     lat
     lon
@@ -89,7 +89,7 @@ mutation CreateFirm(
       items {
         id
         name
-        username
+        auth_id
         licensePlate
         lat
         lon
@@ -115,7 +115,7 @@ mutation UpdateFirm(
       items {
         id
         name
-        username
+        auth_id
         licensePlate
         lat
         lon
@@ -141,7 +141,7 @@ mutation DeleteFirm(
       items {
         id
         name
-        username
+        auth_id
         licensePlate
         lat
         lon
@@ -215,7 +215,7 @@ mutation CreateDriver(
     users {
       id
       name
-      username
+      auth_id
       licensePlate
       lat
       lon
@@ -244,7 +244,7 @@ mutation UpdateDriver(
     users {
       id
       name
-      username
+      auth_id
       licensePlate
       lat
       lon
@@ -273,7 +273,7 @@ mutation DeleteDriver(
     users {
       id
       name
-      username
+      auth_id
       licensePlate
       lat
       lon
@@ -302,7 +302,7 @@ mutation CreateSupervisor(
     users {
       id
       name
-      username
+      auth_id
       licensePlate
       lat
       lon
@@ -331,7 +331,7 @@ mutation UpdateSupervisor(
     users {
       id
       name
-      username
+      auth_id
       licensePlate
       lat
       lon
@@ -360,7 +360,7 @@ mutation DeleteSupervisor(
     users {
       id
       name
-      username
+      auth_id
       licensePlate
       lat
       lon
