@@ -20,6 +20,7 @@ import com.frazmatic.logitrack.R;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.jar.Attributes;
 
 ///**
 // * A simple {@link Fragment} subclass.
@@ -88,6 +89,9 @@ public class userSelect extends Fragment {
         getActivity().runOnUiThread(()->{
             try {
                 User u = currentUserFuture.get();
+                u.getName();
+                editor.putString(MainActivity.USERNAME_TAG, u.getName());
+                editor.apply();
                 Button supervisor = view.findViewById(R.id.userSelectSupBtn);
                 if (u == null){
                     supervisor.setOnClickListener(v -> {

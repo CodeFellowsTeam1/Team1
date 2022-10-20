@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String FIRM_ID_TAG = "firmId";
     public static final String SUPERVISOR_ID_TAG = "supervisorId";
     public static final String DRIVER_ID_TAG = "driverId";
+    public static final String USERNAME_TAG = "username";
+
     public static final String CURRENT_LAT = "currentLat";
     public static final String CURRENT_LON = "currentLon";
 
