@@ -29,10 +29,10 @@ public final class Supervisor implements Model {
   public static final QueryField ID = field("Supervisor", "id");
   public static final QueryField SUPERVISOR_USERS_ID = field("Supervisor", "supervisorUsersId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="User") @HasOne(associatedWith = "id", type = User.class) User users = null;
+  private final @ModelField(targetType="User", isRequired = true) @HasOne(associatedWith = "id", type = User.class) User users = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
-  private final @ModelField(targetType="ID") String supervisorUsersId;
+  private final @ModelField(targetType="ID", isRequired = true) String supervisorUsersId;
   public String getId() {
       return id;
   }
@@ -96,7 +96,7 @@ public final class Supervisor implements Model {
       .toString();
   }
   
-  public static BuildStep builder() {
+  public static SupervisorUsersIdStep builder() {
       return new Builder();
   }
   
@@ -119,14 +119,18 @@ public final class Supervisor implements Model {
     return new CopyOfBuilder(id,
       supervisorUsersId);
   }
-  public interface BuildStep {
-    Supervisor build();
-    BuildStep id(String id);
+  public interface SupervisorUsersIdStep {
     BuildStep supervisorUsersId(String supervisorUsersId);
   }
   
 
-  public static class Builder implements BuildStep {
+  public interface BuildStep {
+    Supervisor build();
+    BuildStep id(String id);
+  }
+  
+
+  public static class Builder implements SupervisorUsersIdStep, BuildStep {
     private String id;
     private String supervisorUsersId;
     @Override
@@ -140,6 +144,7 @@ public final class Supervisor implements Model {
     
     @Override
      public BuildStep supervisorUsersId(String supervisorUsersId) {
+        Objects.requireNonNull(supervisorUsersId);
         this.supervisorUsersId = supervisorUsersId;
         return this;
     }
