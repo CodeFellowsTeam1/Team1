@@ -18,7 +18,7 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Firm;
 import com.amplifyframework.datastore.generated.model.User;
-import com.frazmatic.logitrack.activities.MainActivity;
+import com.frazmatic.logitrack.MainActivity;
 import com.frazmatic.logitrack.R;
 
 import java.util.concurrent.CompletableFuture;
