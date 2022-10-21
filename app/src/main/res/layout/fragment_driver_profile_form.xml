@@ -39,7 +39,7 @@
         android:hint="@string/company"
         android:inputType="textPersonName"
         android:textColorHint="#757575"
-        app:layout_constraintBottom_toTopOf="@+id/driverFormCompanyCityStateField"
+        app:layout_constraintBottom_toTopOf="@+id/driverFormCityStateField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -57,7 +57,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/driverFormCompanyCityStateField"
+        android:id="@+id/driverFormCityStateField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="91dp"

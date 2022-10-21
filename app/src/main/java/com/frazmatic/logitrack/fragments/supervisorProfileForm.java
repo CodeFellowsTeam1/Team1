@@ -38,7 +38,6 @@ import java.util.concurrent.ExecutionException;
  */
 public class supervisorProfileForm extends Fragment {
 
-
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
     private CompletableFuture<Firm> firmCompletableFuture;
@@ -90,6 +89,7 @@ public class supervisorProfileForm extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_supervisor_profile_form, container, false);
+
         firmCompletableFuture = new CompletableFuture<>();
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         editor = settings.edit();
@@ -202,6 +202,4 @@ public class supervisorProfileForm extends Fragment {
         }
         return f;
     }
-
-
 }
