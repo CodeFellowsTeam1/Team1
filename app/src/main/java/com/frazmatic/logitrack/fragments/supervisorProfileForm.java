@@ -25,7 +25,7 @@ import com.amplifyframework.datastore.generated.model.Driver;
 import com.amplifyframework.datastore.generated.model.Firm;
 import com.amplifyframework.datastore.generated.model.Supervisor;
 import com.amplifyframework.datastore.generated.model.User;
-import com.frazmatic.logitrack.activities.MainActivity;
+import com.frazmatic.logitrack.MainActivity;
 import com.frazmatic.logitrack.R;
 
 import java.util.concurrent.CompletableFuture;
