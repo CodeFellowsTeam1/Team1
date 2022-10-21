@@ -15,7 +15,7 @@ import android.widget.Button;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.User;
-import com.frazmatic.logitrack.MainActivity;
+import com.frazmatic.logitrack.activities.MainActivity;
 import com.frazmatic.logitrack.R;
 
 import java.util.concurrent.CompletableFuture;
@@ -53,7 +53,6 @@ public class userSelect extends Fragment {
 
         //TODO Change to use OAuth & User (DynamoDB) object to check instead of id string
         // for both supervisor form directing
-
 
         Button driver = view.findViewById(R.id.userSelectCarrierButton);
         driver.setOnClickListener((v -> {
