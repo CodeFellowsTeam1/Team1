@@ -34,6 +34,11 @@ public class TripStatusActivity extends AppCompatActivity {
             startActivity(goToCreateTrip);
         });
 
+        findViewById(R.id.buttonUserSelectRedirect).setOnClickListener(view -> {
+            Intent goToUserSelect = new Intent(TripStatusActivity.this, NavHostActivity.class);
+            startActivity(goToUserSelect);
+        });
+
         setUpTripStatusRecyclerView();
         QueryDB();
 
@@ -53,7 +58,6 @@ public class TripStatusActivity extends AppCompatActivity {
     }
 
     public void QueryDB() {
-        String UserID = settings.getString(MainActivity.USER_ID_TAG,"");
         String FirmID = settings.getString(MainActivity.FIRM_ID_TAG,"");
         Amplify.API.query(
                 ModelQuery.list(Trip.class,Trip.FIRM.contains(FirmID)),
