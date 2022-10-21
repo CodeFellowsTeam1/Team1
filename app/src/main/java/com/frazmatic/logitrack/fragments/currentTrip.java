@@ -1,20 +1,31 @@
 package com.frazmatic.logitrack.fragments;
 
+import android.annotation.SuppressLint;
 import android.nfc.Tag;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
 import com.frazmatic.logitrack.R;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,19 +73,63 @@ public class currentTrip extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        MaterialToolbar toolbar = getView().findViewById(R.id.fragmentAppBar);
+        DrawerLayout drawerLayout = getView().findViewById(R.id.drawer_layout);
+        NavigationView navigationView = getView().findViewById(R.id.navigation_view);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                item.setChecked(true);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                switch (id) {
+                    case R.id.profile:
+                        replaceFragment(new driverProfile());
+                        break;
+                    case R.id.trips:
+                        replaceFragment(new currentTrip());
+                        break;
+                    case R.id.map:
+                        replaceFragment(new mapGPS());
+                        break;
+                    case R.id.logout:
+                        Amplify.Auth.signOut(
+                                () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                                error -> Log.e("AuthQuickstart", error.toString())
+                        );
+                        break;
+                }
+                return false;
+            }
+        });
     }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit();
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-    View view = inflater.inflate(R.layout.fragment_current_trip, container, false);
-    String currentTrip = ((TextView) view.findViewById(R.id.CurrentTripTV)).getText().toString();
-    view.findViewById(R.id.userSelectSupBtn).setOnClickListener((v -> {
+        View view = inflater.inflate(R.layout.fragment_current_trip, container, false);
+        String currentTrip = ((TextView) view.findViewById(R.id.CurrentTripTV)).getText().toString();
+        view.findViewById(R.id.userSelectSupBtn).setOnClickListener((v -> {
 //        saveTrip(where, miles, hours, dropOff, deadHead, rate, deliveryNotes);
-        Navigation.findNavController(v).navigate(R.id.action_userSelect_to_supervisorProfile);
-    }));
+            Navigation.findNavController(v).navigate(R.id.action_userSelect_to_supervisorProfile);
+        }));
         return view;
     }
 

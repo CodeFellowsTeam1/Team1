@@ -68,4 +68,5 @@ dependencies {
 
     //AppBar Integration
     implementation "com.google.android.material:material:1.6.1"
+    implementation "de.hdodenhof:circleimageview:3.1.0"
 }

@@ -16,4 +16,5 @@
     <string name="first_last_name">First/Last Name</string>
     <string name="save">Save</string>
     <string name="city_and_state">City and State</string>
+    <string name="Clear">STRING</string>
 </resources>

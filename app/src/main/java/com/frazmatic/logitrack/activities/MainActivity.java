@@ -1,9 +1,18 @@
 package com.frazmatic.logitrack.activities;
 
+import static com.frazmatic.logitrack.R.*;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.Manifest;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,6 +21,8 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
@@ -19,7 +30,12 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthProvider;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Firm;
+import com.amplifyframework.datastore.generated.model.Trip;
 import com.amplifyframework.datastore.generated.model.User;
+import com.frazmatic.logitrack.fragments.currentTrip;
+import com.frazmatic.logitrack.fragments.driverProfile;
+import com.frazmatic.logitrack.fragments.mapGPS;
 import com.frazmatic.logitrack.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -27,6 +43,8 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.gms.maps.model.Marker;
 
 import java.util.concurrent.CompletableFuture;
@@ -57,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         settings = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         editor = settings.edit();
+
+
+
+
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 55555);
         createLocationRequest(30);
         createLocationCallback();
@@ -215,4 +237,8 @@ public class MainActivity extends AppCompatActivity {
             );
         }
     }
+
+
+
+
 }

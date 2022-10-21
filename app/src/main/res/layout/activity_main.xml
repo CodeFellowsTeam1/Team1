@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_blue"
+    android:background="#FDF0D5"
     tools:context=".activities.MainActivity">
 
 
@@ -17,14 +17,14 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo__19_" />
+        app:srcCompat="@drawable/logo" />
 
     <Button
         android:id="@+id/MainActivityLoginBttn"
         android:layout_width="176dp"
         android:layout_height="55dp"
         android:layout_marginTop="65dp"
-        android:backgroundTint="@color/light_red"
+        android:backgroundTint="@color/dark_blue"
         android:text="@string/login"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
