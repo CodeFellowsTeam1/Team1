@@ -40,6 +40,7 @@ public class MapsFragmentSeeFirmMembers extends Fragment {
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
     private HashMap<Marker, User> markerUsers;
+    public static final String ADD_DRIVER_TRIP_ID = "tripID";
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 

@@ -1,5 +1,6 @@
 package com.frazmatic.logitrack.fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -18,6 +19,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.User;
 import com.frazmatic.logitrack.MainActivity;
 import com.frazmatic.logitrack.R;
+import com.frazmatic.logitrack.TripStatusActivity;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -88,7 +90,9 @@ public class supervisorProfile extends Fragment {
 
         Button currentTrips = view.findViewById(R.id.supervisorProfileCurrentTripsBtn);
         currentTrips.setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_supervisorTripStatus);
+            Intent gotToTripStatus = new Intent(getContext(), TripStatusActivity.class);
+            startActivity(gotToTripStatus);
+//            Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_supervisorTripStatus);
         });
 
         Button seeTeamMap = view.findViewById(R.id.buttonSupervisorTeamMembers);
