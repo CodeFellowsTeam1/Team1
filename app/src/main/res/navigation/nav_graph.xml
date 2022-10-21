@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_supervisorProfile_to_mapsFragmentSeeFirmMembers"
             app:destination="@id/mapsFragmentSeeFirmMembers" />
+        <action
+            android:id="@+id/action_supervisorProfile_to_currentTrip2"
+            app:destination="@id/currentTrip" />
     </fragment>
     <fragment
         android:id="@+id/currentTrip"
