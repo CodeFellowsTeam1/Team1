@@ -34,6 +34,7 @@ import com.google.android.material.navigation.NavigationView;
  */
 public class currentTrip extends Fragment {
 
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -76,12 +77,8 @@ public class currentTrip extends Fragment {
         MaterialToolbar toolbar = getView().findViewById(R.id.fragmentAppBar);
         DrawerLayout drawerLayout = getView().findViewById(R.id.drawer_layout);
         NavigationView navigationView = getView().findViewById(R.id.navigation_view);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+        toolbar.setNavigationOnClickListener(v -> {
                 drawerLayout.openDrawer(GravityCompat.START);
-            }
         });
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

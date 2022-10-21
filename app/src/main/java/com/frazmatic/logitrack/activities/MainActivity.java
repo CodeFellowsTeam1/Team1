@@ -76,13 +76,12 @@ public class MainActivity extends AppCompatActivity {
         settings = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         editor = settings.edit();
 
-
-
-
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 55555);
         createLocationRequest(30);
         createLocationCallback();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+
+
     }
 
     @Override
@@ -101,12 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupNavButton(){
         Button loginBtn = findViewById(R.id.MainActivityLoginBttn);
-        Amplify.Auth.fetchUserAttributes(
-                userAttributes -> Log.i("AuthDemo", "User attributes = " + userAttributes.toString()),
-
-                error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
-        );
-
         Amplify.Auth.fetchAuthSession(
                 result -> {
                     if(result.isSignedIn()){

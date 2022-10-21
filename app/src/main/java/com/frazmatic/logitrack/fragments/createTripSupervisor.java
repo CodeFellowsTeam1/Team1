@@ -84,7 +84,7 @@ public class createTripSupervisor extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        resetForm();
+//        resetForm();
     }
 
     @Override
