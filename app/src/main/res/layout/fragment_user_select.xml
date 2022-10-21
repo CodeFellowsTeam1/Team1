@@ -5,48 +5,45 @@
     android:id="@+id/frameLayoutSupervisorForm"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tan"
     tools:context=".fragments.userSelect">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/userSelectSupBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="96dp"
+        android:layout_width="132dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginBottom="280dp"
+        android:backgroundTint="@color/light_red"
         android:text="Supervisor"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/userSelectCarrierButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:text="Carrier"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/userSelectCarrierButton" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="272dp"
-        android:layout_height="262dp"
-        android:layout_marginTop="224dp"
-        android:src="@drawable/logo__19_"
+    <Button
+        android:id="@+id/userSelectCarrierButton"
+        android:layout_width="132dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="248dp"
+        android:backgroundTint="@color/light_red"
+        android:text="Carrier"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -119,8 +119,8 @@ public class driverProfile extends Fragment {
             User u = userCompletableFuture.get();
             getTrip(u);
             getActivity().runOnUiThread(() -> {
-                user.setText(u.getName());
-                firm.setText(u.getFirm().getName());
+                user.setText("Name: " + u.getName());
+                firm.setText("Company: " + u.getFirm().getName());
             });
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -152,7 +152,7 @@ public class driverProfile extends Fragment {
             TextView name = view.findViewById(R.id.textViewDriverProfileTrip);
             getActivity().runOnUiThread(()->{
                 if (t != null){
-                    name.setText(t.getWhere());
+                    name.setText("Current Trip: " + t.getWhere());
                 } else {
                     name.setText("No Trips");
                 }
