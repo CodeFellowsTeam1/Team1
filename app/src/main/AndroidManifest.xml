@@ -32,6 +32,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LogiTrack"
         tools:targetApi="31">
+<<<<<<< HEAD
+=======
+        <activity
+            android:name=".activities.MapNavHostActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.TripNavHostActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.TripStatusActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+>>>>>>> f7d9c30 (clickable trips working and senda extra to maps)
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

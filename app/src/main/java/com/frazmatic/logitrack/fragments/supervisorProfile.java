@@ -88,7 +88,13 @@ public class supervisorProfile extends Fragment {
 
         Button currentTrips = view.findViewById(R.id.supervisorProfileCurrentTripsBtn);
         currentTrips.setOnClickListener(v -> {
+<<<<<<< HEAD
             Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_supervisorTripStatus);
+=======
+            Intent gotToTripStatus = new Intent(getContext(), TripStatusActivity.class);
+            startActivity(gotToTripStatus);
+//            Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_currentTrip2);
+>>>>>>> f7d9c30 (clickable trips working and senda extra to maps)
         });
 
         Button seeTeamMap = view.findViewById(R.id.buttonSupervisorTeamMembers);
