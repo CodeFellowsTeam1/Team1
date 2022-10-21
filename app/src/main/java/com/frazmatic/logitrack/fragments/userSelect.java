@@ -48,16 +48,7 @@ public class userSelect extends Fragment {
         // User Object if exists & adds ID to settings.
         currentUserFuture = new CompletableFuture<>();
         completeUserByAuthId();
-        setSupervisorButton(view);
-
-        //TODO Change to use OAuth & User (DynamoDB) object to check instead of id string
-        // for both supervisor form directing
-
-
-        Button driver = view.findViewById(R.id.userSelectCarrierButton);
-        driver.setOnClickListener((v -> {
-            Navigation.findNavController(v).navigate(R.id.action_userSelect_to_driverProfileForm3);
-        }));
+        setButtons(view);
 
         return view;
     }
@@ -84,18 +75,25 @@ public class userSelect extends Fragment {
         );
     }
 
-    private void setSupervisorButton(View view){
+    private void setButtons(View view){
         getActivity().runOnUiThread(()->{
             try {
                 User u = currentUserFuture.get();
                 Button supervisor = view.findViewById(R.id.userSelectSupBtn);
+                Button driver = view.findViewById(R.id.userSelectCarrierButton);
                 if (u == null){
                     supervisor.setOnClickListener(v -> {
                         Navigation.findNavController(v).navigate(R.id.action_userSelect_to_supervisorProfileForm);
                     });
+                    driver.setOnClickListener(v -> {
+                        Navigation.findNavController(v).navigate(R.id.action_userSelect_to_driverProfileForm3);
+                    });
                 } else {
                     supervisor.setOnClickListener((v -> {
                         Navigation.findNavController(v).navigate(R.id.action_userSelect_to_supervisorProfile);
+                    }));
+                    driver.setOnClickListener((v-> {
+                        Navigation.findNavController(v).navigate(R.id.action_userSelect_to_driverProfile);
                     }));
                 }
             } catch (ExecutionException e) {

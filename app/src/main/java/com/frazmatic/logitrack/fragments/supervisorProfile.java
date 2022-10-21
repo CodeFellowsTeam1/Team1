@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
@@ -19,6 +20,7 @@ import com.frazmatic.logitrack.MainActivity;
 import com.frazmatic.logitrack.R;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +31,7 @@ public class supervisorProfile extends Fragment {
 
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
+    private CompletableFuture<User> userCompletableFuture;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,9 +78,14 @@ public class supervisorProfile extends Fragment {
                              Bundle savedInstanceState) {
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         editor = settings.edit();
+        userCompletableFuture = new CompletableFuture<>();
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_supervisor_profile, container, false);
+
+        saveNames();
+        fillInTextFields(view);
+
         Button currentTrips = view.findViewById(R.id.supervisorProfileCurrentTripsBtn);
         currentTrips.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_supervisorTripStatus);
@@ -97,16 +105,28 @@ public class supervisorProfile extends Fragment {
             Amplify.API.query(
                     ModelQuery.get(User.class, userId),
                     response -> {
-                        String userName = response.getData().getName();
-                        String firmName = response.getData().getFirm().getName();
-                        editor.putString("userName", userName);
-                        editor.putString("firmName", firmName);
+                        userCompletableFuture.complete(response.getData());
                     },
                     error -> {
 
                     }
             );
         }
+    }
 
+    private void fillInTextFields(View view){
+        TextView user = view.findViewById(R.id.textViewSupervisorProfileUserName);
+        TextView firm = view.findViewById(R.id.textViewSupervisorProfileCompanyName);
+        try {
+            User u = userCompletableFuture.get();
+            getActivity().runOnUiThread(() -> {
+                user.setText(u.getName());
+                firm.setText(u.getFirm().getName());
+            });
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
