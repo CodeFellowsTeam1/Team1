@@ -1,4 +1,4 @@
-package com.frazmatic.logitrack;
+package com.frazmatic.logitrack.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
@@ -20,9 +19,8 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthProvider;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.Firm;
-import com.amplifyframework.datastore.generated.model.Trip;
 import com.amplifyframework.datastore.generated.model.User;
+import com.frazmatic.logitrack.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -46,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String FIRM_ID_TAG = "firmId";
     public static final String SUPERVISOR_ID_TAG = "supervisorId";
     public static final String DRIVER_ID_TAG = "driverId";
+    public static final String USERNAME_TAG = "username";
+
     public static final String CURRENT_LAT = "currentLat";
     public static final String CURRENT_LON = "currentLon";
     public static final String TRIP_ID_TAG = "tripId";
@@ -183,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
         Log.i("Saved Lat/Lon: ", settings.getFloat(CURRENT_LAT, 0.0f) + ", " + settings.getFloat(CURRENT_LON, 0.0f));
         String userId = settings.getString(USER_ID_TAG, "");
+
         if (!userId.isEmpty()){
             Amplify.API.query(
                     ModelQuery.get(User.class, userId),

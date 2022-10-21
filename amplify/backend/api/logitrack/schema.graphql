@@ -46,4 +46,3 @@ type Supervisor @model @auth(rules:[{allow: public}]) {
     userID: ID
     user: User @hasOne(fields: ["userID"])
 }
-
