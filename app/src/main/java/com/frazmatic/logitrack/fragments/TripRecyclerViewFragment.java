@@ -16,7 +16,6 @@ public class TripRecyclerViewFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     public static TripRecyclerViewFragment newInstance(String param1, String param2) {
         TripRecyclerViewFragment fragment = new TripRecyclerViewFragment();
         return fragment;
