@@ -12,8 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Trip;
 import com.amplifyframework.datastore.generated.model.User;
 import com.frazmatic.logitrack.activities.MainActivity;
 import com.frazmatic.logitrack.activities.MainActivity;
@@ -55,6 +57,10 @@ public class MapsFragmentSeeFirmMembers extends Fragment {
         public void onMapReady(GoogleMap googleMap) {
             googleMap.setOnMarkerClickListener(marker -> {
                 User u = markerUsers.get(marker);
+                String tripId = settings.getString(MainActivity.TRIP_ID_TAG, "");
+                if (!tripId.isEmpty()){
+                    updateDateTrip(u, tripId);
+                }
                 Log.i("USER NAME: ", u.getName());
                 return false;
             });
@@ -115,6 +121,49 @@ public class MapsFragmentSeeFirmMembers extends Fragment {
                     error -> {
                         teamMembers.complete(null);
                     }
+            );
+        }
+    }
+
+    private void updateDateTrip(User u, String tripId){
+        CompletableFuture<Trip> oldTrip = new CompletableFuture<>();
+        Amplify.API.query(
+                ModelQuery.get(Trip.class, tripId),
+                success -> {
+                    oldTrip.complete(success.getData());
+                },
+                failure -> {
+                    oldTrip.complete(null);
+                }
+        );
+        Trip trip = null;
+        try {
+            trip = oldTrip.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (trip != null){
+            Trip updatedTrip = Trip.builder()
+                    .id(trip.getId())
+                    .firm(trip.getFirm())
+                    .deadHead(trip.getDeadHead())
+                    .deliveryNotes(trip.getDeliveryNotes())
+                    .dropOff(trip.getDropOff())
+                    .hours(trip.getHours())
+                    .miles(trip.getMiles())
+                    .rate(trip.getRate())
+                    .where(trip.getWhere())
+                    .userId(u.getId())
+                    .build();
+            Amplify.API.mutate(
+                    ModelMutation.update(updatedTrip),
+                    success -> {
+                        Log.e("Driver Added to Trip", success.getData().getId());
+                        editor.putString(MainActivity.TRIP_ID_TAG, "");
+                    },
+                    failure -> {}
             );
         }
     }
