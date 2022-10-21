@@ -68,9 +68,9 @@ public class supervisorProfile extends Fragment {
         View view = inflater.inflate(R.layout.fragment_supervisor_profile, container, false);
         Button currentTrips = view.findViewById(R.id.supervisorProfileCurrentTripsBtn);
         currentTrips.setOnClickListener(v -> {
-            Intent gotToTripStatus = new Intent(getContext(), TripStatusActivity.class);
-            startActivity(gotToTripStatus);
-//            Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_supervisorTripStatus);
+//            Intent gotToTripStatus = new Intent(getContext(), TripStatusActivity.class);
+//            startActivity(gotToTripStatus);
+            Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_currentTrip);
         });
 
 
