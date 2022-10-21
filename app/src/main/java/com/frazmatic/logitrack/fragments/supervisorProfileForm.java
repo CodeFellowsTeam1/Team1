@@ -25,7 +25,7 @@ import com.amplifyframework.datastore.generated.model.Driver;
 import com.amplifyframework.datastore.generated.model.Firm;
 import com.amplifyframework.datastore.generated.model.Supervisor;
 import com.amplifyframework.datastore.generated.model.User;
-import com.frazmatic.logitrack.activities.MainActivity;
+import com.frazmatic.logitrack.MainActivity;
 import com.frazmatic.logitrack.R;
 
 import java.util.concurrent.CompletableFuture;
@@ -37,7 +37,6 @@ import java.util.concurrent.ExecutionException;
  * create an instance of this fragment.
  */
 public class supervisorProfileForm extends Fragment {
-
 
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
@@ -90,6 +89,7 @@ public class supervisorProfileForm extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_supervisor_profile_form, container, false);
+
         firmCompletableFuture = new CompletableFuture<>();
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         editor = settings.edit();
@@ -202,6 +202,4 @@ public class supervisorProfileForm extends Fragment {
         }
         return f;
     }
-
-
 }

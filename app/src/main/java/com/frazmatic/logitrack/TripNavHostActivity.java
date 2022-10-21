@@ -1,10 +1,8 @@
-package com.frazmatic.logitrack.activities;
+package com.frazmatic.logitrack;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
-import com.frazmatic.logitrack.R;
 
 public class TripNavHostActivity extends AppCompatActivity {
 

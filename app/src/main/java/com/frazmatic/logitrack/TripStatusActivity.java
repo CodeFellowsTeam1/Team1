@@ -1,32 +1,33 @@
-package com.frazmatic.logitrack.activities;
+package com.frazmatic.logitrack;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Trip;
-import com.frazmatic.logitrack.R;
 import com.frazmatic.logitrack.adapter.TripStatusRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TripStatusActivity extends AppCompatActivity {
-
+    private SharedPreferences settings;
     TripStatusRecyclerViewAdapter adapter;
     List<Trip> Trips = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trip_status_view);
-
+        setContentView(R.layout.activity_trip_status);
+        settings = PreferenceManager.getDefaultSharedPreferences(this);
 
         findViewById(R.id.TripStatusAddTripButton).setOnClickListener(view -> {
             Intent goToCreateTrip = new Intent(TripStatusActivity.this, TripNavHostActivity.class);
@@ -35,6 +36,7 @@ public class TripStatusActivity extends AppCompatActivity {
 
         setUpTripStatusRecyclerView();
         QueryDB();
+
     }
 
     private void setUpTripStatusRecyclerView() {
@@ -51,8 +53,10 @@ public class TripStatusActivity extends AppCompatActivity {
     }
 
     public void QueryDB() {
+        String UserID = settings.getString(MainActivity.USER_ID_TAG,"");
+        String FirmID = settings.getString(MainActivity.FIRM_ID_TAG,"");
         Amplify.API.query(
-                ModelQuery.list(Trip.class),
+                ModelQuery.list(Trip.class,Trip.FIRM.contains(FirmID)),
                 success -> {
                     Log.i("QueryDB", "Read DB successfully");
                     Trips.clear();

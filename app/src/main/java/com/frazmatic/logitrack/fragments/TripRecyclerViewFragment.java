@@ -10,11 +10,6 @@ import android.view.ViewGroup;
 
 import com.frazmatic.logitrack.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TripRecyclerViewFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TripRecyclerViewFragment extends Fragment {
 
     public TripRecyclerViewFragment() {

@@ -2,8 +2,6 @@ package com.frazmatic.logitrack.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Trip;
+import com.frazmatic.logitrack.MapNavHostActivity;
 import com.frazmatic.logitrack.R;
+import com.frazmatic.logitrack.fragments.MapsFragmentSeeFirmMembers;
 
 import java.util.List;
 
@@ -46,22 +45,20 @@ public class TripStatusRecyclerViewAdapter extends RecyclerView.Adapter<TripStat
 
         //TODO: Put DB Data here
         String taskTitle = trips.get(position).getWhere();
+        String tripID = trips.get(position).getId();
 
-//        String taskDescription = tasks.get(position).getDescription();
-//        String TaskStatus = tasks.get(position).getState().toString();
 
 
         TripStatusTitleFragment.setText(taskTitle);
 
         // Make an on click handler so we can interact with recyclerview items
-        View taskViewHolder = holder.itemView;
+        View TripViewHolder = holder.itemView;
 
-        taskViewHolder.setOnClickListener(view -> {
+        TripViewHolder.setOnClickListener(view -> {
+            Intent goToMap = new Intent(callingActivity, MapNavHostActivity.class);
+            callingActivity.startActivity(goToMap);
 
-            //TODO: pass data to task details here
-//            goToTaskDetails.putExtra(MainActivity.TASK_TITLE_TAG,taskTitle);
-//            goToTaskDetails.putExtra(MainActivity.TASK_DESCRIPTION_TAG,taskDescription);
-//            goToTaskDetails.putExtra(MainActivity.TASK_STATUS_TAG,TaskStatus);
+            goToMap.putExtra(MapsFragmentSeeFirmMembers.ADD_DRIVER_TRIP_ID,tripID);
 
         });
 
