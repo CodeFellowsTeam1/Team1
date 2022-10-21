@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,6 +92,7 @@ public class driverProfile extends Fragment {
         saveNames();
         fillInTextFields(view);
         setTripNameText(view);
+        setupSignoutButton(view);
         return view;
     }
 
@@ -160,5 +162,19 @@ public class driverProfile extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setupSignoutButton(View view){
+        Button signout = view.findViewById(R.id.buttonSignOutDriver);
+        signout.setOnClickListener(v -> {
+            Amplify.Auth.signOut(
+                    () -> {
+                        Intent returnToMain = new Intent(view.getContext(), MainActivity.class );
+                        startActivity(returnToMain);
+                        Log.i("AuthQuickstart", "Signed out successfully");
+                    },
+                    error -> Log.e("AuthQuickstart", error.toString())
+            );
+        });
     }
 }

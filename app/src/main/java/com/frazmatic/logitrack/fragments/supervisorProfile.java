@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,6 +88,7 @@ public class supervisorProfile extends Fragment {
 
         saveNames();
         fillInTextFields(view);
+        setupSignoutButton(view);
 
         Button currentTrips = view.findViewById(R.id.supervisorProfileCurrentTripsBtn);
         currentTrips.setOnClickListener(v -> {
@@ -132,5 +134,19 @@ public class supervisorProfile extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setupSignoutButton(View view){
+        Button signout = view.findViewById(R.id.buttonSignOut);
+        signout.setOnClickListener(v -> {
+            Amplify.Auth.signOut(
+                    () -> {
+                        Intent returnToMain = new Intent(view.getContext(), MainActivity.class );
+                        startActivity(returnToMain);
+                        Log.i("AuthQuickstart", "Signed out successfully");
+                    },
+                    error -> Log.e("AuthQuickstart", error.toString())
+            );
+        });
     }
 }
