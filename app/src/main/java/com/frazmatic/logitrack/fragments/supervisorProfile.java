@@ -1,16 +1,24 @@
 package com.frazmatic.logitrack.fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.User;
+import com.frazmatic.logitrack.MainActivity;
 import com.frazmatic.logitrack.R;
+
+import java.util.concurrent.CompletableFuture;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +26,9 @@ import com.frazmatic.logitrack.R;
  * create an instance of this fragment.
  */
 public class supervisorProfile extends Fragment {
+
+    private SharedPreferences settings;
+    private SharedPreferences.Editor editor;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,6 +73,9 @@ public class supervisorProfile extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        settings = PreferenceManager.getDefaultSharedPreferences(getContext());
+        editor = settings.edit();
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_supervisor_profile, container, false);
         Button currentTrips = view.findViewById(R.id.supervisorProfileCurrentTripsBtn);
@@ -74,5 +88,25 @@ public class supervisorProfile extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_mapsFragmentSeeFirmMembers);
         });
         return view;
+    }
+
+    private void saveNames(){
+
+        String userId = settings.getString(MainActivity.USER_ID_TAG, "");
+        if (!userId.isEmpty()){
+            Amplify.API.query(
+                    ModelQuery.get(User.class, userId),
+                    response -> {
+                        String userName = response.getData().getName();
+                        String firmName = response.getData().getFirm().getName();
+                        editor.putString("userName", userName);
+                        editor.putString("firmName", firmName);
+                    },
+                    error -> {
+
+                    }
+            );
+        }
+
     }
 }

@@ -58,9 +58,9 @@ public class MapsFragmentSeeFirmMembers extends Fragment {
                 User u = markerUsers.get(marker);
                 String tripId = settings.getString(MainActivity.TRIP_ID_TAG, "");
                 if (!tripId.isEmpty()){
-                    updateDateTrip(u, tripId);
+                    updateTrip(u, tripId);
                 }
-                Log.i("USER NAME: ", u.getName());
+
                 return false;
             });
             try {
@@ -78,7 +78,6 @@ public class MapsFragmentSeeFirmMembers extends Fragment {
             Double currentLat = (double)settings.getFloat(MainActivity.CURRENT_LAT,0);
             Double currentLon = (double)settings.getFloat(MainActivity.CURRENT_LON, 0);
             LatLng currentLocation = new LatLng(currentLat, currentLon);
-            googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Your Location"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
         }
     };
@@ -124,7 +123,7 @@ public class MapsFragmentSeeFirmMembers extends Fragment {
         }
     }
 
-    private void updateDateTrip(User u, String tripId){
+    private void updateTrip(User u, String tripId){
         CompletableFuture<Trip> oldTrip = new CompletableFuture<>();
         Amplify.API.query(
                 ModelQuery.get(Trip.class, tripId),
