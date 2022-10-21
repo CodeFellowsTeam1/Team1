@@ -41,14 +41,20 @@ public class TripStatusRecyclerViewAdapter extends RecyclerView.Adapter<TripStat
     @Override
     public void onBindViewHolder(@NonNull TripStatusViewHolder holder, int position) {
         // 11 bind the data to our fragment
-        TextView TripStatusTitleFragment = holder.itemView.findViewById(R.id.TripRecyclerViewTextView);
+
 
         //TODO: Put DB Data here
         String taskTitle = trips.get(position).getWhere();
         String tripID = trips.get(position).getId();
-
-
-
+        String driverName = "";
+        if (trips.get(position).getUser() != null){
+            driverName = trips.get(position).getUser().getName();
+        }
+        if(!driverName.isEmpty()){
+            TextView viewDrivername = holder.itemView.findViewById(R.id.TripRecyclerViewDriverName);
+            viewDrivername.setText(driverName);
+        }
+        TextView TripStatusTitleFragment = holder.itemView.findViewById(R.id.TripRecyclerViewTextView);
         TripStatusTitleFragment.setText(taskTitle);
 
         // Make an on click handler so we can interact with recyclerview items
@@ -56,10 +62,8 @@ public class TripStatusRecyclerViewAdapter extends RecyclerView.Adapter<TripStat
 
         TripViewHolder.setOnClickListener(view -> {
             Intent goToMap = new Intent(callingActivity, MapNavHostActivity.class);
-            callingActivity.startActivity(goToMap);
-
             goToMap.putExtra(MapsFragmentSeeFirmMembers.ADD_DRIVER_TRIP_ID,tripID);
-
+            callingActivity.startActivity(goToMap);
         });
 
 

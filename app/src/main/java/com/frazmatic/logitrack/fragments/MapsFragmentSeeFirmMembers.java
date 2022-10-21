@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -18,6 +19,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Trip;
 import com.amplifyframework.datastore.generated.model.User;
 import com.frazmatic.logitrack.MainActivity;
+import com.frazmatic.logitrack.TripStatusActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -57,8 +59,9 @@ public class MapsFragmentSeeFirmMembers extends Fragment {
         public void onMapReady(GoogleMap googleMap) {
             googleMap.setOnMarkerClickListener(marker -> {
                 User u = markerUsers.get(marker);
-                String tripId = settings.getString(MainActivity.TRIP_ID_TAG, "");
-                if (!tripId.isEmpty()){
+                String tripId = getActivity().getIntent().getStringExtra(ADD_DRIVER_TRIP_ID);
+                //String tripId = settings.getString(MainActivity.TRIP_ID_TAG, "");
+                if (!(tripId == null)  && !tripId.isEmpty()){
                     updateTrip(u, tripId);
                 }
 
@@ -160,7 +163,9 @@ public class MapsFragmentSeeFirmMembers extends Fragment {
                     ModelMutation.update(updatedTrip),
                     success -> {
                         Log.e("Driver Added to Trip", success.getData().getId());
-                        editor.putString(MainActivity.TRIP_ID_TAG, "");
+                        getActivity().getIntent().putExtra(ADD_DRIVER_TRIP_ID, "");
+                        Intent gotToTripStatus = new Intent(getContext(), TripStatusActivity.class);
+                        startActivity(gotToTripStatus);
                     },
                     failure -> {}
             );

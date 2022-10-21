@@ -92,7 +92,7 @@ public class supervisorProfile extends Fragment {
         currentTrips.setOnClickListener(v -> {
             Intent gotToTripStatus = new Intent(getContext(), TripStatusActivity.class);
             startActivity(gotToTripStatus);
-//            Navigation.findNavController(v).navigate(R.id.action_supervisorProfile_to_supervisorTripStatus);
+
         });
 
         Button seeTeamMap = view.findViewById(R.id.buttonSupervisorTeamMembers);
