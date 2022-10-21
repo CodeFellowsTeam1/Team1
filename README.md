@@ -4,7 +4,7 @@
 
 ## Key Strengths
 
-Josh - Great design principles
+Josh - Great design principles.
 
 Rexie - Comfortable with Java and android studios
 
