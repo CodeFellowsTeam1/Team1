@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String CURRENT_LON = "currentLon";
     public static final String TRIP_ID_TAG = "tripId";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
