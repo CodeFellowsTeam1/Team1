@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Trip;
 import com.amplifyframework.datastore.generated.model.User;
 import com.frazmatic.logitrack.MainActivity;
 import com.frazmatic.logitrack.R;
@@ -34,6 +35,7 @@ public class driverProfile extends Fragment {
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
     private CompletableFuture<User> userCompletableFuture;
+    private CompletableFuture<Trip> tripCompletableFuture;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,13 +83,14 @@ public class driverProfile extends Fragment {
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         editor = settings.edit();
         userCompletableFuture = new CompletableFuture<>();
+        tripCompletableFuture = new CompletableFuture<>();
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_driver_profile, container, false);
 
         saveNames();
         fillInTextFields(view);
-
+        setTripNameText(view);
         return view;
     }
 
@@ -112,9 +115,45 @@ public class driverProfile extends Fragment {
         TextView firm = view.findViewById(R.id.textViewDriverProfileCompanyName);
         try {
             User u = userCompletableFuture.get();
+            getTrip(u);
             getActivity().runOnUiThread(() -> {
                 user.setText(u.getName());
                 firm.setText(u.getFirm().getName());
+            });
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getTrip(User u){
+        Amplify.API.query(
+                ModelQuery.list(Trip.class),
+                success -> {
+                    for (Trip t : success.getData()){
+                        if (!(t.getUserId() == null) && t.getUserId().equals(u.getId())){
+                            tripCompletableFuture.complete(t);
+                        }
+                    }
+                    tripCompletableFuture.complete(null);
+                },
+                error -> {
+                    tripCompletableFuture.complete(null);
+                }
+        );
+    }
+
+    private void setTripNameText(View view){
+        try {
+            Trip t = tripCompletableFuture.get();
+            TextView name = view.findViewById(R.id.textViewDriverProfileTrip);
+            getActivity().runOnUiThread(()->{
+                if (t != null){
+                    name.setText(t.getWhere());
+                } else {
+                    name.setText("No Trips");
+                }
             });
         } catch (ExecutionException e) {
             e.printStackTrace();
